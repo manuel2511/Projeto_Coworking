@@ -1,2 +1,5 @@
 # Ignore arquivos Back-End
-.env
+.env,
+NiceAdmin.zip,
+Apresentação Desafio Full Stack.pdf,
+Equipe5.jpg
