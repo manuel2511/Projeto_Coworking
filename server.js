@@ -11,7 +11,7 @@ app.use('/', require('./routes'));
 
 swaggerDocs(app);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT_APP || 3000;
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
