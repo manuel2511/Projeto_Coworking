@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../services/authService';
+import './login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,18 +17,38 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      <div>
-        <label>Username</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <div className='form-container'>
+      <form onSubmit={handleSubmit}>
+        <h1>COWORKING SPACE</h1>
+        <div className='form-content'>
+          <h2>Login</h2>
+          <div className='form-group'>
+            <input type='text' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+              placeholder=''
+            />
+            <label>Username</label>
+          </div>
+          <div className='form-group'>
+            <input type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required
+              placeholder=''
+            />
+            <label>Password</label>
+          </div>
+          <div className='form-footer'>
+            <button className='login-button' type="submit">Login</button>
+            <a href='/register' className='register-button'>Cadastrar-se</a>
+            <a href='/reset-password' className='reset-password-button'>Esqueceu a senha?</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    
   );
 };
 
