@@ -1,0 +1,120 @@
+.register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.register-container form {
+    width: 36em;
+    height: 28em;
+    padding: 2em;
+    border-radius: 10px;
+    background-color: var(--light-color);
+}
+
+.register-content {
+    padding: 0 2em;
+    font-family: var(--main-font);
+}
+
+.register-content h1, .register-content h2 {
+    margin-bottom: 2rem;
+}
+
+.register-content h1 {
+    text-align: center;
+    font-size: 29px;
+    font-weight: 600;
+    font-family: var(--title-font);
+    padding: 10px;
+}
+
+.register-content h2 {
+    font-family: var(--main-font);
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-bottom: 0.7em;
+}
+
+/* INPUT */
+.register-form-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 15px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+input {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 1rem;
+    border: 1px solid #999;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--darkBlue-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -9px;
+    left: 9px;
+    font-size: 0.75rem;
+    padding: 0 5px;
+    color: var(--darkBlue-color);
+    background-color: var(--light-color);
+}
+
+/* BUTTONS */
+.register-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7em;
+}
+
+.register-btn {
+    color: #fff;
+    padding: 0.3em 1.2em;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--darkBlue-color);
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    cursor: pointer;
+    background-color: var(--lightBlue-color);
+}
+
+.register-login-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.register-login-btn {
+    margin-right: 0.4em;
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.register-login-btn:hover {
+    color: #3f3f3f;
+}

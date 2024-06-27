@@ -114,7 +114,7 @@ input:not(:placeholder-shown) + label {
 }
 
 .reset-password-button {
-    margin: 0 0 0 30px; 
+    margin: 0 0 0 15px; 
     font-size: 13px;
     color: #999;
     transition: all 0.3s ease;
@@ -122,5 +122,4 @@ input:not(:placeholder-shown) + label {
 
 .reset-password-button:hover{
     color: #3f3f3f;
-    
 }
