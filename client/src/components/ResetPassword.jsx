@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { resetPassword } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 import './resetPassword.css';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const navigate = useNavigate(); // Hook para navigação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await resetPassword(email, newPassword);
       console.log('Password reset successful', response.data);
+      alert("Senha alterada com sucesso!");
+      navigate('/login');
     } catch (error) {
       console.error('Password reset failed', error);
     }

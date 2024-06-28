@@ -13,7 +13,7 @@ const Login = () => {
     try {
       const response = await login(username, password);
       console.log('Login successful', response.data);
-      navigate('/index');
+      navigate('/');
     } catch (error) {
       console.error('Login failed', error);
     }
