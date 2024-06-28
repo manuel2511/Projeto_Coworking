@@ -23,10 +23,10 @@ const Register = () => {
   };
 
   return (
-    <div className='register-container'>
+    <div className='register-form-container'>
       <form onSubmit={handleSubmit}>
         <h1>COWORKING SPACE</h1>
-        <div className='register-content'>
+        <div className='register-form-content'>
           <h2>Register</h2>
           <div className='register-form-group'>
             <input 
@@ -35,7 +35,6 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder=''
-
             />
             <label>Email</label>
           </div>
@@ -69,9 +68,9 @@ const Register = () => {
             />
             <label>Repetir Senha</label>
           </div>
-          <div className='register-footer'>
-            <button className='register-btn' type="submit">Register</button>
-            <a href='/' className='register-login-btn'>Já possui cadastro? Faça login</a>
+          <div className='register-form-footer'>
+            <button className='register-form-button' type="submit">Register</button>
+            <a href='/' className='register-login-button'>Já possui cadastro? Faça login</a>
           </div>
         </div>
       </form>

@@ -20,12 +20,12 @@ const Login = () => {
   };
 
   return (
-    <div className='form-container'>
+    <div className='login-form-container'>
       <form onSubmit={handleSubmit}>
         <h1>COWORKING SPACE</h1>
-        <div className='form-content'>
+        <div className='login-form-content'>
           <h2>Login</h2>
-          <div className='form-group'>
+          <div className='login-form-group'>
             <input type='text' 
               value={username} 
               onChange={(e) => setUsername(e.target.value)} 
@@ -34,7 +34,7 @@ const Login = () => {
             />
             <label>Username</label>
           </div>
-          <div className='form-group'>
+          <div className='login-form-group'>
             <input type="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
@@ -43,10 +43,10 @@ const Login = () => {
             />
             <label>Password</label>
           </div>
-          <div className='form-footer'>
-            <button className='login-button' type="submit">Login</button>
-            <a href='/register' className='register-button'>Cadastrar-se</a>
-            <a href='/reset-password' className='reset-password-button'>Esqueceu a senha?</a>
+          <div className='login-form-footer'>
+            <button className='login-form-button' type="submit">Login</button>
+            <a href='/register' className='login-register-button'>Cadastrar-se</a>
+            <a href='/reset-password' className='login-reset-button'>Esqueceu a senha?</a>
           </div>
         </div>
       </form>

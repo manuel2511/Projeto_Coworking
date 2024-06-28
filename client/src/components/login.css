@@ -1,4 +1,4 @@
-.form-container {
+.login-form-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     background-color: var(--background-color);
 }
 
-form {
+.login-form-container form {
     width: 35em;
     height: 23em;
     padding: 2em;
@@ -15,23 +15,24 @@ form {
     background-color: var(--light-color);
 }
 
-.form-content {
+.login-form-content {
     padding: 0 2em;
     font-family: var(--main-font);
 }
 
-form h1, form h2{
+.login-form-container form h1,
+.login-form-container form h2{
     margin-bottom: 2rem;
 }
 
-form h1 {
+.login-form-container form h1 {
     text-align: center;
     font-size: 30px;
     font-weight: 600;
     font-family: var(--title-font);
 }
 
-form h2 {
+.login-form-container form h2 {
     font-family: var(--main-font);
     font-size: 1.6em;
     font-weight: 500;
@@ -39,7 +40,7 @@ form h2 {
 }
 
 /* INPUT */
-.form-group {
+.login-form-group {
     position: relative;
     margin-bottom: 1.5rem;
 }
@@ -80,14 +81,14 @@ input:not(:placeholder-shown) + label {
 }
 
 /* BUTTONS */
-.form-footer {
+.login-form-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 2.3em;
 }
 
-.login-button {
+.login-form-button {
     color: #fff;
     padding: 0.3em 1.2em;
     border: none;
@@ -96,92 +97,109 @@ input:not(:placeholder-shown) + label {
     transition: all 0.3s ease;
 }
 
-.login-button:hover {
+.login-form-button:hover {
     cursor: pointer;
     background-color: var(--lightBlue-color);
 }
 
-.register-button, .reset-password-button {
+.login-register-button, 
+.login-reset-button {
     border: none;
     background-color: transparent;
 }
 
-.register-button {
+.login-register-button {
     margin-right: 6em;
     font-weight: 400;
     color: var(--darkBlue-color);
     transition: all 0.3s ease;
 }
 
-.reset-password-button {
+.login-reset-button {
     margin: 0 0 0 15px; 
     font-size: 13px;
     color: #999;
     transition: all 0.3s ease;
 }
 
-.reset-password-button:hover{
+.login-reset-button:hover{
     color: #3f3f3f;
 }
 
 /* MEDIA QUERIES */
 
-/* Tablets and smaller screens */
+/* Tablets e telas menores */
 @media (max-width: 768px) {
-    form {
+    .login-form-container form {
         width: 90%;
         height: auto;
         padding: 1.5em;
     }
 
-    .form-content {
+    .login-form-content {
         padding: 0 1em;
     }
 
-    form h1 {
+    .login-form-container form h1 {
         font-size: 24px;
     }
 
-    form h2 {
-        font-size: 1.4em;
+    .login-form-container form h2 {
+        font-size: 22px;
+    }
+
+    .login-form-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .login-form-button,
+    .login-reset-button,
+    .login-register-button{
+        margin-left: 0;
+        margin-top: 0.2em;
+        width: 100%;
+        text-align: center;
+
     }
 }
 
 /* Smartphones */
 @media (max-width: 480px) {
-    form {
+    .login-form-container form {
         width: 100%;
         height: auto;
         padding: 1em;
         margin: 0 1.2em;
     }
 
-    .form-content {
+    .login-form-content {
         padding: 0.1em 0.8em;
     }
 
-    form h1 {
-        font-size: 20px;
+    .login-form-container form h1 {
+        font-size: 22px;
     }
 
-    form h2 {
-        font-size: 1.2em;
+    .login-form-container form h2 {
+        font-size: 18px;
     }
 
-    .form-footer {
+    .login-form-footer {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .login-button {
+    .login-form-button {
         width: 100%;
         text-align: center;
         margin-bottom: 1em;
     }
 
-    .register-button, .reset-password-button {
+    .login-register-button, 
+    .login-reset-button {
         width: 100%;
         text-align: center;
-        margin: 0.5em 0;
+        margin: 0.3em 0;
     }
 }

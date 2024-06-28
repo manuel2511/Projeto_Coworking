@@ -1,4 +1,4 @@
-.register-container {
+.register-form-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     background-color: var(--background-color);
 }
 
-.register-container form {
+.register-form-container form {
     width: 36em;
     height: 28em;
     padding: 2em;
@@ -15,16 +15,17 @@
     background-color: var(--light-color);
 }
 
-.register-content {
+.register-form-content {
     padding: 0 2em;
     font-family: var(--main-font);
 }
 
-.register-content h1, .register-content h2 {
+.register-form-container h1,
+.register-form-content h2 {
     margin-bottom: 2rem;
 }
 
-.register-content h1 {
+.register-form-container h1 {
     text-align: center;
     font-size: 29px;
     font-weight: 600;
@@ -32,7 +33,7 @@
     padding: 10px;
 }
 
-.register-content h2 {
+.register-form-content h2 {
     font-family: var(--main-font);
     font-size: 1.6em;
     font-weight: 500;
@@ -81,14 +82,14 @@ input:not(:placeholder-shown) + label {
 }
 
 /* BUTTONS */
-.register-footer {
+.register-form-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1.7em;
 }
 
-.register-btn {
+.register-form-button {
     color: #fff;
     padding: 0.3em 1.2em;
     border: none;
@@ -97,17 +98,17 @@ input:not(:placeholder-shown) + label {
     transition: all 0.3s ease;
 }
 
-.register-btn:hover {
+.register-form-button:hover {
     cursor: pointer;
     background-color: var(--lightBlue-color);
 }
 
-.register-login-btn {
+.register-login-button {
     border: none;
     background-color: transparent;
 }
 
-.register-login-btn {
+.register-login-button {
     margin-right: 0.4em;
     font-size: 13px;
     font-weight: 400;
@@ -115,66 +116,81 @@ input:not(:placeholder-shown) + label {
     transition: all 0.3s ease;
 }
 
-.register-login-btn:hover {
+.register-login-button:hover {
     color: #3f3f3f;
 }
 
-/* MEDIA QUERIES */
-
 /* Tablets e telas menores */
 @media (max-width: 768px) {
-    .register-container form {
+    .register-form-container form {
         width: 90%;
         height: auto;
         padding: 1.5em;
     }
 
-    .register-content {
+    .register-form-content {
         padding: 0 1em;
     }
 
-    .register-content h1 {
+    .register-form-container h1 {
         font-size: 24px;
     }
 
-    .register-content h2 {
-        font-size: 1.4em;
+    .register-form-content h2 {
+        font-size: 22px;
+    }
+
+    .register-form-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .register-form-button {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    .register-login-button {
+        width: 100%;
+        text-align: center;
+        margin: 0.5em 0;
     }
 }
 
 /* Smartphones */
 @media (max-width: 480px) {
-    .register-container form {
+    .register-form-container form {
         width: 100%;
         height: auto;
         padding: 1em;
         margin: 0 1.2em;
     }
 
-    .register-content {
+    .register-form-content {
         padding: 0.1em 0.8em;
     }
 
-    .register-content h1 {
-        font-size: 20px;
+    .register-form-container h1 {
+        font-size: 22px;
     }
 
-    .register-content h2 {
-        font-size: 1.2em;
+    .register-form-content h2 {
+        font-size: 18px;
     }
 
-    .register-footer {
+    .register-form-footer {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
-    .register-btn {
+    .register-form-button {
         width: 100%;
         text-align: center;
         margin-bottom: 1em;
     }
 
-    .register-login-btn {
+    .register-login-button, .register-reset-button {
         width: 100%;
         text-align: center;
         margin: 0.5em 0;
