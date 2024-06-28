@@ -96,74 +96,44 @@ const NavBar = () => {
 
   <li class="nav-item">
     <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="/">
-      <i class="bi bi-journal-text"></i><span>Menu</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-journal-text"></i><span>Cadastro</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="/">
-          <i class="bi bi-circle"></i><span>Menu</span>
-        </a>
-      </li>
-      <li>
-        <a href="/" class="/*active*/">
-          <i class="bi bi-circle"></i><span>Menu</span>
-        </a>
-      </li>
-      <li>
-        <a href="/">
-          <i class="bi bi-circle"></i><span>Menu</span>
-        </a>
-      </li>
-      <li>
-        <a href="/">
-          <i class="bi bi-circle"></i><span>Menu</span>
+        <a href="/index" class="/*active*/">
+          <i class="bi bi-circle"></i><span>Reservas</span>
         </a>
       </li>
     </ul>
   </li>
   {/* <!-- End Forms Nav --> */}
 
-  {/* <li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-layout-text-window-reverse"></i><span>Movimentações</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="tables-general.html">
-          <i class="bi bi-circle"></i><span>General Tables</span>
-        </a>
-      </li>
-      <li>
-        <a href="tables-data.html">
-          <i class="bi bi-circle"></i><span>Data Tables</span>
+        <a href="/index">
+          <i class="bi bi-circle"></i><span>Listagem de Reseras</span>
         </a>
       </li>
     </ul>
-  </li> */}
+  </li>
   {/* <!-- End Tables Nav --> */}
 
-  {/* <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="/index">
+      <i class="bi bi-file-earmark"></i><span>Relatórios</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="charts-chartjs.html">
-          <i class="bi bi-circle"></i><span>Chart.js</span>
-        </a>
-      </li>
-      <li>
-        <a href="charts-apexcharts.html">
-          <i class="bi bi-circle"></i><span>ApexCharts</span>
-        </a>
-      </li>
-      <li>
-        <a href="charts-echarts.html">
-          <i class="bi bi-circle"></i><span>ECharts</span>
+        <a href="/index">
+          <i class="bi bi-circle"></i><span>Reservas</span>
         </a>
       </li>
     </ul>
-  </li> */}
+  </li>
   {/* <!-- End Charts Nav --> */}
 
   {/* <li class="nav-item">
@@ -225,12 +195,12 @@ const NavBar = () => {
   </li> */}
   {/* <!-- End Register Page Nav --> */}
 
-  {/* <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-login.html">
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="/">
       <i class="bi bi-box-arrow-in-right"></i>
       <span>Login</span>
     </a>
-  </li> */}
+  </li>
   {/* <!-- End Login Page Nav --> */}
 
   {/* <li class="nav-item">
@@ -243,7 +213,7 @@ const NavBar = () => {
 
   {/* <li class="nav-item">
     <a class="nav-link collapsed" href="pages-blank.html">
-      <i class="bi bi-file-earmark"></i>
+      <i class="bi bi-bar-chart "></i>
       <span>Blank</span>
     </a>
   </li> */}
