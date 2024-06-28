@@ -71,7 +71,7 @@ const Register = () => {
           </div>
           <div className='register-footer'>
             <button className='register-btn' type="submit">Register</button>
-            <a href='/login' className='register-login-btn'>Já possui cadastro? Faça login</a>
+            <a href='/' className='register-login-btn'>Já possui cadastro? Faça login</a>
           </div>
         </div>
       </form>
