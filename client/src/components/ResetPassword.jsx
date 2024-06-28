@@ -17,12 +17,12 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className='form-container'>
+    <div className='reset-form-container'>
     <form onSubmit={handleSubmit}>
       <h1>COWORKING SPACE</h1>
-      <div className='form-content'>
+      <div className='reset-form-content'>
         <h2>Recuperar senha</h2>
-        <div className='form-group'>
+        <div className='reset-form-group'>
           <input type='text' 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
@@ -31,7 +31,7 @@ const ResetPassword = () => {
           />
           <label>Email</label>
         </div>
-        <div className='form-group'>
+        <div className='reset-form-group'>
           <input type="password" 
             value={newPassword} 
             onChange={(e) => setNewPassword(e.target.value)} 
@@ -40,9 +40,9 @@ const ResetPassword = () => {
           />
           <label>Nova senha</label>
         </div>
-        <div className='form-footer'>
-          <button className='login-button' type="submit">Salvar</button>
-          <a href='/' className='reset-password-button'>voltar</a>
+        <div className='reset-form-footer'>
+          <button className='reset-form-button' type="submit">Salvar</button>
+          <a href='/' className='login-page-button'>voltar</a>
         </div>
       </div>
     </form>
