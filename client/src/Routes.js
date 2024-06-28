@@ -10,10 +10,10 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/" element={<Index />} />
+        <Route path="/index" element={<Index />} />
       </Routes>
     </Router>
   );
