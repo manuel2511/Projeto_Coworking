@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
 import './register.css';
 
@@ -7,14 +8,17 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate(); // Hook para navigação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await register(username, password, email);
       console.log('Registration successful', response.data);
+      navigate('/login');
     } catch (error) {
       console.error('Registration failed', error);
+      alert('Registration failed', error);
     }
   };
 
@@ -31,6 +35,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder=''
+
             />
             <label>Email</label>
           </div>

@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 import './login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Hook para navigação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await login(username, password);
       console.log('Login successful', response.data);
+      navigate('/');
     } catch (error) {
       console.error('Login failed', error);
     }
