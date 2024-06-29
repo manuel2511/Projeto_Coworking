@@ -33,6 +33,18 @@ const NavBar = () => {
               <li>
                 <a href="/">
                   <i class="bi bi-circle"></i>
+                  <span>Produtos</span>
+                </a>
+              </li>
+              <li>
+                <a href="/cadastroPagamento">
+                  <i class="bi bi-circle"></i>
+                  <span>Condição de Pagamento</span>
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <i class="bi bi-circle"></i>
                   <span>Reservas</span>
                 </a>
               </li>
@@ -61,6 +73,12 @@ const NavBar = () => {
                 <a href="/">
                   <i class="bi bi-circle"></i>
                   <span>Listagem de Reseras</span>
+                </a>
+              </li>
+              <li>
+                <a href="/listaPagamento">
+                  <i class="bi bi-circle"></i>
+                  <span>Listar Formas de Pagamento</span>
                 </a>
               </li>
             </ul>

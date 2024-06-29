@@ -4,6 +4,8 @@ import Index from './components/Index';
 import Login from './components/Login';
 import Register from './components/Register';
 import ResetPassword from './components/ResetPassword';
+import PaymentConditionForm from './components/PaymentCondition/PaymentConditionForm';
+import PaymentConditionList from './components/PaymentCondition/PaymentConditionList';
 // import ProductList from './components/ProductList';
 
 const AppRoutes = () => {
@@ -15,6 +17,8 @@ const AppRoutes = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Index />} />
+        <Route path="/cadastroPagamento" element={<PaymentConditionForm />} />
+        <Route path="/listaPagamento" element={<PaymentConditionList />} />
       </Routes>
     </Router>
   );
