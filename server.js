@@ -9,9 +9,6 @@ dotenv.config();
 app.use(bodyParser.json());
 app.use('/', require('./routes'));
 
-const paymentConditionRoutes = require('./routes/paymentConditionRoutes');
-app.use('/payment-conditions', paymentConditionRoutes);
-
 swaggerDocs(app);
 
 const PORT = process.env.PORT_APP || 3000;

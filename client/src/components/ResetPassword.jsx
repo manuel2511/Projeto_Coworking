@@ -46,7 +46,7 @@ const ResetPassword = () => {
         </div>
         <div className='reset-form-footer'>
           <button className='reset-form-button' type="submit">Salvar</button>
-          <a href='/' className='login-page-button'>voltar</a>
+          <a href='/login' className='login-page-button'>voltar</a>
         </div>
       </div>
     </form>

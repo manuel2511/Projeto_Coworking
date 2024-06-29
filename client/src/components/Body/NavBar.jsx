@@ -31,7 +31,7 @@ const NavBar = () => {
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="/">
+                <a href="/cadastroProduto">
                   <i class="bi bi-circle"></i>
                   <span>Produtos</span>
                 </a>
@@ -73,6 +73,12 @@ const NavBar = () => {
                 <a href="/">
                   <i class="bi bi-circle"></i>
                   <span>Listagem de Reseras</span>
+                </a>
+              </li>
+              <li>
+                <a href="/listaProduto">
+                  <i class="bi bi-circle"></i>
+                  <span>Listar Produtos</span>
                 </a>
               </li>
               <li>
