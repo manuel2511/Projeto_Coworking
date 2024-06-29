@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React from "react";
 import Header from "./Body/Header";
 import NavBar from "./Body/NavBar";
 import Footer from "./Body/Footer";
@@ -9,7 +9,7 @@ function Index() {
         <Header />
         <NavBar />
         <main id="main" className="main d-flex justify-content-center align-items-center" style={{height: '76vh'}}>
-          <div class="pagetitle text-center ">
+          <div className="pagetitle text-center ">
            <img src="assets/img/apple-touch-icon.png" className="" alt="" />
           </div>
           {/* <!-- End Page Title --> */}
