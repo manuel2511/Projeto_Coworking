@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const db = require('./models');
 const swaggerDocs = require('./docs/swagger');
 const app = express( );
-
+app.use(express.json());
 dotenv.config();
 app.use(bodyParser.json());
 app.use('/', require('./routes'));
