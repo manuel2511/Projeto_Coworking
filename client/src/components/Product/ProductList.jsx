@@ -3,10 +3,11 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllProducts } from "../../services/productService";
+import editImage from '../../assets/img/edit.png'; // Importação da imagem de edição
+import './productList.css';  // Importação do css
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,37 +23,57 @@ const ProductList = () => {
 
   return (
     <>
-      <body className="">
-        <Header />
-        <NavBar />
-        <main id="main" className="main">
-          <div class="">
-            <h1>Formas de Pagamentos</h1>
-            <nav>
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="/">Home</a>
-                </li>
-                <li class="breadcrumb-item">Cadastros</li>
-                <li class="breadcrumb-item active">Condição de Pagamento</li>
-              </ol>
-            </nav>
-          </div>
-          {/* <!-- End Page Title --> */}
-          <div>
-            <h2>Produtos</h2>
-            <ul>
+      <Header />
+      <NavBar />
+      <main id="main" className="main">
+        <div className="">
+          <h1>Listar Produtos</h1>
+          <nav>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li className="breadcrumb-item">Movimentação</li>
+              <li className="breadcrumb-item active">Listar Produtos</li>
+            </ol>
+          </nav>
+        </div>
+        {/* <!-- End Page Title --> */}
+        <div className='product-table-container'>
+          <table className='product-table-content'>
+            <thead>
+              <tr>
+                <th className="col-id">ID</th>
+                <th className="col-name">Nome</th>
+                <th className="col-observation">Observação</th>
+                <th className="col-photo">Foto</th>
+                <th className="col-rate">Taxa</th>
+                <th className="col-edit">Editar</th>
+              </tr>
+            </thead>
+            <tbody>
               {products.map((product) => (
-                <li key={product.id}>
-                  {product.name} - {product.observation} - {product.photo} -{" "}
-                  {product.hourlyRate}
-                </li>
+                <tr key={product.id}>
+                  <td className="col-id">{product.id}</td>
+                  <td className="col-name">{product.name}</td>
+                  <td className="col-observation">{product.observation}</td>
+                  <td className="col-photo">
+                    <img src={product.photo} alt={product.name} width="50"/>
+                  </td>
+                  <td className="col-rate">{product.hourlyRate}</td>
+                  {/* Botão para fazer a edição dos produtos */}
+                  <td>
+                    <button className="product-edit-button" /*onClick={() => handleEdit(product.id)}*/ >
+                      <img src={editImage}/>
+                    </button>
+                  </td>
+                </tr>
               ))}
-            </ul>
-          </div>
-        </main>
-        <Footer />
-      </body>
+            </tbody>
+          </table>
+        </div>
+      </main>
+      <Footer />
     </>
   );
 };

@@ -3,6 +3,7 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { createProduct } from "../../services/productService";
+import './productForm.css';  // Importação do css
 
 const ProductForm = () => {
   const [name, setName] = useState("");
@@ -26,62 +27,62 @@ const ProductForm = () => {
 
   return (
     <>
-      <body className="">
-        <Header />
-        <NavBar />
-        <main id="main" className="main">
-          <div class="">
-            <h1>Formas de Pagamentos</h1>
-            <nav>
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="/">Home</a>
-                </li>
-                <li class="breadcrumb-item">Cadastros</li>
-                <li class="breadcrumb-item active">Condição de Pagamento</li>
-              </ol>
-            </nav>
-          </div>
-          {/* <!-- End Page Title --> */}
+      <Header />
+      <NavBar />
+      <main id="main" className="main">
+        <div class="">
+          <h1>Produtos</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li class="breadcrumb-item">Cadastro</li>
+              <li class="breadcrumb-item active">Produtos</li>
+            </ol>
+          </nav>
+        </div>
+        {/* <!-- End Page Title --> */}
+        <div className="product-form-container">
           <form onSubmit={handleSubmit}>
-            <div>
-              <label>Nome:</label>
+            <div className="product-form-group">
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
+              <label>Nome:</label>
             </div>
-            <div>
-              <label>Observação:</label>
+            <div className="product-form-group">
               <textarea
                 value={observation}
                 onChange={(e) => setObservation(e.target.value)}
               ></textarea>
+              <label>Observação:</label>
             </div>
-            <div>
-              <label>Foto:</label>
+            <div className="product-form-group">
               <input
                 type="text"
                 value={photo}
                 onChange={(e) => setPhoto(e.target.value)}
               />
+              <label>Foto:</label>
             </div>
-            <div>
-              <label>Valor por Hora:</label>
+            <div className="product-form-group">
               <input
                 type="number"
                 value={hourlyRate}
                 onChange={(e) => setHourlyRate(e.target.value)}
                 required
               />
+              <label>Valor por Hora:</label>
             </div>
-            <button type="submit">Cadastrar</button>
+            <button className="product-form-button" type="submit">Cadastrar</button>
           </form>
-        </main>
-        <Footer />
-      </body>
+        </div>      
+      </main>
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { resetPassword } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
-import './resetPassword.css';
+import './resetPassword.css'; // Importação do css
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
