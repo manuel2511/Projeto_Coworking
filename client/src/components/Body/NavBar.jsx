@@ -3,49 +3,49 @@ import React from "react";
 const NavBar = () => {
   return (
     <>
-      <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="/">
-              <i class="bi bi-grid"></i>
+      <aside id="sidebar" className="sidebar">
+        <ul className="sidebar-nav" id="sidebar-nav">
+          <li className="nav-item">
+            <a className="nav-link collapsed" href="/">
+              <i className="bi bi-grid"></i>
               <span>Dashboard</span>
             </a>
           </li>
           {/* <!-- End Dashboard Nav --> */}
 
 
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link collapsed"
+              className="nav-link collapsed"
               data-bs-target="#forms-nav"
               data-bs-toggle="collapse"
               href="/"
             >
-              <i class="bi bi-journal-text"></i>
+              <i className="bi bi-journal-text"></i>
               <span>Cadastro</span>
-              <i class="bi bi-chevron-down ms-auto"></i>
+              <i className="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul
               id="forms-nav"
-              class="nav-content collapse"
+              className="nav-content collapse"
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="/">
-                  <i class="bi bi-circle"></i>
+                <a href="/cadastroReserva">
+                  <i className="bi bi-circle"></i>
+                  <span>Reservas</span>
+                </a>
+              </li>
+              <li>
+                <a href="/cadastroProduto">
+                  <i className="bi bi-circle"></i>
                   <span>Produtos</span>
                 </a>
               </li>
               <li>
                 <a href="/cadastroPagamento">
-                  <i class="bi bi-circle"></i>
+                  <i className="bi bi-circle"></i>
                   <span>Condição de Pagamento</span>
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <i class="bi bi-circle"></i>
-                  <span>Reservas</span>
                 </a>
               </li>
             </ul>
@@ -53,31 +53,37 @@ const NavBar = () => {
 
           {/* <!-- End Forms Nav --> */}
 
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link collapsed"
+              className="nav-link collapsed"
               data-bs-target="#tables-nav"
               data-bs-toggle="collapse"
-              href="#"
+              href="/"
             >
-              <i class="bi bi-layout-text-window-reverse"></i>
+              <i className="bi bi-layout-text-window-reverse"></i>
               <span>Movimentações</span>
-              <i class="bi bi-chevron-down ms-auto"></i>
+              <i className="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul
               id="tables-nav"
-              class="nav-content collapse "
+              className="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="/">
-                  <i class="bi bi-circle"></i>
+                <a href="/listaReserva">
+                  <i className="bi bi-circle"></i>
                   <span>Listagem de Reseras</span>
                 </a>
               </li>
               <li>
+                <a href="/listaProduto">
+                  <i className="bi bi-circle"></i>
+                  <span>Listar Produtos</span>
+                </a>
+              </li>
+              <li>
                 <a href="/listaPagamento">
-                  <i class="bi bi-circle"></i>
+                  <i className="bi bi-circle"></i>
                   <span>Listar Formas de Pagamento</span>
                 </a>
               </li>
@@ -85,25 +91,25 @@ const NavBar = () => {
           </li>
           {/* <!-- End Tables Nav --> */}
 
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link collapsed"
+              className="nav-link collapsed"
               data-bs-target="#charts-nav"
               data-bs-toggle="collapse"
               href="/"
             >
-              <i class="bi bi-file-earmark"></i>
+              <i className="bi bi-file-earmark"></i>
               <span>Relatórios</span>
-              <i class="bi bi-chevron-down ms-auto"></i>
+              <i className="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul
               id="charts-nav"
-              class="nav-content collapse "
+              className="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
               <li>
                 <a href="/">
-                  <i class="bi bi-circle"></i>
+                  <i className="bi bi-circle"></i>
                   <span>Reservas</span>
                 </a>
               </li>
@@ -113,9 +119,9 @@ const NavBar = () => {
 
           {/* <!-- End Register Page Nav --> */}
 
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="/login">
-              <i class="bi bi-box-arrow-in-right"></i>
+          <li className="nav-item">
+            <a className="nav-link collapsed" href="/login">
+              <i className="bi bi-box-arrow-in-right"></i>
               <span>Login</span>
             </a>
           </li>

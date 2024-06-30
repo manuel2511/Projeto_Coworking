@@ -45,7 +45,7 @@
     margin-bottom: 1.5rem;
 }
 
-label {
+.login-form-group label {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -55,7 +55,7 @@ label {
     pointer-events: none;
 }
   
-input {
+.login-form-group input {
     width: 100%;
     padding: 6px 12px;
     font-size: 1rem;
@@ -64,14 +64,14 @@ input {
     background-color: transparent;
 }
 
-input:focus{
+.login-form-group input:focus{
     outline: none;
     border-color: var(--darkBlue-color);
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
   
-input:focus + label,
-input:not(:placeholder-shown) + label {
+.login-form-group input:focus + label,
+.login-form-group input:not(:placeholder-shown) + label {
     top: -9px;
     left: 9px;
     font-size: 0.75rem;

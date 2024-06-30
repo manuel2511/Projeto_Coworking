@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const paymentConditionRoutes = require('./paymentConditionRoutes');
+const productRoutes = require('./productRoutes');
+const reservationRoutes = require('./reservationRoutes');
 
-router.use('/api', require('./product'));
 router.use('/auth', require('./auth'));
+router.use('/products', productRoutes);
+router.use('/payment-conditions', paymentConditionRoutes);
+router.use('/reservations', reservationRoutes);
 module.exports = router;

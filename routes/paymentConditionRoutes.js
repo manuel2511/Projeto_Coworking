@@ -4,7 +4,8 @@ const paymentConditionController = require('../controllers/paymentConditionContr
 
 router.post('/', paymentConditionController.create);
 router.get('/', paymentConditionController.findAll);
-
-// Adicione mais rotas conforme necessário (get by id, update, delete)
+router.get('/:id', paymentConditionController.findById);
+router.put('/:id', paymentConditionController.update);
+router.delete('/:id', paymentConditionController.delete);
 
 module.exports = router;

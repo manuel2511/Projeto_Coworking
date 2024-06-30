@@ -6,6 +6,10 @@ import Register from './components/Register';
 import ResetPassword from './components/ResetPassword';
 import PaymentConditionForm from './components/PaymentCondition/PaymentConditionForm';
 import PaymentConditionList from './components/PaymentCondition/PaymentConditionList';
+import ProductForm from './components/Product/ProductForm';
+import ProductList from './components/Product/ProductList';
+import ReservationForm  from './components/Reservation/ReservationForm';
+import ReservationList  from './components/Reservation/ReservationList';
 // import ProductList from './components/ProductList';
 
 const AppRoutes = () => {
@@ -19,6 +23,10 @@ const AppRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/cadastroPagamento" element={<PaymentConditionForm />} />
         <Route path="/listaPagamento" element={<PaymentConditionList />} />
+        <Route path="/cadastroProduto" element={<ProductForm />} />
+        <Route path="/listaProduto" element={<ProductList />} />
+        <Route path="/cadastroReserva" element={<ReservationForm />} />
+        <Route path="/listaReserva" element={<ReservationList />} />
       </Routes>
     </Router>
   );
