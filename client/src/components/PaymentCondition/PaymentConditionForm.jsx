@@ -3,6 +3,7 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { createPaymentCondition } from "../../services/paymentConditionService";
+import "./paymentConditions.css";
 
 const PaymentConditionForm = () => {
   const [name, setName] = useState("");
