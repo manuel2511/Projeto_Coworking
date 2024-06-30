@@ -27,32 +27,34 @@ const PaymentConditionForm = () => {
         <Header />
         <NavBar />
         <main id="main" className="main">
-          <div class="">
+          <div className="">
             <h1>Formas de Pagamentos</h1>
             <nav>
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
                   <a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item">Cadastros</li>
-                <li class="breadcrumb-item active">Condição de Pagamento</li>
+                <li className="breadcrumb-item">Cadastros</li>
+                <li className="breadcrumb-item active">Condição de Pagamento</li>
               </ol>
             </nav>
           </div>
           {/* <!-- End Page Title --> */}
+          <div className="PaymentCondition-form-container">
           <form onSubmit={handleSubmit}>
-            <div>
-              <label>Nome:</label>
+            <div className="PaymentCondition-form-group">
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
+              <label>Forma de pagamento</label>
             </div>
-            <button type="submit">Cadastrar</button>
+            <button className="PaymentCondition-form-button" type="submit">Cadastrar</button>
           </form>
-        </main>
+        </div>      
+      </main>
         <Footer />
       </body>
     </>

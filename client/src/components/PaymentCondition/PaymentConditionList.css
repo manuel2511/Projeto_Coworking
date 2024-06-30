@@ -1,0 +1,118 @@
+/* Breadcrumb */
+.breadcrumb {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+  
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #007bff;
+}
+  
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+ 
+/* Tabela */
+.paymentConditions-table-container {
+    overflow-x: auto;
+    margin: 0 15px;
+}
+
+.paymentConditions-table-content {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+    font-family: var(--main-font);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.183);
+}
+
+/* Cabeçalho da tabela */
+.paymentConditions-table-content thead tr {
+    background-color: var(--dark-color);
+    color: #fff;
+    text-align: left;
+}
+
+.paymentConditions-table-content th,
+.paymentConditions-table-content td {
+    padding: 12px 15px;
+}
+
+.paymentConditions-table-content td {
+    word-break: break-word;
+}
+
+/* Largura das colunas */
+.col-id {
+    width: 5%;
+}
+
+.col-name {
+    width: 20%;
+}
+
+.col-observation {
+    width: 30%;
+}
+
+.col-photo {
+    width: 15%;
+}
+
+.col-rate {
+    width: 10%;
+}
+
+.col-edit {
+    width: 5%;
+}
+
+/* Estilo para as linhas da tabela */
+.paymentConditions-table-content tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.paymentConditions-table-content tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;  /* striped */
+}
+
+.paymentConditions-table-content tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.paymentConditions-table-content td img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Edit Button */
+.paymentConditions-edit-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+  
+.paymentConditions-edit-button img {
+    width: 20px;
+    height: 20px;
+}    
+.paymentConditions-delete-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+  
+.paymentConditions-delete-button img {
+    width: 20px;
+    height: 20px;
+}    

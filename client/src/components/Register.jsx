@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
-import './register.css';
+import './register.css'; // Importação do css
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -70,7 +70,7 @@ const Register = () => {
           </div>
           <div className='register-form-footer'>
             <button className='register-form-button' type="submit">Register</button>
-            <a href='/' className='register-login-button'>Já possui cadastro? Faça login</a>
+            <a href='/login' className='register-login-button'>Já possui cadastro? Faça login</a>
           </div>
         </div>
       </form>
