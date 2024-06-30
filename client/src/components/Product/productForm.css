@@ -5,6 +5,12 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.144);
 }
 
+.product-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 /* INPUT */
 .product-form-group {
     position: relative;
@@ -14,26 +20,27 @@
 .product-form-group input,
 .product-form-group textarea {
     width: 100%;
-    padding: 6px 12px;
-    font-size: 1rem;
-    border: 1px solid #999;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: transparent;
+    background-color: #f8f9fa;
 }
 
 .product-form-group label {
     position: absolute;
     top: 10px;
-    left: 10px;
-    font-size: 15px;
+    left: 15px;
+    font-size: 16px;
     color: #999;
     pointer-events: none;
+    transition: top 0.3s ease, left 0.3s ease, font-size 0.3s ease;
 }
 
 .product-form-group input:focus,
 .product-form-group textarea:focus {
     outline: none;
-    border-color: var(--darkBlue-color);
+    border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
@@ -41,24 +48,66 @@
 .product-form-group textarea:focus + label,
 .product-form-group input:not(:placeholder-shown) + label,
 .product-form-group textarea:not(:placeholder-shown) + label {
-    top: -9px;
-    left: 9px;
-    font-size: 0.75rem;
-    padding: 0 5px;
+    top: -12px;
+    left: 10px;
+    font-size: 13px;
     color: var(--darkBlue-color);
-    background-color: var(--light-color);
+    background-color: #f8f9fa;
+    padding: 0 5px;
+}
+
+/* IMAGE PREVIEW */
+.product-preview-container {
+    width: 100%;
+    height: 300px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.product-preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-preview-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.product-preview-placeholder .icon {
+    font-size: 3rem;
+    color: #ccc;
+}
+
+.product-preview-placeholder p {
+    margin-top: 10px;
+    color: #ccc;
 }
 
 /* BUTTON */
 .product-form-button {
     color: #fff;
-    padding: 0.3em 1.2em;
+    padding: 10px 20px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
+    margin-top: 20px;
     background-color: var(--darkBlue-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    grid-column: span 2;
 }
 
 .product-form-button:hover {
-    cursor: pointer;
-    background-color: var(--lightBlue-color);
+    background-color: #0056b3;
 }

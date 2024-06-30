@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     observation: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: false,
     },
     photo: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     hourlyRate: {
       type: DataTypes.DECIMAL(10, 2),
