@@ -63,11 +63,11 @@
     width: 15%;
 }
 
-.col-rate {
+.product-table-content .col-rate {
     width: 10%;
 }
 
-.product-table-content .col-edit {
+.product-table-content .col-edit, .product-table-content .col-delete {
     width: 5%;
 }
 
@@ -90,7 +90,7 @@
 }
 
 /* Edit Button */
-.product-edit-button {
+.product-edit-button, .product-delete-button {
     border: none;
     background-color: transparent;
     padding: 0;
@@ -102,4 +102,9 @@
 .product-edit-button img {
     width: 20px;
     height: 20px;
-}    
+}
+
+.product-delete-button img {
+    width: 45px;
+    height: 40px;
+}

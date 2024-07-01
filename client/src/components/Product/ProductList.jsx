@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { getAllProducts } from "../../services/productService";
-import editImage from '../../assets/img/edit.png'; // Importação da imagem de edição
+import { getAllProducts, deleteProduct } from "../../services/productService";
+import editImage from '../../assets/img/edit.png';
+import deleteImage from '../../assets/img/delete.png'; 
 import './productList.css';  // Importação do css
 
 const ProductList = () => {
@@ -20,6 +21,20 @@ const ProductList = () => {
 
     fetchData();
   }, []);
+
+  
+  /* Função para deletar um produto */
+  const handleDelete = async(productID) => {
+    try {
+      await deleteProduct(productID);  // Chama a função do productService para enviar a requisição (delete)
+      // Atualize a lista de produtos após deletar
+      const updatedProducts = products.filter(product => product.id !== productID);  // updatedProducts = novo array com todos os produtos restantes
+      setProducts(updatedProducts);
+      alert("Produto deletado com sucesso!");
+    } catch (error) {
+      alert("Erro ao deletar produto.");
+    }
+  };
 
   return (
     <>
@@ -49,6 +64,7 @@ const ProductList = () => {
                 <th className="col-photo">Foto</th>
                 <th className="col-rate">Taxa</th>
                 <th className="col-edit">Editar</th>
+                <th className="col-delete">Deletar</th>
               </tr>
             </thead>
             <tbody>
@@ -61,10 +77,15 @@ const ProductList = () => {
                     <img src={product.photo} alt={product.name} width="50"/>
                   </td>
                   <td className="col-rate">{product.hourlyRate}</td>
-                  {/* Botão para fazer a edição dos produtos */}
+                  {/* Botão para editar e deletar os produtos */}
                   <td>
                     <button className="product-edit-button" /*onClick={() => handleEdit(product.id)}*/ >
                       <img src={editImage}/>
+                    </button>
+                  </td>
+                  <td>
+                    <button className="product-delete-button" onClick={() => handleDelete(product.id)} >
+                      <img src={deleteImage}/>
                     </button>
                   </td>
                 </tr>
