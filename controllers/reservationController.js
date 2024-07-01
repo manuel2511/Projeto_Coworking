@@ -1,30 +1,63 @@
-const { Reservation, Product } = require('../models');
+const { Reservation, Product, User, PaymentCondition } = require('../models');
 
-exports.create = async (req, res) => {
-  const { products, paymentMethod } = req.body;
-  let totalAmount = 0;
+// exports.create = async (req, res) => {
+//   const { products, paymentMethod } = req.body;
+//   let totalAmount = 0;
 
+//   try {
+//     const reservation = await Reservation.create({ totalAmount, paymentMethod });
+
+//     for (const product of products) {
+//       const foundProduct = await Product.findByPk(product.id);
+//       if (foundProduct) {
+//         const amount = foundProduct.hourlyRate * product.hoursReserved;
+//         totalAmount += amount;
+
+//         await reservation.addProduct(foundProduct, {
+//           through: { hoursReserved: product.hoursReserved },
+//         });
+//       }
+//     }
+
+//     reservation.totalAmount = totalAmount;
+//     await reservation.save();
+
+//     res.status(201).json(reservation);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+exports.createReservation = async (req, res) => {
   try {
-    const reservation = await Reservation.create({ totalAmount, paymentMethod });
+    const { userId, date, duration, products, repeat, status, paymentConditionId } = req.body;
+    const reservation = await Reservation.create({ userId, date, duration, status, paymentConditionId });
 
-    for (const product of products) {
-      const foundProduct = await Product.findByPk(product.id);
-      if (foundProduct) {
-        const amount = foundProduct.hourlyRate * product.hoursReserved;
-        totalAmount += amount;
+    // Adicionar produtos à reserva
+    for (const productId of products) {
+      await reservation.addProduct(productId);
+    }
 
-        await reservation.addProduct(foundProduct, {
-          through: { hoursReserved: product.hoursReserved },
-        });
+    // Lógica de repetição de reservas
+    if (repeat) {
+      const repeatCount = repeat.count || 1;
+      const repeatInterval = repeat.interval || 'daily'; // daily, weekly, monthly
+
+      for (let i = 1; i <= repeatCount; i++) {
+        let newDate = new Date(date);
+        if (repeatInterval === 'weekly') {
+          newDate.setDate(newDate.getDate() + 7 * i);
+        } else if (repeatInterval === 'monthly') {
+          newDate.setMonth(newDate.getMonth() + i);
+        } else {
+          newDate.setDate(newDate.getDate() + i);
+        }
+        await Reservation.create({ userId, date: newDate, duration, status, paymentConditionId });
       }
     }
 
-    reservation.totalAmount = totalAmount;
-    await reservation.save();
-
     res.status(201).json(reservation);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

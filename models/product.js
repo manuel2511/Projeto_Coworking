@@ -6,11 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     observation: {
       type: DataTypes.TEXT,
-      allowNull: false,
     },
     photo: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     hourlyRate: {
       type: DataTypes.DECIMAL(10, 2),
@@ -18,5 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // Product.associate = models => {
+  //   Product.belongsToMany(models.Reservation, {
+  //     through: 'ReservationProducts',
+  //     as: 'reservations',
+  //     foreignKey: 'productId',
+  //   });
+  // };
   return Product;
 };

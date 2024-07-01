@@ -1,10 +1,21 @@
+// models/ReservationProducts.js
 module.exports = (sequelize, DataTypes) => {
-    const ReservationProduct = sequelize.define('ReservationProduct', {
-      hoursReserved: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+  const ReservationProducts = sequelize.define('ReservationProducts', {
+    reservationId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Reservations',
+        key: 'id',
       },
-    });
-  
-    return ReservationProduct;
-  };
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Products',
+        key: 'id',
+      },
+    },
+  });
+
+  return ReservationProducts;
+};

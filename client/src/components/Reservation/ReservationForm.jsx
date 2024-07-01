@@ -1,40 +1,75 @@
+// src/components/ReservationForm.js
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { createReservation } from "../../services/reservationService";
-import { getAllProducts } from "../../services/productService";
 
 const ReservationForm = () => {
+  const [date, setDate] = useState("");
+  const [duration, setDuration] = useState(1);
+  const [status, setStatus] = useState("Aberta");
+  const [repeat, setRepeat] = useState("None");
+  const [repeatCount, setRepeatCount] = useState(1);
   const [products, setProducts] = useState([]);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [addedProducts, setAddedProducts] = useState([]);
+  const [paymentConditionId, setPaymentConditionId] = useState("");
+  const [paymentConditions, setPaymentConditions] = useState([]);
+  const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await getAllProducts();
+    // Fetch products
+    axios.get("/products").then((response) => {
       setProducts(response.data);
-    };
+    });
 
-    fetchProducts();
+    // Fetch payment conditions
+    axios.get("/payment-conditions").then((response) => {
+      setPaymentConditions(response.data);
+    });
   }, []);
 
-  const handleAddProduct = (productId, hoursReserved) => {
-    const product = products.find((p) => p.id === productId);
+  const handleAddProduct = () => {
+    const product = products.find((p) => p.id === parseInt(selectedProduct));
     if (product) {
-      setSelectedProducts([...selectedProducts, { ...product, hoursReserved }]);
+      const productTotal = product.valuePerHour * duration;
+      setAddedProducts([
+        ...addedProducts,
+        { ...product, quantity: duration, total: productTotal },
+      ]);
+      setTotalValue(totalValue + productTotal);
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const reservationData = {
+      date,
+      duration,
+      status,
+      repeat,
+      repeatCount,
+      // products: addedProducts,
+      paymentConditionId,
+      totalValue,
+    };
+
+    console.log("Sending reservation data:", reservationData);
+
     try {
-      await createReservation(selectedProducts, paymentMethod);
-      alert("Reserva cadastrada com sucesso!");
-      setSelectedProducts([]);
-      setPaymentMethod("");
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "/reservations",
+        reservationData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log("Reservation created:", response.data);
     } catch (error) {
-      alert("Erro ao cadastrar reserva");
+      console.error("Error creating reservation:", error.response.data);
     }
   };
 
@@ -45,46 +80,118 @@ const ReservationForm = () => {
         <NavBar />
         <main id="main" className="main">
           <div className="">
-            <h1>Reservas</h1>
+            <h1>Cadastro de Reservas</h1>
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="/">Home</a>
                 </li>
-                <li className="breadcrumb-item">Cadastros</li>
-                <li className="breadcrumb-item active">Reservas</li>
+                <li className="breadcrumb-item">Cadastro</li>
+                <li className="breadcrumb-item active">Cadastro de Reservas</li>
               </ol>
             </nav>
           </div>
           {/* <!-- End Page Title --> */}
           <form onSubmit={handleSubmit}>
             <div>
-              <label>Método de Pagamento:</label>
+              <h2>Detalhes da Reserva</h2>
+              <label>Date</label>
               <input
-                type="text"
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+                type="datetime-local"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 required
               />
+              <label>Duration (hours)</label>
+              <input
+                type="number"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                required
+              />
+              <label>Status</label>
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="Aberta">Aberta</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Finalizada">Finalizada</option>
+              </select>
+              <label>Repeat</label>
+              <select
+                value={repeat}
+                onChange={(e) => setRepeat(e.target.value)}
+              >
+                <option value="None">None</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+              <label>Repeat Count</label>
+              <input
+                type="number"
+                value={repeatCount}
+                onChange={(e) => setRepeatCount(e.target.value)}
+              />
+              <label>Condição de Pagamento</label>
+              <select
+                value={paymentConditionId}
+                onChange={(e) => setPaymentConditionId (parseInt(e.target.value))}
+                required
+              >
+                <option value="">Selecione uma condição de pagamento</option>
+                {paymentConditions.map((condition) => (
+                  <option key={condition.id} value={condition.id}>
+                    {condition.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
-              <label>Produtos:</label>
-              <ul>
+              <h2>Produtos</h2>
+              <label>Products</label>
+              <select
+                value={selectedProduct}
+                onChange={(e) => setSelectedProduct(e.target.value)}
+              >
+                <option value="">Selecione um produto</option>
                 {products.map((product) => (
-                  <li key={product.id}>
-                    {product.name} - {product.hourlyRate} por hora
-                    <input
-                      type="number"
-                      placeholder="Horas reservadas"
-                      onBlur={(e) =>
-                        handleAddProduct(product.id, parseInt(e.target.value))
-                      }
-                    />
-                  </li>
+                  <option key={product.id} value={product.id}>
+                    {product.name}
+                  </option>
                 ))}
-              </ul>
+              </select>
+              <button type="button" onClick={handleAddProduct}>
+                Add Product
+              </button>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Quantidade de Horas</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {addedProducts.map((product, index) => (
+                    <tr key={index}>
+                      <td>{product.id}</td>
+                      <td>{product.name}</td>
+                      <td>{product.hourlyRate}</td>
+                      <td>{product.quantity}</td>
+                      <td>{product.total = product.quantity * product.hourlyRate }</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div>
+                <strong>Valor Total da Reserva: {totalValue }</strong>
+              </div>
             </div>
-            <button type="submit">Cadastrar Reserva</button>
+            <button type="submit">Create Reservation</button>
           </form>
         </main>
         <Footer />

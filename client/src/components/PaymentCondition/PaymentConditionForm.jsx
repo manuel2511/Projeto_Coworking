@@ -17,7 +17,7 @@ const PaymentConditionForm = () => {
       setName("");
       setDescription("");
     } catch (error) {
-      alert("Erro ao cadastrar condição de pagamento");
+      alert("Já existe está condição de pagamento");
     }
   };
 
