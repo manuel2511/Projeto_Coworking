@@ -25,6 +25,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f8f9fa;
+    resize: none;
 }
 
 .product-form-group label {
@@ -44,8 +45,6 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.product-form-group input:focus + label,
-.product-form-group textarea:focus + label,
 .product-form-group input:not(:placeholder-shown) + label,
 .product-form-group textarea:not(:placeholder-shown) + label {
     top: -12px;
@@ -53,6 +52,7 @@
     font-size: 13px;
     color: var(--darkBlue-color);
     background-color: #f8f9fa;
+    border-radius: 20px;
     padding: 0 5px;
 }
 
@@ -110,4 +110,16 @@
 
 .product-form-button:hover {
     background-color: #0056b3;
+}
+
+/* Remove spinners no Chrome, Safari e Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinners no Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

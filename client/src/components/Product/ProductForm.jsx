@@ -102,7 +102,7 @@ const ProductForm = () => {
               </div>
               <div className="product-form-group-image">
                 <input
-                  type="file" // Alterado para type="file"
+                  type="file"
                   onChange={handlePhotoChange} // Função para lidar com a seleção de arquivo
                   accept="image/*" // Aceitar apenas imagens
                 />

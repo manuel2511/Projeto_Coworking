@@ -2,8 +2,13 @@ import axios from 'axios';
 
 const API_URL = '/products';
 
-export const createProduct = (name, observation, photo, hourlyRate) => {
-  return axios.post(API_URL, { name, observation, photo, hourlyRate });
+// Envio dos dados como FormData por conta da imagem
+export const createProduct = (formData) => {
+  return axios.post(API_URL, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'  // Envio de formulário com dados mistos (texto e binário)
+    }
+  });
 };
 
 export const getAllProducts = () => {
