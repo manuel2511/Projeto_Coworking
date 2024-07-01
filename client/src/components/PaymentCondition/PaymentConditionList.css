@@ -1,20 +1,3 @@
-/* Breadcrumb */
-.breadcrumb {
-    background-color: #f8f9fa;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-  
-.breadcrumb-item a {
-    text-decoration: none;
-    color: #007bff;
-}
-  
-.breadcrumb-item a:hover {
-    text-decoration: underline;
-}
- 
 /* Tabela */
 .paymentConditions-table-container {
     overflow-x: auto;
@@ -32,6 +15,7 @@
 
 /* Cabeçalho da tabela */
 .paymentConditions-table-content thead tr {
+    width: 100%;
     background-color: var(--dark-color);
     color: #fff;
     text-align: left;
@@ -47,28 +31,16 @@
 }
 
 /* Largura das colunas */
-.col-id {
+.paymentConditions-table-content .col-id {
     width: 5%;
 }
 
-.col-name {
-    width: 20%;
+.paymentConditions-table-content .col-name {
+    width: 80%;
 }
 
-.col-observation {
-    width: 30%;
-}
-
-.col-photo {
-    width: 15%;
-}
-
-.col-rate {
-    width: 10%;
-}
-
-.col-edit {
-    width: 5%;
+.paymentConditions-table-content .col-delete, .paymentConditions-delete-button .col-edit {
+    width: 1%;
 }
 
 /* Estilo para as linhas da tabela */
@@ -90,7 +62,7 @@
 }
 
 /* Edit Button */
-.paymentConditions-edit-button {
+.paymentConditions-edit-button, .paymentConditions-delete-button {
     border: none;
     background-color: transparent;
     padding: 0;
@@ -102,17 +74,9 @@
 .paymentConditions-edit-button img {
     width: 20px;
     height: 20px;
-}    
-.paymentConditions-delete-button {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    cursor: pointer;
-    display: block;
-    margin: 0 auto;
 }
-  
+
 .paymentConditions-delete-button img {
-    width: 20px;
-    height: 20px;
+    width: 45px;
+    height: 40px;
 }    

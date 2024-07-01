@@ -29,7 +29,7 @@ const PaymentConditionList = () => {
         <Header />
         <NavBar />
         <main id="main" className="main">
-          <div className="">
+          <div className="breadcrumb-container">
             <h1>Formas de Pagamentos</h1>
             <nav>
               <ol className="breadcrumb">
@@ -37,45 +37,44 @@ const PaymentConditionList = () => {
                   <a href="/">Home</a>
                 </li>
                 <li className="breadcrumb-item">Movimentações</li>
-                <li className="breadcrumb-item active">Condição de Pagamento</li>
+                <li className="breadcrumb-item active">Formas de Pagamento</li>
               </ol>
             </nav>
           </div>
     
-              {/* <!-- End Page Title --> */}
-        <div className='paymentConditions-table-container'>
-          <table className='paymentConditions-table-content'>
-            <thead>
-              <tr>
-                <th className="col-id">ID</th>
-                <th className="col-name">Nome</th>
-             
-              </tr>
-            </thead>
-            <tbody>
-
-              {paymentConditions.map((paymentConditions) => (
-                <tr key={paymentConditions.id}>
-                  <td className="col-id">{paymentConditions.id}</td>
-                  <td className="col-name">{paymentConditions.name}</td>
-                  <td className="col-observation">{paymentConditions.description}</td>
-                  {/* Botão para fazer a edição dos produtos */}
-                  <td>
-                    <button className="paymentConditions-edit-button" /*onClick={() => handleEdit(paymentConditions.id)}*/ >
-                      <img src={editImage}/>
-                    </button>
-                  </td>
-                  <td>
-                    <button className="paymentConditions-delete-button" /*onClick={() => handleEdit(paymentConditions.id)}*/ >
-                      <img src={deleteImage}/>
-                    </button>
-                  </td>
+          {/* <!-- End Page Title --> */}
+          <div className='paymentConditions-table-container'>
+            <table className='paymentConditions-table-content'>
+              <thead>
+                <tr>
+                  <th className="col-id">ID</th>
+                  <th className="col-name">Forma de Pagamento</th>
+                  <th className="col-edit">Editar</th>
+                  <th className="col-delete">Deletar</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-    </div>
-    </main>
+              </thead>
+              <tbody>
+                {paymentConditions.map((paymentConditions) => (
+                  <tr key={paymentConditions.id}>
+                    <td className="col-id">{paymentConditions.id}</td>
+                    <td className="col-name">{paymentConditions.name}</td>
+                    {/* Botão para editar e deletar os produtos */}
+                    <td>
+                      <button className="paymentConditions-edit-button" /*onClick={() => handleEdit(paymentConditions.id)}*/ >
+                        <img src={editImage}/>
+                      </button>
+                    </td>
+                    <td>
+                      <button className="paymentConditions-delete-button" /*onClick={() => handleDelete(paymentConditions.id)}*/ >
+                        <img src={deleteImage}/>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </main>
         <Footer />
       </body>
     </>

@@ -41,7 +41,7 @@ const ProductForm = () => {
       <Header />
       <NavBar />
       <main id="main" className="main">
-        <div className="">
+        <div className="breadcrumb-container">
           <h1>Produtos</h1>
           <nav>
             <ol className="breadcrumb">

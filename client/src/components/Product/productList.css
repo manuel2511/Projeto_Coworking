@@ -47,19 +47,19 @@
 }
 
 /* Largura das colunas */
-.col-id {
+.product-table-content .col-id {
     width: 5%;
 }
 
-.col-name {
+.product-table-content .col-name {
     width: 20%;
 }
 
-.col-observation {
+.product-table-content .col-observation {
     width: 30%;
 }
 
-.col-photo {
+.product-table-content .col-photo {
     width: 15%;
 }
 
@@ -67,7 +67,7 @@
     width: 10%;
 }
 
-.col-edit {
+.product-table-content .col-edit {
     width: 5%;
 }
 
