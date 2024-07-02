@@ -1,40 +1,16 @@
-const { Reservation, Product, User, PaymentCondition } = require('../models');
+const { Reservation, Product, User, PaymentCondition,ReservationProducts } = require('../models');
 
-// exports.create = async (req, res) => {
-//   const { products, paymentMethod } = req.body;
-//   let totalAmount = 0;
-
-//   try {
-//     const reservation = await Reservation.create({ totalAmount, paymentMethod });
-
-//     for (const product of products) {
-//       const foundProduct = await Product.findByPk(product.id);
-//       if (foundProduct) {
-//         const amount = foundProduct.hourlyRate * product.hoursReserved;
-//         totalAmount += amount;
-
-//         await reservation.addProduct(foundProduct, {
-//           through: { hoursReserved: product.hoursReserved },
-//         });
-//       }
-//     }
-
-//     reservation.totalAmount = totalAmount;
-//     await reservation.save();
-
-//     res.status(201).json(reservation);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// };
 exports.create = async (req, res) => {
   try {
     const { userId, date, duration, products, repeat, status, paymentConditionId } = req.body;
     const reservation = await Reservation.create({ userId, date, duration, status, paymentConditionId });
-
     // Adicionar produtos à reserva
-    for (const productId of products) {
-      await reservation.addProduct(productId);
+    for (const product of products) {
+      console.log(reservation.id,product.id);
+      await ReservationProducts.create({
+        reservationId: reservation.id,
+        productId: product.id
+      });
     }
 
     // Lógica de repetição de reservas
@@ -51,13 +27,22 @@ exports.create = async (req, res) => {
         } else {
           newDate.setDate(newDate.getDate() + i);
         }
-        await Reservation.create({ userId, date: newDate, duration, status, paymentConditionId });
+        const repeatedReservation = await Reservation.create({ userId, date: newDate, duration, status, paymentConditionId });
+
+        // Adicionar produtos às reservas repetidas
+        for (const product of products) {
+          await ReservationProducts.create({
+            reservationId: repeatedReservation.id,
+            productId: product.id 
+          });
+        }
+        console.log(ReservationProducts);
       }
     }
 
     res.status(201).json(reservation);
   } catch (error) {
-    res.status(500).json({ error: error.message + " chegou aqui" });
+    res.status(500).json({ error: error.message });
   }
 };
 
