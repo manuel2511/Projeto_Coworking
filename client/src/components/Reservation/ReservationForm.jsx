@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
+import "./ReservationForm.css"
 
 const ReservationForm = () => {
   const [date, setDate] = useState("");
@@ -85,7 +86,9 @@ const ReservationForm = () => {
         <Header />
         <NavBar />
         <main id="main" className="main">
-          <div className="">
+        
+          <div className="breadcrumb-container">
+           
             <h1>Cadastro de Reservas</h1>
             <nav>
               <ol className="breadcrumb">
@@ -98,23 +101,35 @@ const ReservationForm = () => {
             </nav>
           </div>
           {/* <!-- End Page Title --> */}
-          <form onSubmit={handleSubmit}>
-            <div>
-              <h2>Detalhes da Reserva</h2>
-              <label>Date</label>
+          <div className="reservation-form-conteiner"> 
+          <form onSubmit={handleSubmit}
+
+
+          className="reservation-form-grid">
+
+        
+               <h2>Detalhes da Reserva</h2>
+               {/* lado esquerdo */}
+              <div className="reservation-form-group">
+              <label>Data</label>
               <input
                 type="datetime-local"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 required
               />
-              <label>Duration (hours)</label>
+              </div>
+              <div className="reservation-form-group">
+              <label>Duração (houras)</label>
               <input
                 type="number"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
                 required
               />
+              </div>
+
+              <div className="reservation-form-group">
               <label>Status</label>
               <select
                 value={status}
@@ -124,22 +139,28 @@ const ReservationForm = () => {
                 <option value="Cancelada">Cancelada</option>
                 <option value="Finalizada">Finalizada</option>
               </select>
-              <label>Repeat</label>
+              </div>
+              <div className="reservation-form-group">
+              <label>Repetir</label>
               <select
                 value={repeat}
                 onChange={(e) => setRepeat(e.target.value)}
               >
-                <option value="None">None</option>
-                <option value="Daily">Daily</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
+                <option value="None">nunca</option>
+                <option value="Daily">Diariamente</option>
+                <option value="Weekly">Semanalmete</option>
+                <option value="Monthly">Mensalmente</option>
               </select>
-              <label>Repeat Count</label>
+              </div>
+              <div className="reservation-form-group">
+              <label>Repetir(contaçâo)</label>
               <input
                 type="number"
                 value={repeatCount}
                 onChange={(e) => setRepeatCount(e.target.value)}
               />
+              </div>
+              <div className="reservation-form-group">
               <label>Condição de Pagamento</label>
               <select
                 value={paymentConditionId}
@@ -153,9 +174,14 @@ const ReservationForm = () => {
                   </option>
                 ))}
               </select>
-            </div>
+              </div>
+
+
             <div>
+              
               <h2>Produtos</h2>
+
+              <div className="reservation-form-group">
               <label>Products</label>
               <select
                 value={selectedProduct}
@@ -168,7 +194,9 @@ const ReservationForm = () => {
                   </option>
                 ))}
               </select>
-              <button type="button" onClick={handleAddProduct}>
+              
+              </div>
+              <button type="button" className="reservation-form-button" onClick={handleAddProduct}>
                 Add Product
               </button>
               <table>
@@ -197,8 +225,10 @@ const ReservationForm = () => {
                 <strong>Valor Total da Reserva: {totalValue}</strong>
               </div>
             </div>
-            <button type="submit">Create Reservation</button>
+            <button type="submit" className="reservationCreate-form-button">Create Reservation</button>
+            
           </form>
+          </div>
         </main>
         <Footer />
       </body>
