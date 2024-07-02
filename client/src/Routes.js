@@ -11,6 +11,7 @@ import ProductForm from './components/Product/ProductForm';
 import ProductList from './components/Product/ProductList';
 import ReservationForm  from './components/Reservation/ReservationForm';
 import ReservationList  from './components/Reservation/ReservationList';
+import Calendar from './components/Dashboard/Calendar';
 // import ProductList from './components/ProductList';
 
 const AppRoutes = () => {
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<PrivateRoute><Index /></PrivateRoute>} />
+        <Route path="/calendario" element={<PrivateRoute><Calendar /></PrivateRoute>} />
         <Route path="/cadastroPagamento" element={<PrivateRoute><PaymentConditionForm /></PrivateRoute>} />
         <Route path="/listaPagamento" element={<PrivateRoute><PaymentConditionList/></PrivateRoute>} />
         <Route path="/cadastroProduto" element={<PrivateRoute><ProductForm /></PrivateRoute>} />
