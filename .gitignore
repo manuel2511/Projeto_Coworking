@@ -29,3 +29,7 @@ yarn-error.log*
 forms-layouts.html
 
 upload/*
+
+.env copy
+
+.env
