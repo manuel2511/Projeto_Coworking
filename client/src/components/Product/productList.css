@@ -55,20 +55,21 @@
     width: 20%;
 }
 
-.product-table-content .col-observation {
+.product-table-content .col-location{
     width: 30%;
 }
 
-.product-table-content .col-photo {
-    width: 15%;
-}
-
-.product-table-content .col-rate {
+.product-table-content .col-capacity{
     width: 10%;
 }
 
-.product-table-content .col-edit, .product-table-content .col-delete {
-    width: 5%;
+.product-table-content .col-rate {
+    width: 20%;
+}
+
+.product-table-content .col-edit,
+.product-table-content .col-delete {
+    width: 7.5%;
 }
 
 /* Estilo para as linhas da tabela */
@@ -90,7 +91,9 @@
 }
 
 /* Edit Button */
-.product-edit-button, .product-delete-button {
+.product-edit-button,
+.product-delete-button,
+.product-infos-button {
     border: none;
     background-color: transparent;
     padding: 0;
@@ -107,4 +110,9 @@
 .product-delete-button img {
     width: 45px;
     height: 40px;
+}
+
+.product-infos-button img{
+    width: 25px;
+    height: 24px;
 }
