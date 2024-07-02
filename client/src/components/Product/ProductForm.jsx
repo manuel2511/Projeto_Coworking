@@ -7,7 +7,9 @@ import './productForm.css';  // Importação do css
 
 const ProductForm = () => {
   const [name, setName] = useState("");
-  const [observation, setObservation] = useState("");
+  const [description, setDescription] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [location, setLocation] = useState("");
   const [photo, setPhoto] = useState(null); // Para armazenar o arquivo de imagem
   const [hourlyRate, setHourlyRate] = useState("");
 
@@ -16,14 +18,18 @@ const ProductForm = () => {
     try {
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("observation", observation);
+      formData.append("description", description);
+      formData.append("capacity", capacity);
+      formData.append("location", location);
       formData.append("photo", photo); // Adiciona o arquivo de imagem ao FormData
       formData.append("hourlyRate", hourlyRate);
 
       await createProduct(formData);
       alert("Produto cadastrado com sucesso!");
       setName("");
-      setObservation("");
+      setDescription("");
+      setCapacity("");
+      setLocation("");
       setPhoto(null); // Limpa o estado da foto após o envio
       setHourlyRate("");
     } catch (error) {
@@ -69,10 +75,28 @@ const ProductForm = () => {
               </div>
               <div className="product-form-group">
                 <textarea
-                  value={observation}
-                  onChange={(e) => setObservation(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
-                <label>Observação:</label>
+                <label>Descrição:</label>
+              </div>
+              <div className="product-form-group">
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  required
+                />
+                <label>Localização:</label>
+              </div>
+              <div className="product-form-group">
+                <input
+                  type="number"
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                  required
+                />
+                <label>Capacidade:</label>
               </div>
               <div className="product-form-group">
                 <input
@@ -105,6 +129,7 @@ const ProductForm = () => {
                   type="file"
                   onChange={handlePhotoChange} // Função para lidar com a seleção de arquivo
                   accept="image/*" // Aceitar apenas imagens
+                  required
                 />
               </div>
             </div>

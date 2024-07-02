@@ -4,8 +4,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    observation: {
+    description: {
       type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    capacity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     photo: {
       type: DataTypes.STRING,

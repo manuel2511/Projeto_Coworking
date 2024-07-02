@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
@@ -11,7 +11,29 @@ import "./calendar.css";
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 const localizer = momentLocalizer(moment);
+
 const Calendario = () => {
+    const [eventos, setEventos] = useState([
+      {
+                id: 1,
+                title: "Atividade1",
+                start: new Date(2024,6,2,15,0,0),
+                end: new Date(2024,6,3,15,0,0),
+                desc: "Atividade1 desc",
+                color: "danger",
+                tipo: "Atividade",
+            },
+            {
+                id: 2,
+                title: "Atividade2",
+                start: new Date(2024,6,2,15,0,0),
+                end: new Date(2024,6,5,15,0,0),
+                desc: "Atividade2 desc",
+                color: "blue",
+                tipo: "Atividade",
+            },
+        ]
+    );
   return (
     <>
       <Header />
@@ -31,7 +53,7 @@ const Calendario = () => {
         <DragAndDropCalendar
           defaultDate={moment().toDate()}
           defaultviews="month"
-          events={[{}]}
+          events={eventos}
           localizer={localizer}
           resizable
           className="calendar"

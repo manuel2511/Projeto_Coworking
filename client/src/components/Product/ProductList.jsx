@@ -4,11 +4,13 @@ import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllProducts, deleteProduct } from "../../services/productService";
 import editImage from '../../assets/img/edit.png';
-import deleteImage from '../../assets/img/delete.png'; 
+import deleteImage from '../../assets/img/delete.png';
+import infosImage from '../../assets/img/infos.png';
 import './productList.css';  // Importação do css
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,6 +38,7 @@ const ProductList = () => {
     }
   };
 
+
   return (
     <>
       <Header />
@@ -60,11 +63,18 @@ const ProductList = () => {
               <tr>
                 <th className="col-id">ID</th>
                 <th className="col-name">Nome</th>
-                <th className="col-observation">Observação</th>
-                <th className="col-photo">Foto</th>
-                <th className="col-rate">Taxa</th>
+                <th className="col-location">Localização</th>
+                <th className="col-capacity">Capacidade</th>
+                <th className="col-rate">Valor por Hora</th>
+
+                {/* Imagem e descrição vão ir para o "Mais informações"
+                    <th className="col-description">Descrição</th>
+                    <th className="col-photo">Foto</th>
+                */}
+
                 <th className="col-edit">Editar</th>
                 <th className="col-delete">Deletar</th>
+                <th className="col-infos"></th>
               </tr>
             </thead>
             <tbody>
@@ -72,12 +82,18 @@ const ProductList = () => {
                 <tr key={product.id}>
                   <td className="col-id">{product.id}</td>
                   <td className="col-name">{product.name}</td>
-                  <td className="col-observation">{product.observation}</td>
-                  <td className="col-photo">
-                    <img src={product.photo} alt={product.name} width="50"/>
-                  </td>
+                  <td className="col-location">{product.location}</td>
+                  <td className="col-capacity">{product.capacity}</td>
                   <td className="col-rate">{product.hourlyRate}</td>
-                  {/* Botão para editar e deletar os produtos */}
+
+                  {/* Imagem e descrição vão ir para o "Mais informações"
+                      <td className="col-description">{product.description}</td>
+                      <td className="col-photo">
+                        <img src={product.photo} alt={product.name} width="50"/>
+                      </td>
+                  */}
+
+                  {/* Botão para ver mais, editar e deletar os produtos */}
                   <td>
                     <button className="product-edit-button" /*onClick={() => handleEdit(product.id)}*/ >
                       <img src={editImage}/>
@@ -86,6 +102,11 @@ const ProductList = () => {
                   <td>
                     <button className="product-delete-button" onClick={() => handleDelete(product.id)} >
                       <img src={deleteImage}/>
+                    </button>
+                  </td>
+                  <td>
+                    <button className="product-infos-button" /*onClick={() => openModal(product)}*/ >
+                      <img src={infosImage}/>
                     </button>
                   </td>
                 </tr>
