@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
 
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
   });
 
   Reservation.associate = (models) => {

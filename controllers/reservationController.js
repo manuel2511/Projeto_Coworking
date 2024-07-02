@@ -27,7 +27,7 @@ const { Reservation, Product, User, PaymentCondition } = require('../models');
 //     res.status(400).json({ error: error.message });
 //   }
 // };
-exports.createReservation = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const { userId, date, duration, products, repeat, status, paymentConditionId } = req.body;
     const reservation = await Reservation.create({ userId, date, duration, status, paymentConditionId });
@@ -57,7 +57,7 @@ exports.createReservation = async (req, res) => {
 
     res.status(201).json(reservation);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message + " chegou aqui" });
   }
 };
 
