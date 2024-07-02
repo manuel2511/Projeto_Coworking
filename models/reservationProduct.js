@@ -16,6 +16,5 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
-
   return ReservationProducts;
 };

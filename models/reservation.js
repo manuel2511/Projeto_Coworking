@@ -27,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-
+      allowNull: false,
+      defaultValue: 1,
     },
     paymentConditionId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
 
     },
   });
@@ -38,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
   Reservation.associate = (models) => {
     Reservation.belongsTo(models.User, { foreignKey: 'userId' });
     Reservation.belongsTo(models.PaymentCondition, { foreignKey: 'paymentConditionId' });
+    Reservation.belongsToMany(models.Product, {
+      through: models.ReservationProducts,
+      foreignKey: 'reservationId',
+      otherKey: 'productId',
+    });
   };
 
   return Reservation;

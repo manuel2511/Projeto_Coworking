@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'api/reservations';
+const API_URL = '/reservations';
 
 // export const createReservation = (products, paymentMethod) => {
 //   return axios.post(API_URL, { products, paymentMethod });

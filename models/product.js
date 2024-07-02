@@ -25,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // Product.associate = models => {
-  //   Product.belongsToMany(models.Reservation, {
-  //     through: 'ReservationProducts',
-  //     as: 'reservations',
-  //     foreignKey: 'productId',
-  //   });
-  // };
+  Product.associate = (models) => {
+    Product.belongsToMany(models.Reservation, {
+      through: models.ReservationProducts,
+      foreignKey: 'productId',
+      otherKey: 'reservationId',
+    });
+  };
   return Product;
 };

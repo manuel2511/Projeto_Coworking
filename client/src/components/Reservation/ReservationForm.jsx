@@ -1,4 +1,3 @@
-// src/components/ReservationForm.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../Body/Header";
@@ -50,13 +49,10 @@ const ReservationForm = () => {
       status,
       repeat,
       repeatCount,
-      // products: addedProducts,
+      products: addedProducts,
       paymentConditionId,
       totalValue,
     };
-
-    console.log("Sending reservation data:", reservationData);
-
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -66,8 +62,18 @@ const ReservationForm = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
       console.log("Reservation created:", response.data);
+
+      // Limpar campos após submissão bem-sucedida
+      setDate("");
+      setDuration(1);
+      setStatus("Aberta");
+      setRepeat("None");
+      setRepeatCount(1);
+      setSelectedProduct("");
+      setAddedProducts([]);
+      setPaymentConditionId("");
+      setTotalValue(0);
     } catch (error) {
       console.error("Error creating reservation:", error.response.data);
     }
@@ -137,7 +143,7 @@ const ReservationForm = () => {
               <label>Condição de Pagamento</label>
               <select
                 value={paymentConditionId}
-                onChange={(e) => setPaymentConditionId (parseInt(e.target.value))}
+                onChange={(e) => setPaymentConditionId(parseInt(e.target.value))}
                 required
               >
                 <option value="">Selecione uma condição de pagamento</option>
@@ -180,15 +186,15 @@ const ReservationForm = () => {
                     <tr key={index}>
                       <td>{product.id}</td>
                       <td>{product.name}</td>
-                      <td>{product.hourlyRate}</td>
+                      <td>{product.valuePerHour}</td>
                       <td>{product.quantity}</td>
-                      <td>{product.total = product.quantity * product.hourlyRate }</td>
+                      <td>{product.total}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
               <div>
-                <strong>Valor Total da Reserva: {totalValue }</strong>
+                <strong>Valor Total da Reserva: {totalValue}</strong>
               </div>
             </div>
             <button type="submit">Create Reservation</button>

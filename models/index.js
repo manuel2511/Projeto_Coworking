@@ -34,4 +34,40 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Associations
+db.User.associate = (models) => {
+  db.User.hasMany(models.Reservation, { foreignKey: 'userId' });
+};
+
+db.Product.associate = (models) => {
+  db.Product.belongsToMany(models.Reservation, {
+    through: models.ReservationProducts,
+    foreignKey: 'productId',
+    otherKey: 'reservationId',
+  });
+};
+
+db.Reservation.associate = (models) => {
+  db.Reservation.belongsTo(models.User, { foreignKey: 'userId' });
+  db.Reservation.belongsTo(models.PaymentCondition, { foreignKey: 'paymentConditionId' });
+  db.Reservation.belongsToMany(models.Product, {
+    through: models.ReservationProducts,
+    foreignKey: 'reservationId',
+    otherKey: 'productId',
+  });
+};
+
+db.PaymentCondition.associate = (models) => {
+  db.PaymentCondition.hasMany(models.Reservation, { foreignKey: 'paymentConditionId' });
+};
+
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log("All models were synchronized successfully.");
+  })
+  .catch(err => {
+    console.error("An error occurred while synchronizing the models:", err);
+  });
+
+
 module.exports = db;
