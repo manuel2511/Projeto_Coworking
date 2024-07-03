@@ -66,7 +66,7 @@ const ProductUpdate = () => {
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Movimentação</li>
-              <li className="breadcrumb-item active">Editar Produto {product.id}</li>
+              <li className="breadcrumb-item active">Editar Produto</li>
             </ol>
           </nav>
         </div>
