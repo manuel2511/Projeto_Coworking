@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
@@ -14,7 +15,7 @@ moment.locale('pt-br');
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 const localizer = momentLocalizer(moment);
 
-// Defina as mensagens em português
+// Definido as mensagens em português
 const messages = {
   date: 'Data',
   time: 'Hora',
@@ -35,28 +36,32 @@ const messages = {
 };
 
 const Calendario = () => {
-    const [eventos, setEventos] = useState([
-      {
-                id: 1,
-                title: "Atividade1",
-                start: new Date(2024,6,3,15,0,0),
-                end:  new Date(2024,6,3,16,0,0),
-                desc: "Atividade1 desc",
-                color: "danger",
-                tipo: "Atividade",
-               
-            },
-            {
-                id: 2,
-                title: "Atividade2",
-                start: new Date(2024,6,2,15,0,0),
-                end: new Date(2024,6,5,15,0,0),
-                desc: "Atividade2 desc",
-                color: "blue",
-                tipo: "Atividade",
-            },
-        ]
-    );
+  const [eventos, setEventos] = useState([]);
+
+  useEffect(() => {
+    // Fetch reservations da API 
+    const fetchReservations = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("/reservations", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+          const reservations = response.data;
+        // Incluindo os enventos das tarefas no calendário
+        const calendarEvents = reservations.map(reservation => ({
+          id: reservation.id,
+          title: `Reserva ${reservation.id}`,
+          start: new Date(reservation.date),
+          end: new Date(new Date(reservation.date).getTime() + reservation.duration * 60 * 60 * 1000), // Calcula a data de término com base na duração em horas
+          desc: `Status: ${reservation.status}`          
+        }));
+        setEventos(calendarEvents);
+      } catch (error) {
+        console.error("Error fetching reservations:", error.response.data);
+      }
+    };
+    fetchReservations();
+  }, []);
   return (
     <>
       <Header />
