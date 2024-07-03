@@ -2,46 +2,52 @@ import React, { useEffect, useState } from 'react';
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { getAllPaymentConditions } from '../../services/paymentConditionService';
-import "./PaymentConditionList.css";
+import { getAllProducts } from "../../services/productService";
+import "./productList.css";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const PaymentConditionsReport = () => {
-  const [paymentConditions, setPaymentConditions] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllPaymentConditions();
-        setPaymentConditions(response.data);
-      } catch (error) {
-        alert('Erro ao buscar condições de pagamento');
-      }
-    };
-
-    fetchData();
-  }, []);
+const ProductReport = () => {
+    const [products, setProducts] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await getAllProducts();
+          setProducts(response.data);
+        } catch (error) {
+          alert("Erro ao buscar produtos");
+        }
+      };
+  
+      fetchData();
+    }, []);
 
   function gerarPDF(){
     var docDefinition = {
       content: [
-        { text: 'Relatório de Formas de Pagamento', style: 'header' },
+        { text: 'Relatório de Produtos', style: 'header' },
         { text: `Data de emissão: ${new Date().toLocaleDateString()}`, style: 'subheader' },
         { text: '\n' },
         {
           table: {
             headerRows: 1,
-            widths: [50, '*'],
+            widths: [50, '*', '*', '*', '*'],
             body: [
               [{text: 'ID', style: 'headerTable'},
-              {text: 'Nome', style: 'headerTable1'}],
-              ...paymentConditions.map(paymentConditions => ([
-                {text: paymentConditions.id, style: 'item'},
-                {text: paymentConditions.name, style: 'item'}
+              {text: 'Nome', style: 'headerTable'},
+              {text: 'Localização', style: 'headerTable'},
+              {text: 'Capacidade', style: 'headerTable'},
+              {text: 'Valor por hora', style: 'headerTable'}],
+              ...products.map(products => ([
+                {text: products.id, style: 'item'},
+                {text: products.name, style: 'item'},
+                {text: products.location, style: 'item'},
+                {text: products.capacity, style: 'item'},
+                {text: products.hourlyRate, style: 'item'},
               ])),
-              [{text: `Total: ${paymentConditions.length}`, colSpan: 2, style: 'total'},
+              [{text: `Total: ${products.length}`, colSpan: 5, style: 'total'},
               {}]
             ]
           },
@@ -81,15 +87,6 @@ const PaymentConditionsReport = () => {
           alignment: 'center',
           margin: [0, 4, 0, 4]
         },
-        headerTable1: {
-          bold: true,
-          fontSize: 13,
-          color: 'white',
-          fillColor: '#2a3f54',
-          alignment: 'center',
-          margin: [0, 4, 0, 4], 
-          alignment: 'left'
-        },
         item: {
           margin: [0, 2, 0, 2]
         },
@@ -117,19 +114,19 @@ const PaymentConditionsReport = () => {
       <NavBar />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Formas de Pagamentos</h1>
+          <h1>Produtos</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Relatórios</li>
-              <li className="breadcrumb-item active">Relatório de formas de pagamento</li>
+              <li className="breadcrumb-item active">Relatório de produtos</li>
             </ol>
           </nav>
         </div>
         <div>
-          <button className="btn btn-primary" onClick={gerarPDF}>Gerar relatório de formas de pagamento</button>
+          <button className="btn btn-primary" onClick={gerarPDF}>Gerar relatório de produtos</button>
         </div>
       </main>
       <Footer />
@@ -137,4 +134,4 @@ const PaymentConditionsReport = () => {
   );
 };
 
-export default PaymentConditionsReport;
+export default ProductReport;

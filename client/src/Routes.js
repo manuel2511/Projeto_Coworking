@@ -14,6 +14,8 @@ import ReservationList  from './components/Reservation/ReservationList';
 import ProductUpdate from './components/Product/ProductUpdate';
 import Calendar from './components/Dashboard/Calendar';
 import PaymentConditionsReport from './components/PaymentCondition/PaymentConditionsReport';
+import ProductReport from './components/Product/ProductReport';
+import ReservationReport from './components/Reservation/ReservationReport';
 // import ProductList from './components/ProductList';
 
 const AppRoutes = () => {
@@ -34,6 +36,8 @@ const AppRoutes = () => {
         <Route path="/cadastroReserva" element={<PrivateRoute><ReservationForm /></PrivateRoute>} />
         <Route path="/listaReserva" element={<PrivateRoute><ReservationList /></PrivateRoute>} />
         <Route path="/relatorioFormaDePagamento" element={<PrivateRoute><PaymentConditionsReport /></PrivateRoute>} />
+        <Route path="/relatorioProdutos" element={<PrivateRoute><ProductReport /></PrivateRoute>} />
+        <Route path="/relatorioReservas" element={<PrivateRoute><ReservationReport /></PrivateRoute>} />
       </Routes>
     </Router>
   );

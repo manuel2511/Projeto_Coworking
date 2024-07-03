@@ -2,46 +2,65 @@ import React, { useEffect, useState } from 'react';
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { getAllPaymentConditions } from '../../services/paymentConditionService';
-import "./PaymentConditionList.css";
+import { getAllReservations } from "../../services/reservationService";
+import "./ReservationForm.css";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const PaymentConditionsReport = () => {
-  const [paymentConditions, setPaymentConditions] = useState([]);
+const ProductReport = () => {
+    const [reservations, setReservations] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllPaymentConditions();
-        setPaymentConditions(response.data);
-      } catch (error) {
-        alert('Erro ao buscar condições de pagamento');
-      }
-    };
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await getAllReservations();
+          setReservations(response.data);
+        } catch (error) {
+          alert("Erro ao buscar reservas");
+        }
+      };
+  
+      fetchData();
+    }, []);
 
-    fetchData();
-  }, []);
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        date.setHours(date.getHours() + 3);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} - ${hours}:${minutes}`;
+    }
 
   function gerarPDF(){
     var docDefinition = {
       content: [
-        { text: 'Relatório de Formas de Pagamento', style: 'header' },
+        { text: 'Relatório de Reservas', style: 'header' },
         { text: `Data de emissão: ${new Date().toLocaleDateString()}`, style: 'subheader' },
         { text: '\n' },
         {
           table: {
             headerRows: 1,
-            widths: [50, '*'],
+            widths: [40, 150, 50, 50, 50, 110],
             body: [
               [{text: 'ID', style: 'headerTable'},
-              {text: 'Nome', style: 'headerTable1'}],
-              ...paymentConditions.map(paymentConditions => ([
-                {text: paymentConditions.id, style: 'item'},
-                {text: paymentConditions.name, style: 'item'}
+              {text: 'Data e hora', style: 'headerTable'},
+              {text: 'Duração', style: 'headerTable'},
+              {text: 'Status', style: 'headerTable'},
+              {text: 'Repetir', style: 'headerTable'},
+              {text: 'Valor Total', style: 'headerTable'}],
+              ...reservations.map(reservations => ([
+                {text: reservations.id, style: 'item'},
+                {text: formatDate(reservations.date), style: 'item'},
+                {text: reservations.duration, style: 'item'},
+                {text: reservations.status, style: 'item'},
+                {text: reservations.repeat, style: 'item'},
+                {text: reservations.totalValue, style: 'item'},
               ])),
-              [{text: `Total: ${paymentConditions.length}`, colSpan: 2, style: 'total'},
+              [{text: `Total: ${reservations.length}`, colSpan: 6, style: 'total'},
               {}]
             ]
           },
@@ -81,15 +100,6 @@ const PaymentConditionsReport = () => {
           alignment: 'center',
           margin: [0, 4, 0, 4]
         },
-        headerTable1: {
-          bold: true,
-          fontSize: 13,
-          color: 'white',
-          fillColor: '#2a3f54',
-          alignment: 'center',
-          margin: [0, 4, 0, 4], 
-          alignment: 'left'
-        },
         item: {
           margin: [0, 2, 0, 2]
         },
@@ -117,19 +127,19 @@ const PaymentConditionsReport = () => {
       <NavBar />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Formas de Pagamentos</h1>
+          <h1>Reservas</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Relatórios</li>
-              <li className="breadcrumb-item active">Relatório de formas de pagamento</li>
+              <li className="breadcrumb-item active">Relatório de reservas</li>
             </ol>
           </nav>
         </div>
         <div>
-          <button className="btn btn-primary" onClick={gerarPDF}>Gerar relatório de formas de pagamento</button>
+          <button className="btn btn-primary" onClick={gerarPDF}>Gerar relatório de reservas</button>
         </div>
       </main>
       <Footer />
@@ -137,4 +147,4 @@ const PaymentConditionsReport = () => {
   );
 };
 
-export default PaymentConditionsReport;
+export default ProductReport;

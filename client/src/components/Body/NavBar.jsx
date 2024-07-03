@@ -108,9 +108,15 @@ const NavBar = () => {
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="/">
+                <a href="/relatorioReservas">
                   <i className="bi bi-circle"></i>
                   <span>Reservas</span>
+                </a>
+              </li>
+              <li>
+                <a href="/relatorioProdutos">
+                  <i className="bi bi-circle"></i>
+                  <span>Produtos</span>
                 </a>
               </li>
               <li>
