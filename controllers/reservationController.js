@@ -2,33 +2,31 @@ const { Reservation, Product, User, PaymentCondition,ReservationProducts } = req
 
 exports.create = async (req, res) => {
   try {
-    const { userId, date, duration, products, repeat, status, paymentConditionId } = req.body;
-    const reservation = await Reservation.create({ userId, date, duration, status, paymentConditionId });
+    const { userId, date, duration, products, repeat,repeatCount, status, paymentConditionId,totalValue } = req.body;
+    const reservation = await Reservation.create({ userId, date, duration,repeat,repeatCount, status, paymentConditionId,totalValue });
     // Adicionar produtos à reserva
     for (const product of products) {
-      console.log(reservation.id,product.id);
       await ReservationProducts.create({
         reservationId: reservation.id,
         productId: product.id
       });
     }
-
+    countRepeat = parseInt(repeatCount)
     // Lógica de repetição de reservas
-    if (repeat) {
-      const repeatCount = repeat.count || 1;
-      const repeatInterval = repeat.interval || 'daily'; // daily, weekly, monthly
-
+    if (repeat !== 'None') {
+      const repeatCount = countRepeat;
+      const repeatInterval = repeat; // daily, weekly, monthly
       for (let i = 1; i <= repeatCount; i++) {
         let newDate = new Date(date);
-        if (repeatInterval === 'weekly') {
+        if (repeatInterval === 'Weekly') {
           newDate.setDate(newDate.getDate() + 7 * i);
-        } else if (repeatInterval === 'monthly') {
+        } else if (repeatInterval === 'Monthly') {
           newDate.setMonth(newDate.getMonth() + i);
         } else {
           newDate.setDate(newDate.getDate() + i);
         }
-        const repeatedReservation = await Reservation.create({ userId, date: newDate, duration, status, paymentConditionId });
-
+        const NewRepeatId = reservation.id;
+        const repeatedReservation = await Reservation.create({ userId, date: newDate, duration,repeat,repeatCount,repeatId: NewRepeatId, status, paymentConditionId, totalValue });
         // Adicionar produtos às reservas repetidas
         for (const product of products) {
           await ReservationProducts.create({
@@ -36,7 +34,6 @@ exports.create = async (req, res) => {
             productId: product.id 
           });
         }
-        console.log(ReservationProducts);
       }
     }
 

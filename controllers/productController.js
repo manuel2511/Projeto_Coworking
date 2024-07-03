@@ -1,4 +1,4 @@
-const { Product } = require('../models');
+const { Product, ReservationProducts  } = require('../models');
 
 exports.create = async (req, res) => {
   try {
@@ -50,13 +50,27 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleted = await Product.destroy({ where: { id } });
-    if (!deleted) {
-      return res.status(404).json({ error: 'Produto não encontrado' });
+    const productId = parseInt(req.params.id);
+    // Verificar se o produto está vinculado a alguma reserva
+    const reservationProduct = await ReservationProducts.findOne({
+      where: { productId },
+    });
+
+    if (reservationProduct) {
+      return res.status(400).json({
+        message: 'O produto não pode ser excluído, pois está vinculado a uma reserva.',
+      });
     }
-    res.status(204).send();
+    const result = await Product.destroy({
+      where: { id: productId },
+    });
+
+    if (result) {
+      return res.status(200).json({ message: 'Produto excluído com sucesso.' });
+    } else {
+      return res.status(404).json({ message: 'Produto não encontrado.' });
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(500).json({ message: error.message+ "Falha catastrofica"});
   }
 };
