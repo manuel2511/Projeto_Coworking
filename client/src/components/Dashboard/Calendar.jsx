@@ -48,7 +48,9 @@ const Calendario = () => {
         });
           const reservations = response.data;
         // Incluindo os enventos das tarefas no calendário
-        const calendarEvents = reservations.map(reservation => ({
+        const calendarEvents = reservations
+        .filter(reservation => reservation.status === "Aberta")
+        .map(reservation => ({
           id: reservation.id,
           title: `Reserva ${reservation.id}`,
           start: new Date(reservation.date),
