@@ -56,8 +56,6 @@ exports.delete = async (req, res) => {
       where: { productId },
     });
 
-    console.log(` ###### ${reservationProduct} $$$$$$$`);
-
     if (reservationProduct) {
       return res.status(400).json({
         message: 'O produto não pode ser excluído, pois está vinculado a uma reserva.',
