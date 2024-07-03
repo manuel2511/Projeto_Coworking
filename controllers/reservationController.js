@@ -6,14 +6,12 @@ exports.create = async (req, res) => {
     const reservation = await Reservation.create({ userId, date, duration,repeat,repeatCount, status, paymentConditionId,totalValue });
     // Adicionar produtos à reserva
     for (const product of products) {
-      console.log(reservation.id,product.id);
       await ReservationProducts.create({
         reservationId: reservation.id,
         productId: product.id
       });
     }
     countRepeat = parseInt(repeatCount)
-    console.log(`Repeat ########## ${repeat} contador${repeatCount} `);
     // Lógica de repetição de reservas
     if (repeat !== 'None') {
       const repeatCount = countRepeat;
@@ -22,16 +20,13 @@ exports.create = async (req, res) => {
         let newDate = new Date(date);
         if (repeatInterval === 'Weekly') {
           newDate.setDate(newDate.getDate() + 7 * i);
-          console.log(`Data ${newDate}, Interval ${repeatInterval}`);
         } else if (repeatInterval === 'Monthly') {
           newDate.setMonth(newDate.getMonth() + i);
         } else {
           newDate.setDate(newDate.getDate() + i);
         }
-        console.log("Chegou no final $$$$$");
         const NewRepeatId = reservation.id;
         const repeatedReservation = await Reservation.create({ userId, date: newDate, duration,repeat,repeatCount,repeatId: NewRepeatId, status, paymentConditionId, totalValue });
-        console.log(repeatedReservation);
         // Adicionar produtos às reservas repetidas
         for (const product of products) {
           await ReservationProducts.create({
@@ -39,7 +34,6 @@ exports.create = async (req, res) => {
             productId: product.id 
           });
         }
-        console.log(ReservationProducts);
       }
     }
 
