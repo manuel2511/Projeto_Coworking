@@ -10,7 +10,7 @@ const ReservationForm = () => {
   const [duration, setDuration] = useState(1);
   const [status, setStatus] = useState("Aberta");
   const [repeat, setRepeat] = useState("None");
-  const [repeatCount, setRepeatCount] = useState(1);
+  const [repeatCount, setRepeatCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [addedProducts, setAddedProducts] = useState([]);
@@ -33,7 +33,7 @@ const ReservationForm = () => {
   const handleAddProduct = () => {
     const product = products.find((p) => p.id === parseInt(selectedProduct));
     if (product) {
-      const productTotal = product.valuePerHour * duration;
+      const productTotal = product.hourlyRate * duration;
       setAddedProducts([
         ...addedProducts,
         { ...product, quantity: duration, total: productTotal },
@@ -70,7 +70,7 @@ const ReservationForm = () => {
       setDuration(1);
       setStatus("Aberta");
       setRepeat("None");
-      setRepeatCount(1);
+      setRepeatCount(0);
       setSelectedProduct("");
       setAddedProducts([]);
       setPaymentConditionId("");
@@ -214,7 +214,7 @@ const ReservationForm = () => {
                     <tr key={index}>
                       <td>{product.id}</td>
                       <td>{product.name}</td>
-                      <td>{product.valuePerHour}</td>
+                      <td>{product.hourlyRate}</td>
                       <td>{product.quantity}</td>
                       <td>{product.total}</td>
                     </tr>
