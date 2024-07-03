@@ -148,7 +148,7 @@ const ReservationForm = () => {
               >
                 <option value="None">nunca</option>
                 <option value="Daily">Diariamente</option>
-                <option value="Weekly">Semanalmete</option>
+                <option value="Weekly">Semanalmente</option>
                 <option value="Monthly">Mensalmente</option>
               </select>
               </div>
