@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
@@ -10,6 +11,8 @@ import './productList.css';  // Importação do css
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();  // Hook para navegação 
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +28,7 @@ const ProductList = () => {
   }, []);
 
   
-  /* Função para deletar um produto */
+  // Função para deletar um produto
   const handleDelete = async(productID) => {
     try {
       await deleteProduct(productID);  // Chama a função do productService para enviar a requisição (delete)
@@ -38,6 +41,11 @@ const ProductList = () => {
     }
   };
 
+  // Função para editar um produto
+  const handleEdit = (productId) => {
+    setSelectedProductId(productId);
+    navigate(`/editarProduto/${productId}`);
+  };
 
   return (
     <>
@@ -95,18 +103,18 @@ const ProductList = () => {
 
                   {/* Botão para ver mais, editar e deletar os produtos */}
                   <td>
-                    <button className="product-edit-button" /*onClick={() => handleEdit(product.id)}*/ >
-                      <img src={editImage}/>
+                    <button className="product-edit-button" onClick={() => handleEdit(product.id)} >
+                      <img src={editImage} alt="Editar"/>
                     </button>
                   </td>
                   <td>
                     <button className="product-delete-button" onClick={() => handleDelete(product.id)} >
-                      <img src={deleteImage}/>
+                      <img src={deleteImage} alt="Deletar"/>
                     </button>
                   </td>
                   <td>
                     <button className="product-infos-button" /*onClick={() => openModal(product)}*/ >
-                      <img src={infosImage}/>
+                      <img src={infosImage} alt="Mais informações"/>
                     </button>
                   </td>
                 </tr>
