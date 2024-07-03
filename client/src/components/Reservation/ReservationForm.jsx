@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import "./ReservationForm.css"
+import "./ReservationForm.css";
 
 const ReservationForm = () => {
   const [date, setDate] = useState("");
@@ -19,12 +19,10 @@ const ReservationForm = () => {
   const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
-    // Fetch products
     axios.get("/products").then((response) => {
       setProducts(response.data);
     });
 
-    // Fetch payment conditions
     axios.get("/payment-conditions").then((response) => {
       setPaymentConditions(response.data);
     });
@@ -56,14 +54,10 @@ const ReservationForm = () => {
     };
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "/reservations",
-        reservationData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      console.log("Reservation created:", response.data);
+      const response = await axios.post("/reservations", reservationData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert("Reserva criada com sucesso!");
 
       // Limpar campos após submissão bem-sucedida
       setDate("");
@@ -76,136 +70,118 @@ const ReservationForm = () => {
       setPaymentConditionId("");
       setTotalValue(0);
     } catch (error) {
-      console.error("Error creating reservation:", error.response.data);
+      alert("Error ao criar reserva");
     }
   };
 
   return (
     <>
-      <body className="">
-        <Header />
-        <NavBar />
-        <main id="main" className="main">
+      <Header />
+      <NavBar />
+      <main id="main" className="main">
+        <div className="breadcrumb-container">
+          <h1>Cadastro de Reservas</h1>
+          <nav>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li className="breadcrumb-item">Cadastro</li>
+              <li className="breadcrumb-item active">Cadastro de Reservas</li>
+            </ol>
+          </nav>
+        </div>
         
-          <div className="breadcrumb-container">
-           
-            <h1>Cadastro de Reservas</h1>
-            <nav>
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                  <a href="/">Home</a>
-                </li>
-                <li className="breadcrumb-item">Cadastro</li>
-                <li className="breadcrumb-item active">Cadastro de Reservas</li>
-              </ol>
-            </nav>
-          </div>
-          {/* <!-- End Page Title --> */}
-          <div className="reservation-form-conteiner"> 
-          <form onSubmit={handleSubmit}
-
-
-          className="reservation-form-grid">
-
-        
-               <h2>Detalhes da Reserva</h2>
-               {/* lado esquerdo */}
+        <div className="reservation-form-wrapper">
+          <div className="reservation-form-container"> 
+            <form className="reservation-form-grid">
+              <h2>Detalhes da Reserva</h2>
               <div className="reservation-form-group">
-              <label>Data</label>
-              <input
-                type="datetime-local"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                required
-              />
+                <label>Data</label>
+                <input
+                  type="datetime-local"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  required
+                />
               </div>
               <div className="reservation-form-group">
-              <label>Duração (houras)</label>
-              <input
-                type="number"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                required
-              />
-              </div>
-
-              <div className="reservation-form-group">
-              <label>Status</label>
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="Aberta">Aberta</option>
-                <option value="Cancelada">Cancelada</option>
-                <option value="Finalizada">Finalizada</option>
-              </select>
+                <label>Duração (horas)</label>
+                <input
+                  type="number"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                  required
+                />
               </div>
               <div className="reservation-form-group">
-              <label>Repetir</label>
-              <select
-                value={repeat}
-                onChange={(e) => setRepeat(e.target.value)}
-              >
-                <option value="None">nunca</option>
-                <option value="Daily">Diariamente</option>
-                <option value="Weekly">Semanalmente</option>
-                <option value="Monthly">Mensalmente</option>
-              </select>
+                <label>Status</label>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="Aberta">Aberta</option>
+                  <option value="Cancelada">Cancelada</option>
+                  <option value="Finalizada">Finalizada</option>
+                </select>
               </div>
               <div className="reservation-form-group">
-              <label>Repetir(contaçâo)</label>
-              <input
-                type="number"
-                value={repeatCount}
-                onChange={(e) => setRepeatCount(e.target.value)}
-              />
+                <label>Repetir</label>
+                <select
+                  value={repeat}
+                  onChange={(e) => setRepeat(e.target.value)}
+                >
+                  <option value="None">Nunca</option>
+                  <option value="Daily">Diariamente</option>
+                  <option value="Weekly">Semanalmente</option>
+                  <option value="Monthly">Mensalmente</option>
+                </select>
               </div>
               <div className="reservation-form-group">
-              <label>Condição de Pagamento</label>
-              <select
-                value={paymentConditionId}
-                onChange={(e) => setPaymentConditionId(parseInt(e.target.value))}
-                required
-              >
-                <option value="">Selecione uma condição de pagamento</option>
-                {paymentConditions.map((condition) => (
-                  <option key={condition.id} value={condition.id}>
-                    {condition.name}
-                  </option>
-                ))}
-              </select>
+                <label>Repetir (contagem)</label>
+                <input
+                  type="number"
+                  value={repeatCount}
+                  onChange={(e) => setRepeatCount(e.target.value)}
+                />
               </div>
-
-
-            <div>
-              
-              <h2>Produtos</h2>
-
               <div className="reservation-form-group">
-              <label>Products</label>
-              <select
-                value={selectedProduct}
-                onChange={(e) => setSelectedProduct(e.target.value)}
-              >
-                <option value="">Selecione um produto</option>
-                {products.map((product) => (
-                  <option key={product.id} value={product.id}>
-                    {product.name}
-                  </option>
-                ))}
-              </select>
-              
+                <label>Condição de Pagamento</label>
+                <select
+                  value={paymentConditionId}
+                  onChange={(e) => setPaymentConditionId(parseInt(e.target.value))}
+                  required
+                >
+                  <option value="">Selecione uma condição de pagamento</option>
+                  {paymentConditions.map((condition) => (
+                    <option key={condition.id} value={condition.id}>
+                      {condition.name}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <button type="button" className="reservation-form-button" onClick={handleAddProduct}>
-                Add Product
-              </button>
-              <table>
+              <div className="reservation-form-group selectProduct">
+                <label>Selecionar Produto(s)</label>
+                <select
+                  value={selectedProduct}
+                  onChange={(e) => setSelectedProduct(e.target.value)}
+                >
+                  <option value="">Selecione um produto</option>
+                  {products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.name}
+                    </option>
+                  ))}
+                </select>
+                <button type="button" className="reservation-product-button" onClick={handleAddProduct}>Adicionar Produto</button>
+              </div>
+              <table className="reservation-product-table">
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nome</th>
+                    <th>Espaço</th>
                     <th>Valor</th>
-                    <th>Quantidade de Horas</th>
+                    <th>Horas</th>
                     <th>Total</th>
                   </tr>
                 </thead>
@@ -221,17 +197,18 @@ const ReservationForm = () => {
                   ))}
                 </tbody>
               </table>
-              <div>
-                <strong>Valor Total da Reserva: {totalValue}</strong>
-              </div>
-            </div>
-            <button type="submit" className="reservationCreate-form-button">Create Reservation</button>
-            
-          </form>
+            </form>
           </div>
-        </main>
-        <Footer />
-      </body>
+          <form onSubmit={handleSubmit} className="reservation-total-form">
+            <div className="reservation-total-container">
+              <h3>Valor Total da Reserva: </h3>
+              <p>R${totalValue.toFixed(2)}</p>
+              <button type="submit" className="reservation-form-button">Criar Reserva</button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <Footer />
     </>
   );
 };
