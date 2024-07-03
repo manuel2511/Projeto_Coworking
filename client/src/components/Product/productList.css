@@ -1,20 +1,3 @@
-/* Breadcrumb */
-.breadcrumb {
-    background-color: #f8f9fa;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-  
-.breadcrumb-item a {
-    text-decoration: none;
-    color: #007bff;
-}
-  
-.breadcrumb-item a:hover {
-    text-decoration: underline;
-}
- 
 /* Tabela */
 .product-table-container {
     overflow-x: auto;

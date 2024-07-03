@@ -129,7 +129,6 @@ const ProductForm = () => {
                   type="file"
                   onChange={handlePhotoChange} // Função para lidar com a seleção de arquivo
                   accept="image/*" // Aceitar apenas imagens
-                  required
                 />
               </div>
             </div>
