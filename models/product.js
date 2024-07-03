@@ -23,8 +23,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-  });
-
+  },
+    {
+      sequelize,
+      modelName: 'Product',
+      indexes: [
+        {
+          unique: true,
+          fields: ['name', 'capacity', 'location']
+        }
+      ]
+    });
   Product.associate = (models) => {
     Product.belongsToMany(models.Reservation, {
       through: models.ReservationProducts,

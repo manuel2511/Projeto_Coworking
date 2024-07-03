@@ -64,7 +64,7 @@ const ReservationForm = () => {
       setDuration(1);
       setStatus("Aberta");
       setRepeat("None");
-      setRepeatCount(1);
+      setRepeatCount(0);
       setSelectedProduct("");
       setAddedProducts([]);
       setPaymentConditionId("");
@@ -115,6 +115,7 @@ const ReservationForm = () => {
                 />
               </div>
               <div className="reservation-form-group">
+<<<<<<< HEAD
                 <label>Status</label>
                 <select
                   value={status}
@@ -124,6 +125,18 @@ const ReservationForm = () => {
                   <option value="Cancelada">Cancelada</option>
                   <option value="Finalizada">Finalizada</option>
                 </select>
+=======
+              <label>Repetir</label>
+              <select
+                value={repeat}
+                onChange={(e) => setRepeat(e.target.value)}
+              >
+                <option value="None">nunca</option>
+                <option value="Daily">Diariamente</option>
+                <option value="Weekly">Semanalmente</option>
+                <option value="Monthly">Mensalmente</option>
+              </select>
+>>>>>>> d00df7a9ea6cad5723446eb8cc96f407b949cbaa
               </div>
               <div className="reservation-form-group">
                 <label>Repetir</label>

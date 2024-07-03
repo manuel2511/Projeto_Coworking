@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    repeatId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     totalValue: {
       type: DataTypes.DECIMAL(10, 2),
 

@@ -113,6 +113,12 @@ const NavBar = () => {
                   <span>Reservas</span>
                 </a>
               </li>
+              <li>
+                <a href="/relatorioFormaDePagamento">
+                  <i className="bi bi-circle"></i>
+                  <span>Formas de Pagamentos</span>
+                </a>
+              </li>
             </ul>
           </li>
           {/* <!-- End Charts Nav --> */}
