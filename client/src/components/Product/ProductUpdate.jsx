@@ -53,6 +53,9 @@ const ProductUpdate = () => {
     );
   }
 
+  // Verifica se product.photo é uma string (significa que é o caminho da imagem salvo no banco)
+  const isStringPhoto = typeof product.photo === "string";
+
   return (
     <>
       <Header />
@@ -120,10 +123,10 @@ const ProductUpdate = () => {
             </div>
             <div className="update-preview-group">
               <div className="update-preview-container">
-                {product.photo && typeof product.photo !== "string" ? (
+                {isStringPhoto ? (
                   <img
                     className="update-preview-image"
-                    src={URL.createObjectURL(product.photo)}
+                    src={`http://localhost:3000/uploads/${product.photo}`}
                     alt="Preview"
                   />
                 ) : (

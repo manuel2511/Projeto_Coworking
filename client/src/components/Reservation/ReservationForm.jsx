@@ -66,7 +66,7 @@ const ReservationForm = () => {
 
       // Limpar campos após submissão bem-sucedida
       setDate("");
-      setDuration(1);
+      setDuration("");
       setStatus("Aberta");
       setRepeat("None");
       setRepeatCount(0);
@@ -78,6 +78,25 @@ const ReservationForm = () => {
       alert("Error ao criar reserva");
     }
   };
+
+  const handleDurationChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
+      setDuration(value);
+    } else {
+      alert("Por favor, digite um número positivo para a duração.");
+    }
+  };
+
+  const handleRepeatCountChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) >= 0)) {
+      setRepeatCount(value);
+    } else {
+      alert("Por favor, digite um número maior ou igual a zero para a quantidade de repetições.");
+    }
+  };
+
   const user = getUserInfo();
 
   if (!user) {
@@ -120,7 +139,7 @@ const ReservationForm = () => {
                 <input
                   type="number"
                   value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
+                  onChange={handleDurationChange}
                   required
                 />
               </div>
@@ -148,11 +167,11 @@ const ReservationForm = () => {
                 </select>
               </div>
               <div className="reservation-form-group">
-                <label>Repetir (contagem)</label>
+                <label>Repetir quantas vezes?</label>
                 <input
                   type="number"
                   value={repeatCount}
-                  onChange={(e) => setRepeatCount(e.target.value)}
+                  onChange={handleRepeatCountChange}
                 />
               </div>
               <div className="reservation-form-group">
