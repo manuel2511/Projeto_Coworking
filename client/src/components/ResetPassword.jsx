@@ -6,7 +6,7 @@ import './resetPassword.css'; // Importação do css
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const navigate = useNavigate(); // Hook para navigação
+  const navigate = useNavigate(); // Hook para navegação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +17,11 @@ const ResetPassword = () => {
       navigate('/login');
     } catch (error) {
       console.error('Password reset failed', error);
+      if (error.response && error.response.status === 404) {
+        alert('Email não encontrado. Verifique o email digitado.');
+      } else {
+        alert('Erro ao redefinir a senha. Tente novamente mais tarde.');
+      }
     }
   };
 
