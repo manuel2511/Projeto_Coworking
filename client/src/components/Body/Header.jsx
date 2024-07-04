@@ -1,8 +1,14 @@
 import React from "react";
+import { getUserInfo, logout } from '../User/auth';
 
 
 
 const Header = () => {
+  const user = getUserInfo();
+  if (!user) {
+    return <p>User not logged in</p>;
+  }
+
   return (
     <>
       <header id="header" className="header fixed-top d-flex align-items-center">
@@ -15,7 +21,7 @@ const Header = () => {
         </div>
         {/* <!-- End Logo --> */}
 
-        <nav className="header-nav ms-auto">
+        <nav className="header-nav ms-auto user-info ">
           <ul className="d-flex align-items-center">
 
             <li className="nav-item dropdown pe-3">
@@ -31,13 +37,12 @@ const Header = () => {
                   className="rounded-circle"
                 />
                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                  Admin
+                   {user.name}
                 </span>
               </a>
-
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li className="dropdown-header">
-                  <h6>Administrador</h6>
+                  <h6 className="">{user.master ? 'Administrador' : 'Usuário'}</h6>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
@@ -83,10 +88,10 @@ const Header = () => {
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center" href="/login">
+                  <button className="dropdown-item d-flex align-items-center" onClick={logout} >  
                     <i className="bi bi-box-arrow-right"></i>
                     <span>Logof</span>
-                  </a>
+                  </button>
                 </li>
               </ul>
               {/* <!-- End Profile Dropdown Items --> */}

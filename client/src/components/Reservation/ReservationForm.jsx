@@ -4,8 +4,10 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import "./ReservationForm.css";
+import { getUserInfo } from '../User/auth';
 
 const ReservationForm = () => {
+  
   const [date, setDate] = useState("");
   const [duration, setDuration] = useState(1);
   const [status, setStatus] = useState("Aberta");
@@ -17,6 +19,8 @@ const ReservationForm = () => {
   const [paymentConditionId, setPaymentConditionId] = useState("");
   const [paymentConditions, setPaymentConditions] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
+
+  
 
   useEffect(() => {
     axios.get("/products").then((response) => {
@@ -51,6 +55,7 @@ const ReservationForm = () => {
       products: addedProducts,
       paymentConditionId,
       totalValue,
+      userId: user.id, // Assumindo que o user já está logado
     };
     try {
       const token = localStorage.getItem("token");
@@ -73,6 +78,11 @@ const ReservationForm = () => {
       alert("Error ao criar reserva");
     }
   };
+  const user = getUserInfo();
+
+  if (!user) {
+    return <p>User not logged in</p>;
+  }
 
   return (
     <>
