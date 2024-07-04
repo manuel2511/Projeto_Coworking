@@ -97,6 +97,13 @@ const ReservationForm = () => {
     }
   };
 
+  const handleRemoveProduct = (indexToRemove) => {
+    const updatedProducts = [...addedProducts];
+    const removedProduct = updatedProducts.splice(indexToRemove, 1);
+    setAddedProducts(updatedProducts);
+    setTotalValue(totalValue - removedProduct[0].total);
+  };
+  
   const user = getUserInfo();
 
   if (!user) {
@@ -207,11 +214,12 @@ const ReservationForm = () => {
               <table className="reservation-product-table">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Espaço</th>
-                    <th>Valor</th>
-                    <th>Horas</th>
-                    <th>Total</th>
+                    <th className="col-id">ID</th>
+                    <th className="col-product">Espaço</th>
+                    <th className="col-value">Valor</th>
+                    <th className="col-hours">Horas</th>
+                    <th className="col-total">Total</th>
+                    <th className="col-remove"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -222,6 +230,15 @@ const ReservationForm = () => {
                       <td>{product.hourlyRate}</td>
                       <td>{product.quantity}</td>
                       <td>{product.total}</td>
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveProduct(index)}
+                          className="reservation-remove-button"
+                        >
+                          Remover
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

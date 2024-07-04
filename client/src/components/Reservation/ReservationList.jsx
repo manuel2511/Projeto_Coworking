@@ -3,6 +3,9 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllReservations } from "../../services/reservationService";
+import editImage from '../../assets/img/edit.png';
+import deleteImage from '../../assets/img/delete.png';
+import "./ReservationList.css"; // Import the CSS file
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
@@ -19,6 +22,12 @@ const ReservationList = () => {
 
     fetchData();
   }, []);
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
 
   return (
     <>
@@ -39,26 +48,26 @@ const ReservationList = () => {
             </nav>
           </div>
           {/* <!-- End Page Title --> */}
-          <div>
-            <ul>
-              {reservations.map((reservation) => (
-                <li key={reservation.id}>
-                  <p>Método de Pagamento: {reservation.paymentMethod}</p>
-                  <p>Valor Total: {reservation.totalAmount}</p>
-                  <ul>
-                    {reservation.Products.map((product) => (
-                      <li key={product.id}>
-                        <p>Produto: {product.name}</p>
-                        <p>
-                          Horas Reservadas: {product.hoursReserved}
-                        </p>
-                        <p>Valor por Hora: {product.hourlyRate}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+          <div className="reservations-container">
+            {reservations.map((reservation) => (
+              <div className="reservation-card" key={reservation.id}>
+                <p className="id">ID: {reservation.id} </p>
+                <p >{formatDate(reservation.date)} </p>
+                <p className="payment-method">
+                  Método de Pagamento: {reservation.paymentMethod}
+                </p>
+                <p>Horas Reservadas: {reservation.duration} {reservation.duration === 1 ? "Hora" : "Horas"}</p>
+                <p className="totalValue">Valor Total: {reservation.totalValue}</p>
+                <ul className="products-list">
+                  {reservation.Products.map((product) => (
+                    <li className="product-item" key={product.id}>
+                      <p className="product-name">Produto: {product.name}</p>
+                      <p className="hourly-rate">Valor por Hora:R$ {product.hourlyRate}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </main>
         <Footer />
