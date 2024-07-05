@@ -9,33 +9,33 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const ProductReport = () => {
-    const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState([]);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await getAllReservations();
-          setReservations(response.data);
-        } catch (error) {
-          alert("Erro ao buscar reservas");
-        }
-      };
-  
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllReservations();
+        setReservations(response.data);
+      } catch (error) {
+        alert("Erro ao buscar reservas");
+      }
+    };
 
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        date.setHours(date.getHours() + 3);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${day}/${month}/${year} - ${hours}:${minutes}`;
-    }
+    fetchData();
+  }, []);
 
-  function gerarPDF(){
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 3);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} - ${hours}:${minutes}`;
+  }
+
+  function gerarPDF() {
     var docDefinition = {
       content: [
         { text: 'Relatório de Reservas', style: 'header' },
@@ -46,21 +46,21 @@ const ProductReport = () => {
             headerRows: 1,
             widths: [40, 150, 50, 50, 50, 110],
             body: [
-              [{text: 'ID', style: 'headerTable'},
-              {text: 'Data e hora', style: 'headerTable'},
-              {text: 'Duração', style: 'headerTable'},
-              {text: 'Status', style: 'headerTable'},
-              {text: 'Repetir', style: 'headerTable'},
-              {text: 'Valor Total', style: 'headerTable'}],
+              [{ text: 'ID', style: 'headerTable' },
+              { text: 'Data e hora', style: 'headerTable' },
+              { text: 'Duração', style: 'headerTable' },
+              { text: 'Status', style: 'headerTable' },
+              { text: 'Repetir', style: 'headerTable' },
+              { text: 'Valor Total', style: 'headerTable' }],
               ...reservations.map(reservations => ([
-                {text: reservations.id, style: 'item'},
-                {text: formatDate(reservations.date), style: 'item'},
-                {text: reservations.duration, style: 'item'},
-                {text: reservations.status, style: 'item'},
-                {text: reservations.repeat, style: 'item'},
-                {text: reservations.totalValue, style: 'item'},
+                { text: reservations.id, style: 'item' },
+                { text: formatDate(reservations.date), style: 'item' },
+                { text: reservations.duration, style: 'item' },
+                { text: reservations.status, style: 'item' },
+                { text: reservations.repeat, style: 'item' },
+                { text: reservations.totalValue, style: 'item' },
               ])),
-              [{text: `Total: ${reservations.length}`, colSpan: 6, style: 'total'},
+              [{ text: `Total: ${reservations.length}`, colSpan: 6, style: 'total' },
               {}]
             ]
           },
@@ -68,7 +68,7 @@ const ProductReport = () => {
         },
         { text: '\n' },
       ],
-        
+
       styles: {
         header: {
           fontSize: 18,
@@ -108,7 +108,7 @@ const ProductReport = () => {
           margin: [0, 0, 0, 10]
         }
       },
-      footer: function(currentPage, pageCount) {
+      footer: function (currentPage, pageCount) {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
           alignment: 'center',

@@ -49,3 +49,34 @@ h1 {
     padding: 12px;
     border-radius: 50%;
 }
+
+/* Edit Button */
+.reservation-edit-button, .reservation-delete-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.reservation-edit-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.reservation-delete-button img {
+  width: 45px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.reservation-buttons {
+  display: flex;
+}
+
+.reservation-top{
+  display: flex;
+  justify-content: space-between;
+}
