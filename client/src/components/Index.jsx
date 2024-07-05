@@ -10,7 +10,7 @@ function Index() {
         <NavBar />
         <main id="main" className="main d-flex justify-content-center align-items-center" style={{height: '76vh'}}>
           <div className="pagetitle text-center ">
-           <img src="assets/img/apple-touch-icon.png" className="" alt="" />
+           <img src="assets/img/LogoCs.svg" className="logo" alt="" />
           </div>
           {/* <!-- End Page Title --> */}
         </main>
