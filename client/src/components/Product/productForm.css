@@ -123,3 +123,46 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* MEDIA QUERIES */
+
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+    .product-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-form-button {
+        grid-column: span 1;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 480px) {
+    .product-form-container {
+        padding: 1.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+    }
+
+    .product-preview-container {
+        height: 200px;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}

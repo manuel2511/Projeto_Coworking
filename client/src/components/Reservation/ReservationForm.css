@@ -1,3 +1,4 @@
+/* Estilos gerais */
 .reservation-form-wrapper {
     display: flex;
     justify-content: center;
@@ -171,4 +172,71 @@
   
 .col-total {
     width: 20%; 
+}
+
+/* Media Queries */
+
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+    .reservation-form-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .reservation-form-container,
+    .reservation-total-form {
+      width: 100%;
+      max-width: none;
+    }
+  
+    .reservation-total-form {
+      position: relative;
+      top: initial;
+      width: 100%;
+      margin-top: 20px; /* Ajuste conforme necessário */
+    }
+  
+    .reservation-form-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-product {
+        width: 36%;
+    }
+
+    .col-value,
+    .col-total {
+      width: 23%; /* Removido width fixo */
+    }
+
+    .col-hours {
+        width: 3%;
+    }
+
+    .col-remove {
+        width: 1%;
+    }
+}
+  
+/* Smartphones */
+@media (max-width: 480px) {
+    .reservation-form-group input,
+    .reservation-form-group select,
+    .reservation-form-group textarea {
+      font-size: 0.9em;
+    }
+  
+    .reservation-form-button,
+    .reservation-product-button {
+      font-size: 0.9em;
+    }
+  
+    .col-product,
+    .col-value,
+    .col-hours,
+    .col-remove,
+    .col-total {
+      width: auto; /* Removido width fixo */
+    }
 }
