@@ -14,8 +14,8 @@ const Header = () => {
       <header id="header" className="header fixed-top d-flex align-items-center">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="" />
-            <span className="d-none d-lg-flex">COWORKING SPACE</span>
+            <img src="assets/img/LogoCs.png" alt="Logo-Coworking-Space" />
+            <span className="d-none d-lg-flex">Coworking Space</span>
           </a>
           <i className="bi bi-list toggle-sidebar-btn"></i>
         </div>
@@ -32,7 +32,7 @@ const Header = () => {
               >
                 <img
                   //assets/img/profile-img.jpg" passar a foto por referencia da imagem  
-                  src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png" 
+                  src="../../assets/img/User.jpg" 
                   alt="Foto do Usuario"
                   className="rounded-circle"
                 />

@@ -73,12 +73,12 @@ const PaymentConditionList = () => {
                   {/* Botão para editar e deletar os produtos */}
                   <td>
                     <button className="paymentConditions-edit-button" /*onClick={() => handleEdit(paymentConditions.id)}*/ >
-                      <img src={editImage}/>
+                      <img src={editImage} />
                     </button>
                   </td>
                   <td>
                     <button className="paymentConditions-delete-button" onClick={() => handleDelete(paymentConditions.id)} >
-                      <img src={deleteImage}/>
+                      <img src={deleteImage} />
                     </button>
                   </td>
                 </tr>
