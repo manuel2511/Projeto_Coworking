@@ -2,14 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const db = require('./models');
-const swaggerDocs = require('./docs/swagger');
+const { swaggerUi, specs } = require('./docs/swagger');
 const app = express( );
 app.use(express.json());
 dotenv.config();
 app.use(bodyParser.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); // Middleware para Swagger
 app.use('/', require('./routes'));
 
-swaggerDocs(app);
+// swaggerDocs(app);
 
 const PORT = process.env.PORT_APP || 3000;
 
