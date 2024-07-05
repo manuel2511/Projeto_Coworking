@@ -193,7 +193,7 @@
       position: relative;
       top: initial;
       width: 100%;
-      margin-top: 20px; /* Ajuste conforme necessário */
+      margin-top: 20px; 
     }
   
     .reservation-form-grid {
@@ -207,7 +207,7 @@
 
     .col-value,
     .col-total {
-      width: 23%; /* Removido width fixo */
+      width: 23%; 
     }
 
     .col-hours {
@@ -237,6 +237,6 @@
     .col-hours,
     .col-remove,
     .col-total {
-      width: auto; /* Removido width fixo */
+      width: auto;
     }
 }

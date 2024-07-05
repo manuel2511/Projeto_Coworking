@@ -99,3 +99,56 @@
     width: 25px;
     height: 24px;
 }
+
+/* MEDIA QUERIES */
+
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+    .product-table-content {
+        font-size: 0.8em;
+    }
+
+    .product-table-content th,
+    .product-table-content td {
+        padding: 10px 12px;
+    }
+
+    .product-table-content td {
+        font-size: 0.85em;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 480px) {
+    .product-table-content {
+        font-size: 0.7em;
+    }
+
+    .product-table-content th,
+    .product-table-content td {
+        padding: 8px 10px;
+    }
+
+    .product-table-content td {
+        font-size: 0.8em;
+    }
+
+    .product-table-content .col-name {
+        width: 70%;
+    }
+
+    .product-edit-button img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .product-delete-button img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .product-infos-button img {
+        width: 20px;
+        height: 20px;
+    }
+}

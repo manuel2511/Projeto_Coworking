@@ -10,11 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
-  const [setSelectedreservationId] = useState(null);
+  const [selectedReservationId, setSelectedreservationId] = useState(null);
   const navigate = useNavigate();
-  
-  
-
   
   useEffect(() => {
     const fetchData = async () => {
@@ -40,17 +37,13 @@ const ReservationList = () => {
     try {
       await deleteReservation(reservationID);  // Chama a função do rervationService para enviar a requisição (delete)
       // Atualize a lista de reservas após deletar
-      const updatedReservation = reservations.filter(reservation => reservation.id !== reservationID);  // updatedreservation = novo array com todas as reservas restantes
-      setReservations(updatedReservation);
+      const updatedReservations = reservations.filter(reservation => reservation.id !== reservationID);  // updatedreservation = novo array com todas as reservas restantes
+      setReservations(updatedReservations);
       alert("Reserva deletado com sucesso!");
     } catch (error) {
       alert("Erro ao deletar reserva.");
     }
   };
-
-
-
-
 
   //função para formataçõa da data
   const formatDate = (dateString) => {

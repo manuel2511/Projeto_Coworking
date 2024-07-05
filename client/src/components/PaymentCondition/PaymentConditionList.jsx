@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { getAllPaymentConditions, deletePaymentCondition } from '../../services/paymentConditionService';
+import { getAllPaymentConditions, deletePaymentCondition, updatePaymentCondition } from '../../services/paymentConditionService';
 import editImage from '../../assets/img/edit.png';
 import deleteImage from '../../assets/img/delete.png';
+import confirmImage from '../../assets/img/confirm.png';
+import cancelImage from '../../assets/img/cancel.png';
 import "./PaymentConditionList.css";
 
 const PaymentConditionList = () => {
   const [paymentConditions, setPaymentConditions] = useState([]);
+  const [editMode, setEditMode] = useState(null);
+  const [editData, setEditData] = useState({ id: '', name: '' });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,18 +27,47 @@ const PaymentConditionList = () => {
     fetchData();
   }, []);
 
-  /* Função para deletar uma forma de pagamento */
-  const handleDelete = async(paymentConditionID) => {
+  const handleDelete = async (paymentConditionID) => {
     try {
-      await deletePaymentCondition(paymentConditionID);  // Chama a função do paymentConditionService para enviar a requisição (delete)
-      // Atualize a lista de condições de pagamento após deletar
-      const updatedPaymentConditions = paymentConditions.filter(paymentCondition => paymentCondition.id !== paymentConditionID);
-      setPaymentConditions(updatedPaymentConditions);
+      await deletePaymentCondition(paymentConditionID);
+      // Atualiza o estado após a exclusão
+      setPaymentConditions(prevConditions =>
+        prevConditions.filter(paymentCondition => paymentCondition.id !== paymentConditionID)
+      );
       alert("Condição de pagamento deletada com sucesso!");
     } catch (error) {
-      alert("Erro ao deletar condição de pagamento.");
+      alert("Erro ao deletar condição de pagamento, verifique se ela não está conectada a alguma reserva ativa.");
     }
   };
+
+  const handleEdit = (paymentCondition) => {
+    setEditMode(paymentCondition.id);
+    setEditData(paymentCondition);
+  };
+
+  const handleCancel = () => {
+    setEditMode(null);
+    setEditData({ id: '', name: '' });
+  }
+
+  const handleSave = async () => {
+    try {
+      await updatePaymentCondition(editData.id, editData);
+      const updatedPaymentConditions = paymentConditions.map((paymentCondition) =>
+        paymentCondition.id === editData.id ? editData : paymentCondition
+      );
+      setPaymentConditions(updatedPaymentConditions);
+      setEditMode(null);
+      alert("Condição de pagamento atualizada com sucesso!");
+    } catch (error) {
+      alert("Erro ao atualizar condição de pagamento.");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditData({ ...editData, [name]: value });
+  }
 
   return (
     <>
@@ -54,32 +87,53 @@ const PaymentConditionList = () => {
           </nav>
         </div>
 
-        {/* <!-- End Page Title --> */}
         <div className='paymentConditions-table-container'>
           <table className='paymentConditions-table-content'>
             <thead>
               <tr>
                 <th className="col-id">ID</th>
                 <th className="col-name">Forma de Pagamento</th>
-                <th className="col-edit">Editar</th>
-                <th className="col-delete">Deletar</th>
+                <th className="col-edit"></th>
+                <th className="col-delete"></th>
               </tr>
             </thead>
             <tbody>
-              {paymentConditions.map((paymentConditions) => (
-                <tr key={paymentConditions.id}>
-                  <td className="col-id">{paymentConditions.id}</td>
-                  <td className="col-name">{paymentConditions.name}</td>
-                  {/* Botão para editar e deletar os produtos */}
-                  <td>
-                    <button className="paymentConditions-edit-button" /*onClick={() => handleEdit(paymentConditions.id)}*/ >
-                      <img src={editImage} />
-                    </button>
+              {paymentConditions.map((paymentCondition) => (
+                <tr key={paymentCondition.id}>
+                  <td className="col-id">{paymentCondition.id}</td>
+                  <td className="col-name">
+                    {editMode === paymentCondition.id ? (
+                      <input
+                        type="text"
+                        name="name"
+                        value={editData.name}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      paymentCondition.name
+                    )}
                   </td>
                   <td>
-                    <button className="paymentConditions-delete-button" onClick={() => handleDelete(paymentConditions.id)} >
-                      <img src={deleteImage} />
-                    </button>
+                    {editMode === paymentCondition.id ? (
+                      <button className="paymentConditions-save-button" onClick={handleSave}>
+                        <img src={confirmImage} alt="Salvar" />
+                      </button>
+                    ) : (
+                      <button className="paymentConditions-edit-button" onClick={() => handleEdit(paymentCondition)}>
+                        <img src={editImage} alt="Editar" />
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {editMode === paymentCondition.id ? (
+                      <button className="paymentConditions-cancel-button" onClick={handleCancel}>
+                        <img src={cancelImage} alt="Cancelar" />
+                      </button>
+                    ) : (
+                      <button className="paymentConditions-delete-button" onClick={() => handleDelete(paymentCondition.id)} >
+                        <img src={deleteImage} alt="Deletar" />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -93,5 +147,3 @@ const PaymentConditionList = () => {
 };
 
 export default PaymentConditionList;
-
-
