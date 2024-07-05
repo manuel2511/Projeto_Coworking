@@ -12,10 +12,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(username, password);
-      console.log('Login successful', response.data);
+      alert('Login feito com sucesso!');
+      console.log('Login feito com sucesso!', response.data);
       navigate('/');
     } catch (error) {
-      console.error('Login failed', error);
+      alert('Erro ao fazer login');
+      console.error('Erro ao fazer login', error);
     }
   };
 
@@ -32,7 +34,7 @@ const Login = () => {
               required 
               placeholder=''
             />
-            <label>Username</label>
+            <label>Nome de Usuário</label>
           </div>
           <div className='login-form-group'>
             <input type="password" 
@@ -41,7 +43,7 @@ const Login = () => {
               required
               placeholder=''
             />
-            <label>Password</label>
+            <label>Senha</label>
           </div>
           <div className='login-form-footer'>
             <button className='login-form-button' type="submit">Login</button>

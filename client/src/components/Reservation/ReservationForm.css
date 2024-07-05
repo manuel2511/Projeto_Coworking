@@ -91,6 +91,7 @@
     margin-right: 10px;
 }
 
+/* Buttons */
 .reservation-product-button,
 .reservation-form-button {
     background-color: var(--darkBlue-color);
@@ -108,11 +109,22 @@
 .reservation-form-button{
     margin-top: 0;
 }
+
 .reservation-product-button:hover,
 .reservation-form-button:hover {
     background-color: var(--lightBlue-color);
 }
 
+.reservation-remove-button {
+    border: none;
+    background-color: transparent;
+}
+
+.reservation-remove-button img {
+    width: 23px;
+}
+
+/* Table */
 .reservation-product-table {
     width: 100%;
     border-collapse: collapse;
@@ -139,4 +151,24 @@
 
 .reservation-product-table tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+.col-product {
+    width: 55%;
+}
+  
+.col-value {
+    width: 20%;
+}
+  
+.col-hours {
+    width: 10%;
+}
+  
+.col-remove {
+    width: 5%;
+}
+  
+.col-total {
+    width: 20%; 
 }

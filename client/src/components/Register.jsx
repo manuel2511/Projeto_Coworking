@@ -8,17 +8,23 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate(); // Hook para navigação
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== repeatPassword) {
+      alert('As senhas não coincidem');
+      return;
+    }
     try {
       const response = await register(username, password, email);
-      console.log('Registration successful', response.data);
+      console.log('Registro feito com sucesso!', response.data);
       navigate('/login');
     } catch (error) {
-      console.error('Registration failed', error);
-      alert('Registration failed', error);
+      console.log('Email já cadastrado');
+      alert('Email já cadastrado no sistema');
+      navigate('/login');
     }
   };
 
@@ -28,6 +34,7 @@ const Register = () => {
         <h1>COWORKING SPACE</h1>
         <div className='register-form-content'>
           <h2>Register</h2>
+          {error && <p className='error-message'>{error}</p>}
           <div className='register-form-group'>
             <input 
               type="email"
@@ -46,7 +53,7 @@ const Register = () => {
               required
               placeholder=''
             />
-            <label>Username</label>
+            <label>Nome de Usuário</label>
           </div>
           <div className='register-form-group'>
             <input 

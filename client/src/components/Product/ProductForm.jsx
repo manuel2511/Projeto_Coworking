@@ -15,6 +15,18 @@ const ProductForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Verificações para garantir que os valores sejam positivos
+    if (parseInt(capacity) <= 0) {
+      alert("Por favor, digite um número maior que zero para a capacidade.");
+      return;
+    }
+
+    if (parseFloat(hourlyRate) <= 0) {
+      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("name", name);
@@ -40,6 +52,24 @@ const ProductForm = () => {
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
     setPhoto(file); // Define o arquivo selecionado como estado da foto
+  };
+
+  const handleCapacityChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
+      setCapacity(value);
+    } else {
+      alert("Por favor, digite um número maior que zero para a capacidade.");
+    }
+  };
+
+  const handleHourlyRateChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
+      setHourlyRate(value);
+    } else {
+      alert("Por favor, digite um número maior que zero para o valor por hora.");
+    }
   };
 
   return (
@@ -93,7 +123,7 @@ const ProductForm = () => {
                 <input
                   type="number"
                   value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
+                  onChange={handleCapacityChange}
                   required
                 />
                 <label>Capacidade:</label>
@@ -102,7 +132,7 @@ const ProductForm = () => {
                 <input
                   type="number"
                   value={hourlyRate}
-                  onChange={(e) => setHourlyRate(e.target.value)}
+                  onChange={handleHourlyRateChange}
                   required
                 />
                 <label>Valor por Hora:</label>

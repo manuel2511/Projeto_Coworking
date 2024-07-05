@@ -26,6 +26,18 @@ const ProductUpdate = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    // Verificações para garantir que os valores sejam positivos
+    if (parseInt(product.capacity) <= 0) {
+      alert("Por favor, digite um número maior que zero para a capacidade.");
+      return;
+    }
+
+    if (parseFloat(product.hourlyRate) <= 0) {
+      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      return;
+    }
+
     try {
       await updateProduct(productId, product);
       alert("Produto atualizado com sucesso!");
@@ -45,6 +57,24 @@ const ProductUpdate = () => {
     setProduct({ ...product, photo: file });
   };
 
+  const handleCapacityChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
+      setProduct({ ...product, capacity: value });
+    } else {
+      alert("Por favor, digite um número maior que zero para a capacidade.");
+    }
+  };
+
+  const handleHourlyRateChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
+      setProduct({ ...product, hourlyRate: value });
+    } else {
+      alert("Por favor, digite um número maior que zero para o valor por hora.");
+    }
+  };
+
   if (!product) {
     return (
       <div className="loading-container">
@@ -52,6 +82,9 @@ const ProductUpdate = () => {
       </div>
     );
   }
+
+  // Verifica se product.photo é uma string (significa que é o caminho da imagem salvo no banco)
+  const isStringPhoto = typeof product.photo === "string";
 
   return (
     <>
@@ -104,7 +137,7 @@ const ProductUpdate = () => {
                   type="number"
                   name="capacity"
                   value={product.capacity}
-                  onChange={handleInputChange}
+                  onChange={handleCapacityChange}
                 />
                 <label>Capacidade:</label>
               </div>
@@ -113,17 +146,17 @@ const ProductUpdate = () => {
                   type="number"
                   name="hourlyRate"
                   value={product.hourlyRate}
-                  onChange={handleInputChange}
+                  onChange={handleHourlyRateChange}
                 />
                 <label>Valor por hora:</label>
               </div>
             </div>
             <div className="update-preview-group">
               <div className="update-preview-container">
-                {product.photo && typeof product.photo !== "string" ? (
+                {isStringPhoto ? (
                   <img
                     className="update-preview-image"
-                    src={URL.createObjectURL(product.photo)}
+                    src={`http://localhost:3000/uploads/${product.photo}`}
                     alt="Preview"
                   />
                 ) : (
