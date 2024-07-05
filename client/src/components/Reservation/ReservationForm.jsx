@@ -5,9 +5,9 @@ import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import "./ReservationForm.css";
 import { getUserInfo } from '../User/auth';
+import RemoveImageButton from '../../assets/img/remove.png';
 
 const ReservationForm = () => {
-  
   const [date, setDate] = useState("");
   const [duration, setDuration] = useState(1);
   const [status, setStatus] = useState("Aberta");
@@ -20,8 +20,6 @@ const ReservationForm = () => {
   const [paymentConditions, setPaymentConditions] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
 
-  
-
   useEffect(() => {
     axios.get("/products").then((response) => {
       setProducts(response.data);
@@ -33,12 +31,43 @@ const ReservationForm = () => {
   }, []);
 
   const handleAddProduct = () => {
+    // Verifica se o espaço está preenchida
+    if (!selectedProduct) {
+      alert("Por favor, selecione pelo menos um espaço antes de continuar a reserva.");
+      return;
+    }
+
+    // Verifique se a duração em horas está preenchida
+    if (!duration) {
+      alert("Por favor, selecione a duração de tempo em horas antes de continuar a reserva.");
+      return;
+    }
+
+    // Verifica se a data está preenchida
+    if (!date) {
+      alert("Por favor, selecione uma data antes de continuar a reserva.");
+      return;
+    }
+
+    // Verifica se o usuário selecionou uma condição de pagamento
+    if (!paymentConditionId) {
+      alert("Por favor, selecione uma condição de pagamento antes de continuar a reserva.");
+      return;
+    }
+  
     const product = products.find((p) => p.id === parseInt(selectedProduct));
-    if (product) {
+    const paymentCondition = paymentConditions.find((pc) => pc.id === parseInt(paymentConditionId));
+  
+    if (product && paymentCondition) {
       const productTotal = product.hourlyRate * duration;
       setAddedProducts([
         ...addedProducts,
-        { ...product, quantity: duration, total: productTotal },
+        { 
+          ...product, 
+          quantity: duration, 
+          total: productTotal, 
+          paymentConditionName: paymentCondition.name
+        },
       ]);
       setTotalValue(totalValue + productTotal);
     }
@@ -84,7 +113,7 @@ const ReservationForm = () => {
     if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
       setDuration(value);
     } else {
-      alert("Por favor, digite um número positivo para a duração.");
+      alert("Por favor, digite um número positivo para a duração de tempo.");
     }
   };
 
@@ -197,19 +226,19 @@ const ReservationForm = () => {
                 </select>
               </div>
               <div className="reservation-form-group selectProduct">
-                <label>Selecionar Produto(s)</label>
+                <label>Selecionar Espaço(s)</label>
                 <select
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
                 >
-                  <option value="">Selecione um produto</option>
+                  <option value="">Selecione um espaços</option>
                   {products.map((product) => (
                     <option key={product.id} value={product.id}>
                       {product.name}
                     </option>
                   ))}
                 </select>
-                <button type="button" className="reservation-product-button" onClick={handleAddProduct}>Adicionar Produto</button>
+                <button type="button" className="reservation-product-button" onClick={handleAddProduct}>Adicionar Espaço</button>
               </div>
               <table className="reservation-product-table">
                 <thead>
@@ -225,18 +254,18 @@ const ReservationForm = () => {
                 <tbody>
                   {addedProducts.map((product, index) => (
                     <tr key={index}>
-                      <td>{product.id}</td>
-                      <td>{product.name}</td>
-                      <td>{product.hourlyRate}</td>
-                      <td>{product.quantity}</td>
-                      <td>{product.total}</td>
-                      <td>
+                      <td className="col-id">{product.id}</td>
+                      <td className="col-product">{product.name}</td>
+                      <td className="col-value">R$ {product.hourlyRate}</td>
+                      <td className="col-hours">{product.quantity}</td>
+                      <td className="col-total">R$ {product.total.toFixed(2)}</td>
+                      <td className="col-remove">
                         <button
                           type="button"
                           onClick={() => handleRemoveProduct(index)}
                           className="reservation-remove-button"
                         >
-                          Remover
+                          <img src={RemoveImageButton}/>
                         </button>
                       </td>
                     </tr>

@@ -116,16 +116,12 @@
 }
 
 .reservation-remove-button {
-    background-color: #dc3545;
-    color: white;
     border: none;
-    border-radius: 2px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
+    background-color: transparent;
 }
-  
-.reservation-remove-button:hover {
-    background-color: #c82333;
+
+.reservation-remove-button img {
+    width: 23px;
 }
 
 /* Table */
@@ -157,6 +153,22 @@
     background-color: #f1f1f1;
 }
 
-.col-remove{
-    width: 2%;
+.col-product {
+    width: 55%;
+}
+  
+.col-value {
+    width: 20%;
+}
+  
+.col-hours {
+    width: 10%;
+}
+  
+.col-remove {
+    width: 5%;
+}
+  
+.col-total {
+    width: 20%; 
 }
