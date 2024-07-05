@@ -80,3 +80,58 @@
     width: 45px;
     height: 40px;
 }    
+
+/* MEDIA QUERIES */
+
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+    .paymentConditions-table-content {
+      font-size: 0.8em;
+    }
+  
+    
+  
+    .paymentConditions-table-content th,
+    .paymentConditions-table-content td {
+      padding: 10px 12px;
+    }
+  
+    .paymentConditions-table-content td {
+      font-size: 0.85em;
+    }
+  }
+  
+  /* Smartphones */
+  @media (max-width: 480px) {
+    .paymentConditions-table-content {
+      font-size: 0.7em;
+    }
+  
+    .paymentConditions-table-content th,
+    .paymentConditions-table-content td {
+      padding: 8px 10px;
+    }
+  
+    .paymentConditions-table-content td {
+      font-size: 0.8em;
+    }
+  
+    .paymentConditions-table-content .col-name {
+      width: 70%;
+    }
+  
+    .paymentConditions-table-content td img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .paymentConditions-edit-button img {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .paymentConditions-delete-button img {
+      width: 30px;
+      height: 30px;
+    }
+  }
