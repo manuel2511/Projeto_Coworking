@@ -29,6 +29,12 @@ const ReservationForm = () => {
       setPaymentConditions(response.data);
     });
   }, []);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
 
   const handleAddProduct = () => {
     // Verifica se o espaço está preenchida
@@ -138,11 +144,11 @@ const ReservationForm = () => {
   if (!user) {
     return <p>User not logged in</p>;
   }
-
+  
   return (
     <>
-      <Header />
-      <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Cadastro de Reservas</h1>

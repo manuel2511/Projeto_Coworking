@@ -45,6 +45,12 @@ const ProductList = () => {
   const handleEdit = (productId) => {
     navigate(`/editarProduto/${productId}`);
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
 
   // Função para exibir a descrição do produto em um tooltip
   const handleInfos = (product) => {
@@ -60,8 +66,8 @@ const ProductList = () => {
 
   return (
     <>
-      <Header />
-      <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="">
           <h1>Listar Produtos</h1>

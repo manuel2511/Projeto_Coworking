@@ -71,11 +71,17 @@ const ProductForm = () => {
       alert("Por favor, digite um número maior que zero para o valor por hora.");
     }
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
 
   return (
     <>
-      <Header />
-      <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Produtos</h1>

@@ -28,7 +28,12 @@ const ReservationList = () => {
 
     fetchData();
   }, []);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
   // criar aba de editar reserva pois não tem
   const handleReopen = (reservationId) => {
     setSelectedreservationId(reservationId);
@@ -59,11 +64,12 @@ const ReservationList = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+
   return (
     <>
       <body className="">
-        <Header />
-        <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
         <main id="main" className="main">
           <div className="">
             <h1>Listagem de Reservas</h1>

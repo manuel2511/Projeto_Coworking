@@ -5,7 +5,7 @@ import ModalHelp from '../Modal/ModalHelp';
 
 
 
-const Header = () => {
+const Header = ({ onToggleSidebar }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
@@ -25,7 +25,7 @@ const Header = () => {
             <img src="assets/img/LogoCs.png" alt="Logo-Coworking-Space" />
             <span className="d-none d-lg-flex">Coworking Space</span>
           </a>
-          <i className="bi bi-list toggle-sidebar-btn"></i>
+          <i className="bi bi-list toggle-sidebar-btn" onClick={onToggleSidebar} ></i>
         </div>
         {/* <!-- End Logo --> */}
 
