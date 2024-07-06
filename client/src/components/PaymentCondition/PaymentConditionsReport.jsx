@@ -110,11 +110,17 @@ const PaymentConditionsReport = () => {
     // Gerar o PDF
     pdfMake.createPdf(docDefinition).open();
   }
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
 
   return (
     <>
-      <Header />
-      <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Formas de Pagamentos</h1>

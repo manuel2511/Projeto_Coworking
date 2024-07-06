@@ -24,6 +24,12 @@ const ProductReport = () => {
     fetchData();
   }, []);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
   function formatDate(dateString) {
     const date = new Date(dateString);
     date.setHours(date.getHours() + 3);
@@ -116,6 +122,7 @@ const ProductReport = () => {
         };
       }
     };
+    
 
     // Gerar o PDF
     pdfMake.createPdf(docDefinition).open();
@@ -123,8 +130,8 @@ const ProductReport = () => {
 
   return (
     <>
-      <Header />
-      <NavBar />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Reservas</h1>

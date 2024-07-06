@@ -23,6 +23,12 @@ const ProductUpdate = () => {
 
     fetchProduct();
   }, [productId]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -82,14 +88,13 @@ const ProductUpdate = () => {
       </div>
     );
   }
-
   // Verifica se product.photo é uma string (significa que é o caminho da imagem salvo no banco)
   const isStringPhoto = typeof product.photo === "string";
 
   return (
     <>
-      <Header />
-      <NavBar />
+     <Header onToggleSidebar={toggleSidebar} />
+     <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Produto {product.id}</h1>
