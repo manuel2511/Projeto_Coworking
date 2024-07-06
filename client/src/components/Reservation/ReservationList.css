@@ -75,9 +75,6 @@
 .reservation-top{
   display: flex;
   justify-content: space-between;
-<<<<<<< HEAD
-}
-=======
 }
 
 /* MEDIA QUERIES */
@@ -88,35 +85,22 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
-    
     }
     .reservation-card {
-      width: 100%;
-     
+      width: 100%;  
     }
-
-  }
+}
 
 
 /* Smartphones */
 @media (max-width: 480px) {
-
   .reservations-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
-    
     }
 
     .reservation-card {
       width: 100%;
-     
     }
-
-
-  }
-
-
->>>>>>> a3983110f90dbda43b6dd1f393cabdaff4ec2e91
+}
