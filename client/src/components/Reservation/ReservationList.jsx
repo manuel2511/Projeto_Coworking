@@ -30,7 +30,12 @@ const ReservationList = () => {
 
     fetchData();
   }, []);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    };
   // criar aba de editar reserva pois não tem
   const handleEdit = (reservationId) => {
     setSelectedreservationId(reservationId);
