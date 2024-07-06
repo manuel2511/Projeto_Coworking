@@ -4,9 +4,7 @@ import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllReservations, deleteReservation } from "../../services/reservationService";
 import { getAllPaymentConditions } from '../../services/paymentConditionService';
-import editImage from '../../assets/img/edit.png';
-import deleteImage from '../../assets/img/delete.png';
-import "./ReservationList.css"; // Import the CSS file
+import "./ReservationList.css";
 import { useNavigate } from "react-router-dom";
 
 const ReservationList = () => {
@@ -32,13 +30,13 @@ const ReservationList = () => {
   }, []);
 
   // criar aba de editar reserva pois não tem
-  const handleEdit = (reservationId) => {
+  const handleReopen = (reservationId) => {
     setSelectedreservationId(reservationId);
     navigate(`/cadastroReserva/${reservationId}`); 
   };
 
   //botão dedeletar
-  const handleDelete = async(reservationID) => {
+  const handleCancel = async(reservationID) => {
     try {
       await deleteReservation(reservationID);  // Chama a função do rervationService para enviar a requisição (delete)
       // Atualize a lista de reservas após deletar
@@ -82,22 +80,8 @@ const ReservationList = () => {
           {/* <!-- End Page Title --> */}
           <div className="reservations-container">
             {reservations.map((reservation) => (
-
               <div className="reservation-card" key={reservation.id}>
-                {/* alinhar id e botões */}
-                <div className="reservation-top"> 
                 <p className="id">ID: {reservation.id} </p>
-                <div className="reservation-buttons">
-                  {/* botão de editar */}
-                <button className="reservation-edit-button" onClick={() => handleEdit(reservation.id)}>
-                  <img src={editImage} />
-                </button>
-                {/* botão de deletar */}
-                <button className="reservation-delete-button" onClick={() => handleDelete(reservation.id)}>
-                  <img src={deleteImage} />
-                </button>
-                </div>
-                </div>
                 <p >{formatDate(reservation.date)} </p>
                 <p className="payment-method">
                   Método de Pagamento:  {getPaymentConditionName(reservation.paymentConditionId)}
@@ -108,10 +92,20 @@ const ReservationList = () => {
                   {reservation.Products.map((product) => (
                     <li className="product-item" key={product.id}>
                       <p className="product-name">Produto: {product.name}</p>
-                      <p className="hourly-rate">Valor por Hora:R$ {product.hourlyRate}</p>
+                      <p className="hourly-rate">Valor por Hora: R${product.hourlyRate}</p>
                     </li>
                   ))}
                 </ul>
+                <hr/>
+                {/* alinhar id e botões */}
+                <div className="reservation-footer"> 
+                  <div className="reservation-buttons">
+                    {/* botão de reagendar */}
+                    <button className="reservation-reopen-button" onClick={() => handleReopen(reservation.id)}>Reagendar</button>
+                    {/* botão de cancelar */}
+                    <button className="reservation-cancel-button" onClick={() => handleCancel(reservation.id)}>Cancelar</button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

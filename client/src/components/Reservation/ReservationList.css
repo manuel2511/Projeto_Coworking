@@ -35,48 +35,51 @@
   margin-right: 20px; 
 }
 
-.id{
+.id {
     font-size: 14px;
     background-color: var(--lightBlue-color);
     border: 1px solid var(--dark-color);
-    width: auto;
+    width: 60px;
     height: auto;
     color: white;  
     padding: 10px;
     border-radius: 90px;
 }
 
-/* Edit Button */
-.reservation-edit-button, .reservation-delete-button {
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-}
-
-.reservation-edit-button img {
-  width: 20px;
-  height: 20px;
-}
-
-.reservation-delete-button img {
-  width: 45px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-}
-
+/* Buttons */
 .reservation-buttons {
   display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  gap: 10px;
 }
 
-.reservation-top{
-  display: flex;
-  justify-content: space-between;
+.reservation-buttons button {
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  width: auto;
+  transition: ease 0.2s;
 }
 
+.reservation-reopen-button {
+  background-color: #cccccc90;
+}
+
+.reservation-cancel-button {
+  font-size: 14px;
+  color: #646464;
+  background-color: transparent;
+}
+
+.reservation-reopen-button:hover {
+  cursor: pointer;
+  background-color: #d8d8d8;
+}
+
+.reservation-cancel-button:hover{
+  color: #000;
+}
 /* MEDIA QUERIES */
 
 /* Tablets e telas menores */
