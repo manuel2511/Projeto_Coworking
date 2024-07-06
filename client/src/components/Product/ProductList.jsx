@@ -11,8 +11,9 @@ import './productList.css';  // Importação do css
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();  // Hook para navegação 
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [tooltipContent, setTooltipContent] = useState('');
+  const navigate = useNavigate();  // Hook para navegação
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +28,8 @@ const ProductList = () => {
     fetchData();
   }, []);
 
-  
   // Função para deletar um produto
-  const handleDelete = async(productID) => {
+  const handleDelete = async (productID) => {
     try {
       await deleteProduct(productID);  // Chama a função do productService para enviar a requisição (delete)
       // Atualize a lista de produtos após deletar
@@ -43,8 +43,19 @@ const ProductList = () => {
 
   // Função para editar um produto
   const handleEdit = (productId) => {
-    setSelectedProductId(productId);
     navigate(`/editarProduto/${productId}`);
+  };
+
+  // Função para exibir a descrição do produto em um tooltip
+  const handleInfos = (product) => {
+    setSelectedProductId(product.id);
+    setTooltipContent(product.description || "Esse produto não possui descrição");
+  };
+
+  // Função para fechar o tooltip
+  const closeTooltip = () => {
+    setSelectedProductId(null);
+    setTooltipContent('');
   };
 
   return (
@@ -64,7 +75,6 @@ const ProductList = () => {
             </ol>
           </nav>
         </div>
-        {/* <!-- End Page Title --> */}
         <div className='product-table-container'>
           <table className='product-table-content'>
             <thead>
@@ -74,12 +84,6 @@ const ProductList = () => {
                 <th className="col-location">Localização</th>
                 <th className="col-capacity">Capacidade</th>
                 <th className="col-rate">Valor por Hora</th>
-
-                {/* Imagem e descrição vão ir para o "Mais informações"
-                    <th className="col-description">Descrição</th>
-                    <th className="col-photo">Foto</th>
-                */}
-
                 <th className="col-edit">Editar</th>
                 <th className="col-delete">Deletar</th>
                 <th className="col-infos"></th>
@@ -93,29 +97,29 @@ const ProductList = () => {
                   <td className="col-location">{product.location}</td>
                   <td className="col-capacity">{product.capacity}</td>
                   <td className="col-rate">{product.hourlyRate}</td>
-
-                  {/* Imagem e descrição vão ir para o "Mais informações"
-                      <td className="col-description">{product.description}</td>
-                      <td className="col-photo">
-                        <img src={product.photo} alt={product.name} width="50"/>
-                      </td>
-                  */}
-
-                  {/* Botão para ver mais, editar e deletar os produtos */}
                   <td>
-                    <button className="product-edit-button" onClick={() => handleEdit(product.id)} >
+                    <button className="product-edit-button" onClick={() => handleEdit(product.id)}>
                       <img src={editImage} alt="Editar"/>
                     </button>
                   </td>
                   <td>
-                    <button className="product-delete-button" onClick={() => handleDelete(product.id)} >
+                    <button className="product-delete-button" onClick={() => handleDelete(product.id)}>
                       <img src={deleteImage} alt="Deletar"/>
                     </button>
                   </td>
-                  <td>
-                    <button className="product-infos-button" /*onClick={() => openModal(product)}*/ >
+                  <td className="tooltip-container">
+                    <button 
+                      className="product-infos-button" 
+                      onMouseEnter={() => handleInfos(product)}
+                      onMouseLeave={closeTooltip}
+                    >
                       <img src={infosImage} alt="Mais informações"/>
                     </button>
+                    {selectedProductId === product.id && (
+                      <div className="tooltip">
+                        {tooltipContent}
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}

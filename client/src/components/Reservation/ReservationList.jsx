@@ -3,6 +3,7 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllReservations, deleteReservation } from "../../services/reservationService";
+import { getAllPaymentConditions } from '../../services/paymentConditionService';
 import editImage from '../../assets/img/edit.png';
 import deleteImage from '../../assets/img/delete.png';
 import "./ReservationList.css"; // Import the CSS file
@@ -11,15 +12,19 @@ import { useNavigate } from "react-router-dom";
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedReservationId, setSelectedreservationId] = useState(null);
+  const [paymentConditions, setPaymentConditions] = useState([]);
   const navigate = useNavigate();
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getAllReservations();
-        setReservations(response.data);
+        const reservationsResponse = await getAllReservations();
+        const paymentConditionsResponse = await getAllPaymentConditions();
+        
+        setReservations(reservationsResponse.data);
+        setPaymentConditions(paymentConditionsResponse.data);
       } catch (error) {
-        alert("Erro ao buscar reservas");
+        alert("Erro ao buscar reservas ou condições de pagamento");
       }
     };
 
@@ -45,12 +50,16 @@ const ReservationList = () => {
     }
   };
 
+  const getPaymentConditionName = (id) => {
+    const condition = paymentConditions.find(condition => condition.id === id);
+    return condition ? condition.name : "Desconhecido";
+  };
+
   //função para formataçõa da data
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-
 
   return (
     <>
@@ -91,10 +100,10 @@ const ReservationList = () => {
                 </div>
                 <p >{formatDate(reservation.date)} </p>
                 <p className="payment-method">
-                  Método de Pagamento: {reservation.paymentMethod}
+                  Método de Pagamento:  {getPaymentConditionName(reservation.paymentConditionId)}
                 </p>
                 <p>Horas Reservadas: {reservation.duration} {reservation.duration === 1 ? "Hora" : "Horas"}</p>
-                <p className="otalValue">Valor Total: {reservation.totalValue}</p>
+                <p className="totalValue">Valor Total: {reservation.totalValue}</p>
                 <ul className="products-list">
                   {reservation.Products.map((product) => (
                     <li className="product-item" key={product.id}>
