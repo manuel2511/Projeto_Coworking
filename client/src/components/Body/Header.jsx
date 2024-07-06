@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from 'react';
+import {Button } from 'react-bootstrap';
 import { getUserInfo, logout } from '../User/auth';
+import ModalHelp from '../Modal/ModalHelp';
 
 
 
 const Header = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   const user = getUserInfo();
   if (!user) {
     return <p>User not logged in</p>;
   }
+
 
   return (
     <>
@@ -75,13 +83,16 @@ const Header = () => {
                 </li>
 
                 <li>
-                  <a
-                    className="dropdown-item d-flex align-items-center"
-                    href="/"
+                  <Button variant="primary" onClick={handleShow}
+                      className="dropdown-item d-flex align-items-center"
                   >
                     <i className="bi bi-question-circle"></i>
                     <span>Ajuda?</span>
-                  </a>
+                  </Button>
+                  <ModalHelp show={showModal} handleClose={handleClose}>
+                    <h2>Hello</h2>
+                    <p>I am a modal!</p>
+                  </ModalHelp>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
