@@ -1,6 +1,6 @@
 // src/components/UserInfo.js
-import React from 'react';
-import { getUserInfo } from './auth';
+import React from "react";
+import { getUserInfo } from "./auth";
 
 const UserInfo = () => {
   const user = getUserInfo();
@@ -13,7 +13,7 @@ const UserInfo = () => {
     <div className="user-info">
       <span>ID: {user.id}</span>
       <span>Name: {user.username}</span>
-      <span>Master: {user.master ? 'Administrador' : 'Usuário'}</span>
+      <span>Master: {user.master ? "Administrador" : "Usuário"}</span>
     </div>
   );
 };

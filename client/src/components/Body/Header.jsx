@@ -59,10 +59,10 @@ const Header = ({ onToggleSidebar }) => {
                 <li>
                   <a
                     className="dropdown-item d-flex align-items-center"
-                    href="/"
+                    href="/usuario"
                   >
                     <i className="bi bi-person"></i>
-                    <span>Meu perfil</span>
+                    <span>Usuários</span>
                   </a>
                 </li>
                 <li>
