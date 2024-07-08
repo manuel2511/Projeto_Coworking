@@ -72,11 +72,11 @@ const ProductList = () => {
     navigate(`/editarProduto/${productId}`);
   };
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
   // Função para exibir a descrição do produto em um tooltip
   const handleInfos = (product) => {
@@ -131,21 +131,21 @@ const ProductList = () => {
                   <td className="col-rate">{product.hourlyRate}</td>
                   <td>
                     <button className="product-edit-button" onClick={() => handleEdit(product.id)}>
-                      <img src={editImage} alt="Editar"/>
+                      <img src={editImage} alt="Editar" />
                     </button>
                   </td>
                   <td>
                     <button className="product-delete-button" onClick={() => handleDelete(product.id)}>
-                      <img src={deleteImage} alt="Deletar"/>
+                      <img src={deleteImage} alt="Deletar" />
                     </button>
                   </td>
                   <td className="tooltip-container">
-                    <button 
-                      className="product-infos-button" 
+                    <button
+                      className="product-infos-button"
                       onMouseEnter={() => handleInfos(product)}
                       onMouseLeave={closeTooltip}
                     >
-                      <img src={infosImage} alt="Mais informações"/>
+                      <img src={infosImage} alt="Mais informações" />
                     </button>
                     {selectedProductId === product.id && (
                       <div className="tooltip">

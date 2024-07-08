@@ -24,11 +24,11 @@ const ProductUpdate = () => {
     fetchProduct();
   }, [productId]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -93,8 +93,8 @@ const ProductUpdate = () => {
 
   return (
     <>
-     <Header onToggleSidebar={toggleSidebar} />
-     <NavBar isOpen={isSidebarOpen} />
+      <Header onToggleSidebar={toggleSidebar} />
+      <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
           <h1>Produto {product.id}</h1>

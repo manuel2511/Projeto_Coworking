@@ -42,9 +42,9 @@ const Register = () => {
           <h2>Register</h2>
           {error && <p className='error-message'>{error}</p>}
           <div className='register-form-group'>
-            <input 
+            <input
               type="email"
-              value={email} 
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder=''
@@ -52,30 +52,30 @@ const Register = () => {
             <label>Email</label>
           </div>
           <div className='register-form-group'>
-            <input 
-              type="text" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               placeholder=''
             />
             <label>Nome de Usuário</label>
           </div>
           <div className='register-form-group'>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               placeholder=''
             />
             <label>Senha</label>
           </div>
           <div className='register-form-group'>
-            <input 
+            <input
               type="password"
-              value={repeatPassword} 
-              onChange={(e) => setRepeatPassword(e.target.value)} 
+              value={repeatPassword}
+              onChange={(e) => setRepeatPassword(e.target.value)}
               required
               placeholder=''
             />

@@ -9,22 +9,22 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const ProductReport = () => {
-    const [products, setProducts] = useState([]);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await getAllProducts();
-          setProducts(response.data);
-        } catch (error) {
-          alert("Erro ao buscar produtos");
-        }
-      };
-  
-      fetchData();
-    }, []);
+  const [products, setProducts] = useState([]);
 
-  function gerarPDF(){
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllProducts();
+        setProducts(response.data);
+      } catch (error) {
+        alert("Erro ao buscar produtos");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  function gerarPDF() {
     var docDefinition = {
       content: [
         { text: 'Relatório de Produtos', style: 'header' },
@@ -35,19 +35,19 @@ const ProductReport = () => {
             headerRows: 1,
             widths: [50, '*', '*', '*', '*'],
             body: [
-              [{text: 'ID', style: 'headerTable'},
-              {text: 'Nome', style: 'headerTable'},
-              {text: 'Localização', style: 'headerTable'},
-              {text: 'Capacidade', style: 'headerTable'},
-              {text: 'Valor por hora', style: 'headerTable'}],
+              [{ text: 'ID', style: 'headerTable' },
+              { text: 'Nome', style: 'headerTable' },
+              { text: 'Localização', style: 'headerTable' },
+              { text: 'Capacidade', style: 'headerTable' },
+              { text: 'Valor por hora', style: 'headerTable' }],
               ...products.map(products => ([
-                {text: products.id, style: 'item'},
-                {text: products.name, style: 'item'},
-                {text: products.location, style: 'item'},
-                {text: products.capacity, style: 'item'},
-                {text: products.hourlyRate, style: 'item'},
+                { text: products.id, style: 'item' },
+                { text: products.name, style: 'item' },
+                { text: products.location, style: 'item' },
+                { text: products.capacity, style: 'item' },
+                { text: products.hourlyRate, style: 'item' },
               ])),
-              [{text: `Total: ${products.length}`, colSpan: 5, style: 'total'},
+              [{ text: `Total: ${products.length}`, colSpan: 5, style: 'total' },
               {}]
             ]
           },
@@ -55,7 +55,7 @@ const ProductReport = () => {
         },
         { text: '\n' },
       ],
-        
+
       styles: {
         header: {
           fontSize: 18,
@@ -95,7 +95,7 @@ const ProductReport = () => {
           margin: [0, 0, 0, 10]
         }
       },
-      footer: function(currentPage, pageCount) {
+      footer: function (currentPage, pageCount) {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
           alignment: 'center',
@@ -108,11 +108,11 @@ const ProductReport = () => {
     pdfMake.createPdf(docDefinition).open();
   }
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
   return (
     <>
       <Header onToggleSidebar={toggleSidebar} />

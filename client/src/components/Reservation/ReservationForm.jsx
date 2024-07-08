@@ -32,7 +32,7 @@ const ReservationForm = () => {
   }, []);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
@@ -86,10 +86,10 @@ const ReservationForm = () => {
       const productTotal = product.hourlyRate * duration;
       setAddedProducts([
         ...addedProducts,
-        { 
-          ...product, 
-          quantity: duration, 
-          total: productTotal, 
+        {
+          ...product,
+          quantity: duration,
+          total: productTotal,
           paymentConditionName: paymentCondition.name
         },
       ]);
@@ -174,13 +174,13 @@ const ReservationForm = () => {
     setAddedProducts(updatedProducts);
     setTotalValue(totalValue - removedProduct[0].total);
   };
-  
+
   const user = getUserInfo();
 
   if (!user) {
     return <p>User not logged in</p>;
   }
-    
+
   return (
     <>
       <Header onToggleSidebar={toggleSidebar} />
@@ -198,9 +198,9 @@ const ReservationForm = () => {
             </ol>
           </nav>
         </div>
-        
+
         <div className="reservation-form-wrapper">
-          <div className="reservation-form-container"> 
+          <div className="reservation-form-container">
             <form className="reservation-form-grid">
               <h2>Detalhes da Reserva</h2>
               <div className="reservation-form-group">
@@ -307,7 +307,7 @@ const ReservationForm = () => {
                           onClick={() => handleRemoveProduct(index)}
                           className="reservation-remove-button"
                         >
-                          <img src={RemoveImageButton}/>
+                          <img src={RemoveImageButton} />
                         </button>
                       </td>
                     </tr>

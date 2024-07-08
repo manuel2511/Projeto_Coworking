@@ -90,11 +90,11 @@ const PaymentConditionList = () => {
     setEditData({ ...editData, [name]: value });
   }
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
 
   return (

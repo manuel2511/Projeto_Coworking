@@ -24,7 +24,7 @@ const PaymentConditionsReport = () => {
     fetchData();
   }, []);
 
-  function gerarPDF(){
+  function gerarPDF() {
     var docDefinition = {
       content: [
         { text: 'Relatório de Formas de Pagamento', style: 'header' },
@@ -35,13 +35,13 @@ const PaymentConditionsReport = () => {
             headerRows: 1,
             widths: [50, '*'],
             body: [
-              [{text: 'ID', style: 'headerTable'},
-              {text: 'Nome', style: 'headerTable1'}],
+              [{ text: 'ID', style: 'headerTable' },
+              { text: 'Nome', style: 'headerTable1' }],
               ...paymentConditions.map(paymentConditions => ([
-                {text: paymentConditions.id, style: 'item'},
-                {text: paymentConditions.name, style: 'item'}
+                { text: paymentConditions.id, style: 'item' },
+                { text: paymentConditions.name, style: 'item' }
               ])),
-              [{text: `Total: ${paymentConditions.length}`, colSpan: 2, style: 'total'},
+              [{ text: `Total: ${paymentConditions.length}`, colSpan: 2, style: 'total' },
               {}]
             ]
           },
@@ -49,7 +49,7 @@ const PaymentConditionsReport = () => {
         },
         { text: '\n' },
       ],
-        
+
       styles: {
         header: {
           fontSize: 18,
@@ -87,7 +87,7 @@ const PaymentConditionsReport = () => {
           color: 'white',
           fillColor: '#2a3f54',
           alignment: 'center',
-          margin: [0, 4, 0, 4], 
+          margin: [0, 4, 0, 4],
           alignment: 'left'
         },
         item: {
@@ -98,7 +98,7 @@ const PaymentConditionsReport = () => {
           margin: [0, 0, 0, 10]
         }
       },
-      footer: function(currentPage, pageCount) {
+      footer: function (currentPage, pageCount) {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
           alignment: 'center',
@@ -113,9 +113,9 @@ const PaymentConditionsReport = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { getUserInfo, logout } from '../User/auth';
 import ModalHelp from '../Modal/ModalHelp';
 
@@ -40,12 +40,12 @@ const Header = ({ onToggleSidebar }) => {
               >
                 <img
                   //assets/img/profile-img.jpg" passar a foto por referencia da imagem  
-                  src="../../assets/img/User.jpg" 
+                  src="../../assets/img/User.jpg"
                   alt="Foto do Usuario"
                   className="rounded-circle"
                 />
                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                   {user.name}
+                  {user.name}
                 </span>
               </a>
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -84,7 +84,7 @@ const Header = ({ onToggleSidebar }) => {
 
                 <li>
                   <Button variant="primary" onClick={handleShow}
-                      className="dropdown-item d-flex align-items-center"
+                    className="dropdown-item d-flex align-items-center"
                   >
                     <i className="bi bi-question-circle"></i>
                     <span>Ajuda?</span>
@@ -99,7 +99,7 @@ const Header = ({ onToggleSidebar }) => {
                 </li>
 
                 <li>
-                  <button className="dropdown-item d-flex align-items-center" onClick={logout} >  
+                  <button className="dropdown-item d-flex align-items-center" onClick={logout} >
                     <i className="bi bi-box-arrow-right"></i>
                     <span>Logof</span>
                   </button>

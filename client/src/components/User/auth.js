@@ -18,6 +18,6 @@ export const getUserInfo = () => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/login'; // ou use o método do react-router para redirecionar
-  };
+  localStorage.removeItem('token');
+  window.location.href = '/login'; // ou use o método do react-router para redirecionar
+};

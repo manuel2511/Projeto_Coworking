@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 const BootstrapModal = ({ show, handleClose, children }) => {
   const openNewTab = () => {
-    const apiUrl = "http://localhost:3000/api-docs/"; 
+    const apiUrl = "http://localhost:3000/api-docs/";
     window.open(apiUrl, '_blank');
   };
   return (
@@ -13,10 +13,10 @@ const BootstrapModal = ({ show, handleClose, children }) => {
       </Modal.Header>
       <Modal.Body className='d-flex justify-content-center align-items-center'>
         <div className='d-flex flex-column align-items-center'>
-        <h5 className='mb-3'>Segue o link para acesso da API</h5>
-        <Button className='pl-5 pr-5  ' variant="success" onClick={openNewTab}>          
-          API
-        </Button>
+          <h5 className='mb-3'>Segue o link para acesso da API</h5>
+          <Button className='pl-5 pr-5  ' variant="success" onClick={openNewTab}>
+            API
+          </Button>
         </div>
       </Modal.Body>
       <Modal.Footer>

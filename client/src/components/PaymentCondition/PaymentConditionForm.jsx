@@ -67,7 +67,7 @@ const PaymentConditionForm = () => {
               </div>
               <button className="PaymentCondition-form-button" type="submit">Cadastrar</button>
             </form>
-          </div>      
+          </div>
         </main>
         <Footer />
       </body>
