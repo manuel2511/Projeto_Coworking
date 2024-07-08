@@ -2,7 +2,7 @@ import React, { useState }  from "react";
 import Header from "./Body/Header";
 import NavBar from "./Body/NavBar";
 import Footer from "./Body/Footer";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 function Index() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

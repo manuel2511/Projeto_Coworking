@@ -23,7 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
         allowNull: false,
-      }
+      },
+      photo: {
+        type: DataTypes.BLOB('long'),
+        allowNull: true,
+      },
     });
   
     return User;
