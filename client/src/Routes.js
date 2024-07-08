@@ -16,6 +16,7 @@ import Calendar from './components/Dashboard/Calendar';
 import PaymentConditionsReport from './components/PaymentCondition/PaymentConditionsReport';
 import ProductReport from './components/Product/ProductReport';
 import ReservationReport from './components/Reservation/ReservationReport';
+import UserMaintenance from './components/User/UserMaintenance';
 // import ProductList from './components/ProductList';
 
 const AppRoutes = () => {
@@ -38,6 +39,7 @@ const AppRoutes = () => {
         <Route path="/relatorioFormaDePagamento" element={<PrivateRoute><PaymentConditionsReport /></PrivateRoute>} />
         <Route path="/relatorioProdutos" element={<PrivateRoute><ProductReport /></PrivateRoute>} />
         <Route path="/relatorioReservas" element={<PrivateRoute><ReservationReport /></PrivateRoute>} />
+        <Route path="/usuario" element={<PrivateRoute><UserMaintenance /></PrivateRoute>} />
       </Routes>
     </Router>
   );
