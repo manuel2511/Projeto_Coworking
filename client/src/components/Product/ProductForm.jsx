@@ -38,7 +38,7 @@ const ProductForm = () => {
       formData.append('hourlyRate', hourlyRate);
 
       await createProduct(formData);
-      Swal.fire('Sucesso', 'Produto cadastrado com sucesso!', 'success');
+      Swal.fire('Sucesso', 'Espaço cadastrado com sucesso!', 'success');
       setName('');
       setDescription('');
       setCapacity('');
@@ -46,7 +46,7 @@ const ProductForm = () => {
       setPhoto(null); // Limpa o estado da foto após o envio
       setHourlyRate('');
     } catch (error) {
-      Swal.fire('Erro', 'Erro ao cadastrar produto', 'error');
+      Swal.fire('Erro', 'Erro ao cadastrar espaço', 'error');
     }
   };
 
@@ -86,14 +86,14 @@ const ProductForm = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Produtos</h1>
+          <h1>Espaço</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Cadastro</li>
-              <li className="breadcrumb-item active">Produtos</li>
+              <li className="breadcrumb-item active">Espaço</li>
             </ol>
           </nav>
         </div>

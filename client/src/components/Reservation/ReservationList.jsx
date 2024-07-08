@@ -106,14 +106,14 @@ const ReservationList = () => {
         <NavBar isOpen={isSidebarOpen} />
         <main id="main" className="main">
           <div className="">
-            <h1>Listagem de Reservas</h1>
+            <h1>Listar Reservas</h1>
             <nav>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <a href="/">Home</a>
                 </li>
                 <li className="breadcrumb-item">Movimentações</li>
-                <li className="breadcrumb-item active">Listagem de Reservas</li>
+                <li className="breadcrumb-item active">Listar Reservas</li>
               </ol>
             </nav>
           </div>
@@ -130,7 +130,7 @@ const ReservationList = () => {
                 <ul className="products-list">
                   {reservation.Products.map((product) => (
                     <li className="product-item" key={product.id}>
-                      <p className="product-name">Produto: {product.name}</p>
+                      <p className="product-name">Espaço: {product.name}</p>
                       <p className="hourly-rate">Valor por Hora: R${product.hourlyRate}</p>
                     </li>
                   ))}

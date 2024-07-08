@@ -1,4 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 export const getUserInfo = () => {
   const token = localStorage.getItem('token');
@@ -18,6 +19,13 @@ export const getUserInfo = () => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
+  localStorage.removeItem('token');
+  Swal.fire({
+    icon: 'success',
+    title: 'Usuário desconectado com sucesso!',
+    showConfirmButton: false,
+    timer: 1700 
+  }).then(() => {
     window.location.href = '/login'; // ou use o método do react-router para redirecionar
-  };
+  });
+};
