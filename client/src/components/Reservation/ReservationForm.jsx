@@ -7,6 +7,9 @@ import "./ReservationForm.css";
 import { getUserInfo } from '../User/auth';
 import RemoveImageButton from '../../assets/img/remove.png';
 import Swal from 'sweetalert2'; // Importar o SweetAlert2
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const ReservationForm = () => {
   const [date, setDate] = useState("");
@@ -133,6 +136,7 @@ const ReservationForm = () => {
       setAddedProducts([]);
       setPaymentConditionId("");
       setTotalValue(0);
+      gerarPDF(response.data);
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -173,6 +177,107 @@ const ReservationForm = () => {
     const removedProduct = updatedProducts.splice(indexToRemove, 1);
     setAddedProducts(updatedProducts);
     setTotalValue(totalValue - removedProduct[0].total);
+  };
+
+  const gerarPDF = (reservation) => {
+    if (!reservation) {
+      return;
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      date.setHours(date.getHours() + 3);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${day}/${month}/${year} - ${hours}:${minutes}`;
+    }
+
+    var docDefinition = {
+      content: [
+        { text: 'Relatório de Reserva', style: 'header' },
+        { text: `Data de emissão: ${new Date().toLocaleDateString()}`, style: 'subheader' },
+        { text: '\n' },
+        {
+          table: {
+            headerRows: 1,
+            widths: [40, 150, 50, 50, 50, 110],
+            body: [
+              [{ text: 'ID', style: 'headerTable' },
+              { text: 'Data e hora', style: 'headerTable' },
+              { text: 'Duração', style: 'headerTable' },
+              { text: 'Status', style: 'headerTable' },
+              { text: 'Repetir', style: 'headerTable' },
+              { text: 'Valor Total', style: 'headerTable' }],
+              [
+                { text: reservation.id, style: 'item' },
+                { text: formatDate(reservation.date), style: 'item' },
+                { text: reservation.duration, style: 'item' },
+                { text: reservation.status, style: 'item' },
+                { text: reservation.repeat, style: 'item' },
+                { text: reservation.totalValue, style: 'item' },
+              ],
+              [{ text: `Total: ${reservation.length}`, colSpan: 6, style: 'total' },
+              {}]
+            ]
+          },
+          style: 'tableExample'
+        },
+        { text: '\n' },
+      ],
+
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 14,
+          bold: true,
+          alignment: 'center',
+          margin: [0, 0, 0, 10]
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15],
+          alignment: 'center'
+        },
+        total: {
+          fontSize: 14,
+          bold: true,
+          alignment: 'right',
+          margin: [0, 2, 10, 2]
+        },
+        headerTable: {
+          bold: true,
+          fontSize: 13,
+          color: 'white',
+          fillColor: '#2a3f54',
+          alignment: 'center',
+          margin: [0, 4, 0, 4]
+        },
+        item: {
+          margin: [0, 2, 0, 2]
+        },
+        footer: {
+          fontSize: 10,
+          margin: [0, 0, 0, 10]
+        }
+      },
+      footer: function (currentPage, pageCount) {
+        return {
+          text: `Página ${currentPage} de ${pageCount}`,
+          alignment: 'center',
+          style: 'footer'
+        };
+      }
+    };
+
+    // Gerar o PDF
+    pdfMake.createPdf(docDefinition).open();
   };
 
   const user = getUserInfo();
