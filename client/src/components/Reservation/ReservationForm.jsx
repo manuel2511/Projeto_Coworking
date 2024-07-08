@@ -6,6 +6,7 @@ import Footer from "../Body/Footer";
 import "./ReservationForm.css";
 import { getUserInfo } from '../User/auth';
 import RemoveImageButton from '../../assets/img/remove.png';
+import Swal from 'sweetalert2'; // Importar o SweetAlert2
 
 const ReservationForm = () => {
   const [date, setDate] = useState("");
@@ -29,41 +30,58 @@ const ReservationForm = () => {
       setPaymentConditions(response.data);
     });
   }, []);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
   const handleAddProduct = () => {
-    // Verifica se o espaço está preenchida
+    // Verifica se o espaço está preenchido
     if (!selectedProduct) {
-      alert("Por favor, selecione pelo menos um espaço antes de continuar a reserva.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, selecione pelo menos um espaço antes de continuar a reserva.'
+      });
       return;
     }
 
     // Verifique se a duração em horas está preenchida
     if (!duration) {
-      alert("Por favor, selecione a duração de tempo em horas antes de continuar a reserva.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, selecione a duração de tempo em horas antes de continuar a reserva.'
+      });
       return;
     }
 
     // Verifica se a data está preenchida
     if (!date) {
-      alert("Por favor, selecione uma data antes de continuar a reserva.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, selecione uma data antes de continuar a reserva.'
+      });
       return;
     }
 
     // Verifica se o usuário selecionou uma condição de pagamento
     if (!paymentConditionId) {
-      alert("Por favor, selecione uma condição de pagamento antes de continuar a reserva.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, selecione uma condição de pagamento antes de continuar a reserva.'
+      });
       return;
     }
-  
+
     const product = products.find((p) => p.id === parseInt(selectedProduct));
     const paymentCondition = paymentConditions.find((pc) => pc.id === parseInt(paymentConditionId));
-  
+
     if (product && paymentCondition) {
       const productTotal = product.hourlyRate * duration;
       setAddedProducts([
@@ -92,16 +110,22 @@ const ReservationForm = () => {
       totalValue,
       userId: user.id, // Assumindo que o user já está logado
     };
+
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post("/reservations", reservationData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Reserva criada com sucesso!");
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso',
+        text: 'Reserva criada com sucesso!'
+      });
 
       // Limpar campos após submissão bem-sucedida
       setDate("");
-      setDuration("");
+      setDuration(1);
       setStatus("Aberta");
       setRepeat("None");
       setRepeatCount(0);
@@ -110,25 +134,37 @@ const ReservationForm = () => {
       setPaymentConditionId("");
       setTotalValue(0);
     } catch (error) {
-      alert("Error ao criar reserva");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Erro ao criar reserva'
+      });
     }
   };
 
   const handleDurationChange = (e) => {
     const value = e.target.value;
     if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
-      setDuration(value);
+      setDuration(parseInt(value));
     } else {
-      alert("Por favor, digite um número positivo para a duração de tempo.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número positivo para a duração de tempo.'
+      });
     }
   };
 
   const handleRepeatCountChange = (e) => {
     const value = e.target.value;
     if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) >= 0)) {
-      setRepeatCount(value);
+      setRepeatCount(parseInt(value));
     } else {
-      alert("Por favor, digite um número maior ou igual a zero para a quantidade de repetições.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número maior ou igual a zero para a quantidade de repetições.'
+      });
     }
   };
 
@@ -144,7 +180,7 @@ const ReservationForm = () => {
   if (!user) {
     return <p>User not logged in</p>;
   }
-  
+    
   return (
     <>
       <Header onToggleSidebar={toggleSidebar} />

@@ -1,51 +1,52 @@
-import React, { useState } from "react";
-import Header from "../Body/Header";
-import NavBar from "../Body/NavBar";
-import Footer from "../Body/Footer";
-import { createProduct } from "../../services/productService";
-import './productForm.css';  // Importação do css
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import Header from '../Body/Header';
+import NavBar from '../Body/NavBar';
+import Footer from '../Body/Footer';
+import { createProduct } from '../../services/productService';
+import './productForm.css'; // Importação do css
 
 const ProductForm = () => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [capacity, setCapacity] = useState("");
-  const [location, setLocation] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [capacity, setCapacity] = useState('');
+  const [location, setLocation] = useState('');
   const [photo, setPhoto] = useState(null); // Para armazenar o arquivo de imagem
-  const [hourlyRate, setHourlyRate] = useState("");
+  const [hourlyRate, setHourlyRate] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Verificações para garantir que os valores sejam positivos
     if (parseInt(capacity) <= 0) {
-      alert("Por favor, digite um número maior que zero para a capacidade.");
+      Swal.fire('Erro', 'Por favor, digite um número maior que zero para a capacidade.', 'error');
       return;
     }
 
     if (parseFloat(hourlyRate) <= 0) {
-      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      Swal.fire('Erro', 'Por favor, digite um número maior que zero para o valor por hora.', 'error');
       return;
     }
 
     try {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("capacity", capacity);
-      formData.append("location", location);
-      formData.append("photo", photo); // Adiciona o arquivo de imagem ao FormData
-      formData.append("hourlyRate", hourlyRate);
+      formData.append('name', name);
+      formData.append('description', description);
+      formData.append('capacity', capacity);
+      formData.append('location', location);
+      formData.append('photo', photo); // Adiciona o arquivo de imagem ao FormData
+      formData.append('hourlyRate', hourlyRate);
 
       await createProduct(formData);
-      alert("Produto cadastrado com sucesso!");
-      setName("");
-      setDescription("");
-      setCapacity("");
-      setLocation("");
+      Swal.fire('Sucesso', 'Produto cadastrado com sucesso!', 'success');
+      setName('');
+      setDescription('');
+      setCapacity('');
+      setLocation('');
       setPhoto(null); // Limpa o estado da foto após o envio
-      setHourlyRate("");
+      setHourlyRate('');
     } catch (error) {
-      alert("Erro ao cadastrar produto");
+      Swal.fire('Erro', 'Erro ao cadastrar produto', 'error');
     }
   };
 
@@ -56,27 +57,28 @@ const ProductForm = () => {
 
   const handleCapacityChange = (e) => {
     const value = e.target.value;
-    if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
+    if (value === '' || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
       setCapacity(value);
     } else {
-      alert("Por favor, digite um número maior que zero para a capacidade.");
+      Swal.fire('Erro', 'Por favor, digite um número maior que zero para a capacidade.', 'error');
     }
   };
 
   const handleHourlyRateChange = (e) => {
     const value = e.target.value;
-    if (value === "" || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
+    if (value === '' || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
       setHourlyRate(value);
     } else {
-      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      Swal.fire('Erro', 'Por favor, digite um número maior que zero para o valor por hora.', 'error');
     }
   };
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+  };
 
   return (
     <>

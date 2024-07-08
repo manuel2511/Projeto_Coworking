@@ -4,52 +4,84 @@ import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getAllReservations, deleteReservation } from "../../services/reservationService";
 import { getAllPaymentConditions } from '../../services/paymentConditionService';
-import "./ReservationList.css";
+import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
+import "./ReservationList.css";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedReservationId, setSelectedreservationId] = useState(null);
   const [paymentConditions, setPaymentConditions] = useState([]);
+  const [cancelledReservations, setCancelledReservations] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const reservationsResponse = await getAllReservations();
         const paymentConditionsResponse = await getAllPaymentConditions();
-        
+
         setReservations(reservationsResponse.data);
         setPaymentConditions(paymentConditionsResponse.data);
       } catch (error) {
-        alert("Erro ao buscar reservas ou condições de pagamento");
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro ao buscar reservas ou condições de pagamento'
+        });
       }
     };
 
     fetchData();
   }, []);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-      document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-    };
-  // criar aba de editar reserva pois não tem
-  const handleReopen = (reservationId) => {
-    setSelectedreservationId(reservationId);
-    navigate(`/cadastroReserva/${reservationId}`); 
+    setIsSidebarOpen(!isSidebarOpen);
+    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
   };
 
-  //botão dedeletar
-  const handleCancel = async(reservationID) => {
+  const handleReopen = (reservationId) => {
+    setSelectedreservationId(reservationId);
+    navigate(`/cadastroReserva/${reservationId}`);
+  };
+
+  const handleCancel = async (reservationID) => {
+    const isConfirmed = await Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Você realmente deseja cancelar esta reserva?',
+      icon: 'warning',
+      showCancelButton: 'true',
+      cancelButtonText: 'Não',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim'
+    });
+
+    if (!isConfirmed.isConfirmed) return;
+
     try {
-      await deleteReservation(reservationID);  // Chama a função do rervationService para enviar a requisição (delete)
-      // Atualize a lista de reservas após deletar
-      const updatedReservations = reservations.filter(reservation => reservation.id !== reservationID);  // updatedreservation = novo array com todas as reservas restantes
+      await deleteReservation(reservationID);
+      const updatedReservations = reservations.map(reservation => {
+        if (reservation.id === reservationID) {
+          return { ...reservation, cancelled: true };
+        }
+        return reservation;
+      });
       setReservations(updatedReservations);
-      alert("Reserva deletado com sucesso!");
+      setCancelledReservations([...cancelledReservations, reservationID]);
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Reserva cancelada com sucesso!'
+      });
     } catch (error) {
-      alert("Erro ao deletar reserva.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao cancelar reserva.'
+      });
     }
   };
 
@@ -58,18 +90,20 @@ const ReservationList = () => {
     return condition ? condition.name : "Desconhecido";
   };
 
-  //função para formataçõa da data
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    const date = new Date(dateString);
+    const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+    const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: false };
+    const formattedDate = date.toLocaleDateString(undefined, optionsDate);
+    const formattedTime = date.toLocaleTimeString(undefined, optionsTime);
+    return `${formattedDate} às ${formattedTime}`;
   };
-
 
   return (
     <>
       <body className="">
-      <Header onToggleSidebar={toggleSidebar} />
-      <NavBar isOpen={isSidebarOpen} />
+        <Header onToggleSidebar={toggleSidebar} />
+        <NavBar isOpen={isSidebarOpen} />
         <main id="main" className="main">
           <div className="">
             <h1>Listagem de Reservas</h1>
@@ -83,17 +117,16 @@ const ReservationList = () => {
               </ol>
             </nav>
           </div>
-          {/* <!-- End Page Title --> */}
           <div className="reservations-container">
             {reservations.map((reservation) => (
-              <div className="reservation-card" key={reservation.id}>
+              <div className={`reservation-card ${reservation.cancelled ? 'cancelled' : ''}`} key={reservation.id}>
                 <p className="id">ID: {reservation.id} </p>
-                <p >{formatDate(reservation.date)} </p>
+                <p>{formatDate(reservation.date)}</p>
                 <p className="payment-method">
-                  Método de Pagamento:  {getPaymentConditionName(reservation.paymentConditionId)}
+                  Método de Pagamento: {getPaymentConditionName(reservation.paymentConditionId)}
                 </p>
                 <p>Horas Reservadas: {reservation.duration} {reservation.duration === 1 ? "Hora" : "Horas"}</p>
-                <p className="totalValue">Valor Total: {reservation.totalValue}</p>
+                <p className="totalValue">Valor Total: R${reservation.totalValue}</p>
                 <ul className="products-list">
                   {reservation.Products.map((product) => (
                     <li className="product-item" key={product.id}>
@@ -102,14 +135,15 @@ const ReservationList = () => {
                     </li>
                   ))}
                 </ul>
-                <hr/>
-                {/* alinhar id e botões */}
-                <div className="reservation-footer"> 
+                <hr />
+                <div className="reservation-footer">
                   <div className="reservation-buttons">
-                    {/* botão de reagendar */}
-                    <button className="reservation-reopen-button" onClick={() => handleReopen(reservation.id)}>Reagendar</button>
-                    {/* botão de cancelar */}
-                    <button className="reservation-cancel-button" onClick={() => handleCancel(reservation.id)}>Cancelar</button>
+                    {/*<button className="reservation-reopen-button" onClick={() => handleReopen(reservation.id)}>Reagendar</button>*/}
+                    {reservation.cancelled ? (
+                      <button className="reservation-cancel-button cancelled" disabled>Cancelado</button>
+                    ) : (
+                      <button className="reservation-cancel-button" onClick={() => handleCancel(reservation.id)}>Cancelar</button>
+                    )}
                   </div>
                 </div>
               </div>

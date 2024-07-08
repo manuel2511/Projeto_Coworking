@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
+import Swal from 'sweetalert2';
 import { getAllPaymentConditions, deletePaymentCondition, updatePaymentCondition } from '../../services/paymentConditionService';
 import editImage from '../../assets/img/edit.png';
 import deleteImage from '../../assets/img/delete.png';
@@ -20,7 +21,11 @@ const PaymentConditionList = () => {
         const response = await getAllPaymentConditions();
         setPaymentConditions(response.data);
       } catch (error) {
-        alert('Erro ao buscar condições de pagamento');
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro ao buscar condições de pagamento'
+        });
       }
     };
 
@@ -34,9 +39,17 @@ const PaymentConditionList = () => {
       setPaymentConditions(prevConditions =>
         prevConditions.filter(paymentCondition => paymentCondition.id !== paymentConditionID)
       );
-      alert("Condição de pagamento deletada com sucesso!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Condição de pagamento deletada com sucesso!'
+      });
     } catch (error) {
-      alert("Erro ao deletar condição de pagamento, verifique se ela não está conectada a alguma reserva ativa.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao deletar condição de pagamento, verifique se ela não está conectada a alguma reserva ativa.'
+      });
     }
   };
 
@@ -58,9 +71,17 @@ const PaymentConditionList = () => {
       );
       setPaymentConditions(updatedPaymentConditions);
       setEditMode(null);
-      alert("Condição de pagamento atualizada com sucesso!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Condição de pagamento atualizada com sucesso!'
+      });
     } catch (error) {
-      alert("Erro ao atualizar condição de pagamento.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao atualizar condição de pagamento.'
+      });
     }
   };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 import './login.css'; // Importação do css
@@ -12,12 +13,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(username, password);
-      alert('Login feito com sucesso!');
-      console.log('Login feito com sucesso!', response.data);
+      Swal.fire('Sucesso', 'Login feito com sucesso!', 'success');
       navigate('/');
     } catch (error) {
-      alert('Erro ao fazer login');
-      console.error('Erro ao fazer login', error);
+      Swal.fire('Erro', 'Erro ao buscar fazer login', 'error');
     }
   };
 

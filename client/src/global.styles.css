@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 :root{
     /* FONTS */
     --titles-font: "Josefin Sans", sans-serif;

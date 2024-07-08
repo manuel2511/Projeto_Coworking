@@ -62,9 +62,9 @@
   transition: ease 0.2s;
 }
 
-.reservation-reopen-button {
+/*.reservation-reopen-button {
   background-color: #cccccc90;
-}
+} */
 
 .reservation-cancel-button {
   font-size: 14px;
@@ -80,6 +80,7 @@
 .reservation-cancel-button:hover{
   color: #000;
 }
+
 /* MEDIA QUERIES */
 
 /* Tablets e telas menores */
@@ -93,7 +94,6 @@
       width: 100%;  
     }
 }
-
 
 /* Smartphones */
 @media (max-width: 480px) {

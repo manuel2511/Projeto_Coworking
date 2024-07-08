@@ -8,6 +8,7 @@ import editImage from '../../assets/img/edit.png';
 import deleteImage from '../../assets/img/delete.png';
 import infosImage from '../../assets/img/infos.png';
 import './productList.css';  // Importação do css
+import Swal from 'sweetalert2'; // Importação do SweetAlert2
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,11 @@ const ProductList = () => {
         const response = await getAllProducts();
         setProducts(response.data);
       } catch (error) {
-        alert("Erro ao buscar produtos");
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro!',
+          text: 'Erro ao buscar produtos'
+        });
       }
     };
 
@@ -30,14 +35,35 @@ const ProductList = () => {
 
   // Função para deletar um produto
   const handleDelete = async (productID) => {
+    const isConfirmed = await Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Você realmente deseja deletar este produto?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Não',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim'
+    });
+
+    if (!isConfirmed.isConfirmed) return;
+
     try {
       await deleteProduct(productID);  // Chama a função do productService para enviar a requisição (delete)
       // Atualize a lista de produtos após deletar
       const updatedProducts = products.filter(product => product.id !== productID);  // updatedProducts = novo array com todos os produtos restantes
       setProducts(updatedProducts);
-      alert("Produto deletado com sucesso!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Produto deletado com sucesso!'
+      });
     } catch (error) {
-      alert("Erro ao deletar produto.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao deletar produto. Verifique se ele não está conectado a alguma reserva ativa.'
+      });
     }
   };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { resetPassword } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import './resetPassword.css'; // Importação do css
@@ -12,15 +13,13 @@ const ResetPassword = () => {
     e.preventDefault();
     try {
       const response = await resetPassword(email, newPassword);
-      console.log('Password reset successful', response.data);
-      alert("Senha alterada com sucesso!");
+      Swal.fire('Sucesso', 'Senha alterada com sucesso!', 'success');
       navigate('/login');
     } catch (error) {
-      console.error('Password reset failed', error);
       if (error.response && error.response.status === 404) {
-        alert('Email não encontrado. Verifique o email digitado.');
+        Swal.fire('Erro', 'Email não encontrado. Verifique o email digitado.', 'error');
       } else {
-        alert('Erro ao redefinir a senha. Tente novamente mais tarde.');
+        Swal.fire('Erro', 'Erro ao redefinir a senha. Tente novamente mais tarde.', 'error');
       }
     }
   };

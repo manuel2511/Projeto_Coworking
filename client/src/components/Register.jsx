@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
 import './register.css'; // Importação do css
@@ -14,17 +15,22 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== repeatPassword) {
-      alert('As senhas não coincidem');
+      Swal.fire('Erro', 'As senhas não coincidem', 'error');
       return;
     }
     try {
       const response = await register(username, password, email);
+      Swal.fire('Sucesso', 'Registro feito com sucesso!', 'success');
       console.log('Registro feito com sucesso!', response.data);
       navigate('/login');
     } catch (error) {
-      console.log('Email já cadastrado');
-      alert('Email já cadastrado no sistema');
-      navigate('/login');
+      if (error.message.includes('email')) {
+        Swal.fire('Erro', 'Email já cadastrado no sistema', 'error');
+      } else if (error.message.includes('username')) {
+        Swal.fire('Erro', 'Nome de usuário já está em uso', 'error');
+      } else {
+        Swal.fire('Erro', 'Erro ao registrar. Tente novamente mais tarde.', 'error');
+      }
     }
   };
 
