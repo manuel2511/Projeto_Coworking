@@ -136,19 +136,8 @@ const ProductList = () => {
                       <img src={deleteImage} alt="Deletar" />
                     </button>
                   </td>
-<<<<<<< HEAD
                   <td>
-                    <button 
-                      className="product-infos-button" 
-                      onClick={() => handleInfos(product)}
-=======
-                  <td className="tooltip-container">
-                    <button
-                      className="product-infos-button"
-                      onMouseEnter={() => handleInfos(product)}
-                      onMouseLeave={closeTooltip}
->>>>>>> 441debec1d2c4446c8cd24ad500f4780cbc9657f
-                    >
+                    <button className="product-infos-button" onClick={() => handleInfos(product)}>
                       <img src={infosImage} alt="Mais informações" />
                     </button>
                   </td>
