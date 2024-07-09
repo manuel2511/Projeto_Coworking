@@ -1,11 +1,4 @@
-const dotenv = require('dotenv');
 require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
-
-console.log("DB_HOST:", process.env.DB_HOST_PROD);
-console.log("DB_USER:", process.env.DB_USER_PROD);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD_PROD);
-console.log("DB_NAME:", process.env.DB_NAME_PROD);
-console.log("DB_PORT:", process.env.DB_PORT_PROD);
 
 module.exports = {
   development: {
@@ -29,7 +22,7 @@ module.exports = {
     password: process.env.DB_PASSWORD_PROD,
     database: process.env.DB_NAME_PROD,
     host: process.env.DB_HOST_PROD,
-    port: parseInt(process.env.DB_PORT_PROD) || 3306,
-    dialect: 'mysql'
+    port: process.env.DB_PORT_PROD || 28807,
+    dialect: 'mysql',
   }
 };
