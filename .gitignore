@@ -33,3 +33,7 @@ upload/*
 .env copy
 
 .env
+
+package-lock.json
+
+/node_modules
