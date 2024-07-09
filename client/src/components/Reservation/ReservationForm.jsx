@@ -219,7 +219,7 @@ const ReservationForm = () => {
                 { text: reservation.repeat, style: 'item' },
                 { text: reservation.totalValue, style: 'item' },
               ],
-              [{ text: `Total: ${reservation.length}`, colSpan: 6, style: 'total' },
+              [{ text: `Total de reservas: ${reservation.repeatCount+1}`, colSpan: 6, style: 'total' },
               {}]
             ]
           },
