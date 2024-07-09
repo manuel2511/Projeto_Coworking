@@ -27,3 +27,5 @@ package copy.json
 config-overrides.js
 
 package-lock copy.json
+
+package-lock.json
