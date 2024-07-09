@@ -40,7 +40,7 @@ const NavBar = () => {
               <li>
                 <a href="/cadastroProduto">
                   <i className="bi bi-circle"></i>
-                  <span>Produtos</span>
+                  <span>Espaços</span>
                 </a>
               </li>
               <li>
@@ -73,13 +73,13 @@ const NavBar = () => {
               <li>
                 <a href="/listaReserva">
                   <i className="bi bi-circle"></i>
-                  <span>Listagem de Reseras</span>
+                  <span>Listar Reservas</span>
                 </a>
               </li>
               <li>
                 <a href="/listaProduto">
                   <i className="bi bi-circle"></i>
-                  <span>Listar Produtos</span>
+                  <span>Listar Espaços</span>
                 </a>
               </li>
               <li>

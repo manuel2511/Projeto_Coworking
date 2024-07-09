@@ -5,6 +5,7 @@ import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import { getProductById, updateProduct } from "../../services/productService";
 import './productUpdate.css';  // Importação do CSS
+import Swal from 'sweetalert2';  // Importação do SweetAlert2
 
 const ProductUpdate = () => {
   const { productId } = useParams();
@@ -17,12 +18,17 @@ const ProductUpdate = () => {
         const response = await getProductById(productId);
         setProduct(response.data);
       } catch (error) {
-        alert("Erro ao carregar o produto");
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro',
+          text: 'Erro ao carregar o espaço',
+        });
       }
     };
 
     fetchProduct();
   }, [productId]);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -35,21 +41,37 @@ const ProductUpdate = () => {
 
     // Verificações para garantir que os valores sejam positivos
     if (parseInt(product.capacity) <= 0) {
-      alert("Por favor, digite um número maior que zero para a capacidade.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número maior que zero para a capacidade.',
+      });
       return;
     }
 
     if (parseFloat(product.hourlyRate) <= 0) {
-      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número maior que zero para o valor por hora.',
+      });
       return;
     }
 
     try {
       await updateProduct(productId, product);
-      alert("Produto atualizado com sucesso!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso',
+        text: 'Espaço atualizado com sucesso!',
+      });
       navigate('/listaProduto');
     } catch (error) {
-      alert("Erro ao atualizar o produto");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Erro ao atualizar o espaço',
+      });
     }
   };
 
@@ -68,7 +90,11 @@ const ProductUpdate = () => {
     if (value === "" || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
       setProduct({ ...product, capacity: value });
     } else {
-      alert("Por favor, digite um número maior que zero para a capacidade.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número maior que zero para a capacidade.',
+      });
     }
   };
 
@@ -77,7 +103,11 @@ const ProductUpdate = () => {
     if (value === "" || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
       setProduct({ ...product, hourlyRate: value });
     } else {
-      alert("Por favor, digite um número maior que zero para o valor por hora.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Por favor, digite um número maior que zero para o valor por hora.',
+      });
     }
   };
 
@@ -88,6 +118,7 @@ const ProductUpdate = () => {
       </div>
     );
   }
+
   // Verifica se product.photo é uma string (significa que é o caminho da imagem salvo no banco)
   const isStringPhoto = typeof product.photo === "string";
 
@@ -97,14 +128,14 @@ const ProductUpdate = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Produto {product.id}</h1>
+          <h1>Espaço {product.id}</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Movimentação</li>
-              <li className="breadcrumb-item active">Editar Produto</li>
+              <li className="breadcrumb-item active">Editar Espaço</li>
             </ol>
           </nav>
         </div>
@@ -117,6 +148,7 @@ const ProductUpdate = () => {
                   name="name"
                   value={product.name}
                   onChange={handleInputChange}
+                  required
                 />
                 <label>Nome:</label>
               </div>
@@ -134,6 +166,7 @@ const ProductUpdate = () => {
                   name="location"
                   value={product.location}
                   onChange={handleInputChange}
+                  required
                 />
                 <label>Localização:</label>
               </div>
@@ -177,7 +210,7 @@ const ProductUpdate = () => {
                 accept="image/*"
               />
             </div>
-            <button className="update-form-button" type="submit">Atualizar Produto</button>
+            <button className="update-form-button" type="submit">Atualizar Espaço</button>
             <a href='/listaProduto' className='product-list-button'>Cancelar</a>
           </form>
         </div>

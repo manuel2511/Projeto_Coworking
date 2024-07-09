@@ -12,8 +12,6 @@ import Swal from 'sweetalert2'; // Importação do SweetAlert2
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [selectedProductId, setSelectedProductId] = useState(null);
-  const [tooltipContent, setTooltipContent] = useState('');
   const navigate = useNavigate();  // Hook para navegação
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const ProductList = () => {
         Swal.fire({
           icon: 'error',
           title: 'Erro!',
-          text: 'Erro ao buscar produtos'
+          text: 'Erro ao buscar espaços'
         });
       }
     };
@@ -37,7 +35,7 @@ const ProductList = () => {
   const handleDelete = async (productID) => {
     const isConfirmed = await Swal.fire({
       title: 'Você tem certeza?',
-      text: 'Você realmente deseja deletar este produto?',
+      text: 'Você realmente deseja deletar este espaço?',
       icon: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Não',
@@ -56,13 +54,13 @@ const ProductList = () => {
       Swal.fire({
         icon: 'success',
         title: 'Sucesso!',
-        text: 'Produto deletado com sucesso!'
+        text: 'Espaço deletado com sucesso!'
       });
     } catch (error) {
       Swal.fire({
         icon: 'error',
         title: 'Erro!',
-        text: 'Erro ao deletar produto. Verifique se ele não está conectado a alguma reserva ativa.'
+        text: 'Erro ao deletar espaço. Verifique se ele não está conectado a alguma reserva ativa.'
       });
     }
   };
@@ -71,6 +69,7 @@ const ProductList = () => {
   const handleEdit = (productId) => {
     navigate(`/editarProduto/${productId}`);
   };
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -78,16 +77,14 @@ const ProductList = () => {
     document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
   };
 
-  // Função para exibir a descrição do produto em um tooltip
+  // Função para exibir a descrição do produto em um SweetAlert
   const handleInfos = (product) => {
-    setSelectedProductId(product.id);
-    setTooltipContent(product.description || "Esse produto não possui descrição");
-  };
-
-  // Função para fechar o tooltip
-  const closeTooltip = () => {
-    setSelectedProductId(null);
-    setTooltipContent('');
+    Swal.fire({
+      title: 'Informações do Espaços',
+      text: product.description || "Esse espaço não possui descrição",
+      icon: 'info',
+      confirmButtonText: 'Fechar'
+    });
   };
 
   return (
@@ -96,14 +93,14 @@ const ProductList = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="">
-          <h1>Listar Produtos</h1>
+          <h1>Listar Espaços</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
-              <li className="breadcrumb-item">Movimentação</li>
-              <li className="breadcrumb-item active">Listar Produtos</li>
+              <li className="breadcrumb-item">Movimentações</li>
+              <li className="breadcrumb-item active">Listar Espaços</li>
             </ol>
           </nav>
         </div>
@@ -139,19 +136,21 @@ const ProductList = () => {
                       <img src={deleteImage} alt="Deletar" />
                     </button>
                   </td>
+<<<<<<< HEAD
+                  <td>
+                    <button 
+                      className="product-infos-button" 
+                      onClick={() => handleInfos(product)}
+=======
                   <td className="tooltip-container">
                     <button
                       className="product-infos-button"
                       onMouseEnter={() => handleInfos(product)}
                       onMouseLeave={closeTooltip}
+>>>>>>> 441debec1d2c4446c8cd24ad500f4780cbc9657f
                     >
                       <img src={infosImage} alt="Mais informações" />
                     </button>
-                    {selectedProductId === product.id && (
-                      <div className="tooltip">
-                        {tooltipContent}
-                      </div>
-                    )}
                   </td>
                 </tr>
               ))}

@@ -16,7 +16,7 @@ const Login = () => {
       Swal.fire('Sucesso', 'Login feito com sucesso!', 'success');
       navigate('/');
     } catch (error) {
-      Swal.fire('Erro', 'Erro ao buscar fazer login', 'error');
+      Swal.fire('Erro', 'Erro ao fazer login', 'error');
     }
   };
 

@@ -39,7 +39,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h1>COWORKING SPACE</h1>
         <div className='register-form-content'>
-          <h2>Register</h2>
+          <h2>Cadastrar-se</h2>
           {error && <p className='error-message'>{error}</p>}
           <div className='register-form-group'>
             <input
@@ -82,7 +82,7 @@ const Register = () => {
             <label>Repetir Senha</label>
           </div>
           <div className='register-form-footer'>
-            <button className='register-form-button' type="submit">Register</button>
+            <button className='register-form-button' type="submit">Cadastrar</button>
             <a href='/login' className='register-login-button'>Já possui cadastro? Faça login</a>
           </div>
         </div>

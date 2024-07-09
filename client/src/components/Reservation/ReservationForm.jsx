@@ -305,14 +305,14 @@ const ReservationForm = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Cadastro de Reservas</h1>
+          <h1>Cadastro de Reserva</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Cadastro</li>
-              <li className="breadcrumb-item active">Cadastro de Reservas</li>
+              <li className="breadcrumb-item active">Cadastro de Reserva</li>
             </ol>
           </nav>
         </div>
@@ -346,8 +346,8 @@ const ReservationForm = () => {
                   onChange={(e) => setStatus(e.target.value)}
                 >
                   <option value="Aberta">Aberta</option>
-                  <option value="Cancelada">Cancelada</option>
-                  <option value="Finalizada">Finalizada</option>
+                  {/*<option value="Cancelada">Cancelada</option>
+                  <option value="Finalizada">Finalizada</option>*/}
                 </select>
               </div>
               <div className="reservation-form-group">

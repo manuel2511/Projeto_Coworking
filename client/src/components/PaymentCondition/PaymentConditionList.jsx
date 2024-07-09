@@ -103,14 +103,14 @@ const PaymentConditionList = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Formas de Pagamentos</h1>
+          <h1>Listar Formas de Pagamentos</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Movimentações</li>
-              <li className="breadcrumb-item active">Formas de Pagamento</li>
+              <li className="breadcrumb-item active">Listar Formas de Pagamento</li>
             </ol>
           </nav>
         </div>

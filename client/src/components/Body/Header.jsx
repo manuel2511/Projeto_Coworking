@@ -3,8 +3,6 @@ import { Button } from 'react-bootstrap';
 import { getUserInfo, logout } from '../User/auth';
 import ModalHelp from '../Modal/ModalHelp';
 
-
-
 const Header = ({ onToggleSidebar }) => {
   const [showModal, setShowModal] = useState(false);
 
