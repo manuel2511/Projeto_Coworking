@@ -187,7 +187,7 @@ const ReservationForm = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Cadastro de Reservas</h1>
+          <h1>Cadastro de Reserva</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">

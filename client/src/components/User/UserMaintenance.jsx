@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import UserNavigator from "./UserNavigator";
 import PhotoUploader from "./PhotoUploader";
 import { getUsers, updateUser } from "../../services/userService";
+import './userInfo.css';
 
 const UserMaintenance = () => {
   const [users, setUsers] = useState([]);
@@ -77,68 +77,77 @@ const UserMaintenance = () => {
   }
 
   return (
-    <div>
+    <div className="user-maintenance-container">
       <h1>Manutenção do Usuário</h1>
-      <UserNavigator onNextUser={handleNextUser} onPrevUser={handlePrevUser} />
+      <div className="user-photo-container">
+        <img src={`../../assets/img/User.jpg`} alt="User" className="user-photo" />
+      </div>
+      <div className="photo-uploader">
+          <PhotoUploader onPhotoUpload={handlePhotoUpload} />
+      </div>
       <form onSubmit={handleFormSubmit}>
         <label>
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={currentUser.username}
-            onChange={handleInputChange}
-            required
-          />
+            Username:
+            <input
+                type="text"
+                name="username"
+                value={currentUser.username}
+                onChange={handleInputChange}
+                required
+            />
         </label>
         <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={currentUser.password}
-            onChange={handleInputChange}
-            required
-          />
+            Email:
+            <input
+                type="email"
+                name="email"
+                value={currentUser.email}
+                onChange={handleInputChange}
+                required
+            />
         </label>
         <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={currentUser.email}
-            onChange={handleInputChange}
-            required
-          />
+            Password:
+            <input
+                type="password"
+                name="password"
+                value={currentUser.password}
+                onChange={handleInputChange}
+                required
+            />
         </label>
-        <label>
-          Master:
-          <input
-            type="checkbox"
-            name="master"
-            checked={currentUser.master}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Status:
-          <input
-            type="checkbox"
-            name="status"
-            checked={currentUser.status}
-            onChange={handleInputChange}
-          />
-        </label>
-        {/* {currentUser.photo && (
-          <img
-            src={`data:image/jpeg;base64,${Buffer.from(currentUser.photo).toString('base64')}`}
-            alt="User"
-          />
-        )} */}
-        <img src={`../../assets/img/User.jpg`} alt="User" width="30px" />
-        <PhotoUploader onPhotoUpload={handlePhotoUpload} />
-        <button type="submit">Salvar</button>
-      </form>
+        <div className="checkbox-container">
+            <label>
+                Master:
+                <input
+                    type="checkbox"
+                    name="master"
+                    checked={currentUser.master}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Status:
+                <input
+                    type="checkbox"
+                    name="status"
+                    checked={currentUser.status}
+                    onChange={handleInputChange}
+                />
+            </label>
+        </div>
+        <div className="user-navigator-container">
+          <button className="user-navigator-arrows" onClick={handlePrevUser}>
+            <i class="bi bi-arrow-left-circle-fill"></i>
+          </button>
+          <button type="submit">Salvar</button>
+          <button className="user-navigator-arrows" onClick={handleNextUser}>
+            <i class="bi bi-arrow-right-circle-fill"></i>
+          </button>
+        </div>
+
+    </form>
+  
     </div>
   );
 };

@@ -86,14 +86,14 @@ const ProductForm = () => {
       <NavBar isOpen={isSidebarOpen} />
       <main id="main" className="main">
         <div className="breadcrumb-container">
-          <h1>Espaço</h1>
+          <h1>Cadastro de Espaço</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
               <li className="breadcrumb-item">Cadastro</li>
-              <li className="breadcrumb-item active">Espaço</li>
+              <li className="breadcrumb-item active">Cadastro de Espaço</li>
             </ol>
           </nav>
         </div>
