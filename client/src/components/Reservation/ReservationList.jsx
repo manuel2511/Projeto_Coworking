@@ -5,15 +5,18 @@ import Footer from "../Body/Footer";
 import { getAllReservations, deleteReservation } from "../../services/reservationService";
 import { getAllPaymentConditions } from '../../services/paymentConditionService';
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
+  //Comentado por nunca ter sido usado no formulário
+// import { useNavigate } from "react-router-dom";
 import "./ReservationList.css";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
-  const [selectedReservationId, setSelectedreservationId] = useState(null);
+  //Comentado por nunca ter sido usado no formulário
+  // const [setSelectedreservationId] = useState(null);
   const [paymentConditions, setPaymentConditions] = useState([]);
   const [cancelledReservations, setCancelledReservations] = useState([]);
-  const navigate = useNavigate();
+  //Comentado por nunca ter sido usado no formulário
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,10 +45,11 @@ const ReservationList = () => {
     document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
   };
 
-  const handleReopen = (reservationId) => {
-    setSelectedreservationId(reservationId);
-    navigate(`/cadastroReserva/${reservationId}`);
-  };
+  //Foi comentado devido que a função handleReopen não e chamada em nada.
+  // const handleReopen = (reservationId) => {
+  //   setSelectedreservationId(reservationId);
+  //   navigate(`/cadastroReserva/${reservationId}`);
+  // };
 
   const handleCancel = async (reservationID) => {
     const isConfirmed = await Swal.fire({

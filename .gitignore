@@ -39,3 +39,5 @@ package-lock.json
 
 /node_modules
 .vscode
+package-lock.json
+client/package-lock.json

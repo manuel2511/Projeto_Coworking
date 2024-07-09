@@ -86,7 +86,6 @@ const PaymentConditionsReport = () => {
           fontSize: 13,
           color: 'white',
           fillColor: '#2a3f54',
-          alignment: 'center',
           margin: [0, 4, 0, 4],
           alignment: 'left'
         },

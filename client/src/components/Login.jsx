@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(username, password);
+      await login(username, password);
       Swal.fire('Sucesso', 'Login feito com sucesso!', 'success');
       navigate('/');
     } catch (error) {
