@@ -26,6 +26,6 @@ export const logout = () => {
     showConfirmButton: false,
     timer: 1700 
   }).then(() => {
-    window.location.href = '/login'; // ou use o método do react-router para redirecionar
+    window.location.href = '/login'; 
   });
 };

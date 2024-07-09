@@ -1,9 +1,9 @@
-const { Reservation, Product, User, PaymentCondition,ReservationProducts } = require('../models');
+const { Reservation, Product, User, PaymentCondition, ReservationProducts } = require('../models');
 
 exports.create = async (req, res) => {
   try {
-    const { userId, date, duration, products, repeat,repeatCount, status, paymentConditionId,totalValue } = req.body;
-    const reservation = await Reservation.create({ userId, date, duration,repeat,repeatCount, status, paymentConditionId,totalValue });
+    const { userId, date, duration, products, repeat, repeatCount, status, paymentConditionId, totalValue } = req.body;
+    const reservation = await Reservation.create({ userId, date, duration, repeat, repeatCount, status, paymentConditionId, totalValue });
     // Adicionar produtos à reserva
     for (const product of products) {
       await ReservationProducts.create({
@@ -26,12 +26,12 @@ exports.create = async (req, res) => {
           newDate.setDate(newDate.getDate() + i);
         }
         const NewRepeatId = reservation.id;
-        const repeatedReservation = await Reservation.create({ userId, date: newDate, duration,repeat,repeatCount,repeatId: NewRepeatId, status, paymentConditionId, totalValue });
+        const repeatedReservation = await Reservation.create({ userId, date: newDate, duration, repeat, repeatCount, repeatId: NewRepeatId, status, paymentConditionId, totalValue });
         // Adicionar produtos às reservas repetidas
         for (const product of products) {
           await ReservationProducts.create({
             reservationId: repeatedReservation.id,
-            productId: product.id 
+            productId: product.id
           });
         }
       }

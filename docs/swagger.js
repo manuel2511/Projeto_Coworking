@@ -13,7 +13,7 @@ const options = {
       schemas: {
         Product: {
           type: 'object',
-          required: ['id', 'name', 'description','capacity','location','photo', 'hourlyRate'],
+          required: ['id', 'name', 'description', 'capacity', 'location', 'photo', 'hourlyRate'],
           properties: {
             id: {
               type: 'integer',

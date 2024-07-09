@@ -1,5 +1,5 @@
 import React from "react";
-import {  logout } from '../User/auth';
+import { logout } from '../User/auth';
 
 const NavBar = () => {
   return (
@@ -133,7 +133,7 @@ const NavBar = () => {
           {/* <!-- End Register Page Nav --> */}
 
           <li className="nav-item">
-            <button className="nav-link collapsed"  onClick={logout}>
+            <button className="nav-link collapsed" onClick={logout}>
               <i className="bi bi-box-arrow-in-right"></i>
               <span>Login</span>
             </button>

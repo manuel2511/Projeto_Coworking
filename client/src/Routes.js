@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes,Navigate  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Index from './components/Index';
 import Login from './components/Login';
@@ -9,8 +9,8 @@ import PaymentConditionForm from './components/PaymentCondition/PaymentCondition
 import PaymentConditionList from './components/PaymentCondition/PaymentConditionList';
 import ProductForm from './components/Product/ProductForm';
 import ProductList from './components/Product/ProductList';
-import ReservationForm  from './components/Reservation/ReservationForm';
-import ReservationList  from './components/Reservation/ReservationList';
+import ReservationForm from './components/Reservation/ReservationForm';
+import ReservationList from './components/Reservation/ReservationList';
 import ProductUpdate from './components/Product/ProductUpdate';
 import Calendar from './components/Dashboard/Calendar';
 import PaymentConditionsReport from './components/PaymentCondition/PaymentConditionsReport';
@@ -30,7 +30,7 @@ const AppRoutes = () => {
         <Route path="/" element={<PrivateRoute><Index /></PrivateRoute>} />
         <Route path="/calendario" element={<PrivateRoute><Calendar /></PrivateRoute>} />
         <Route path="/cadastroPagamento" element={<PrivateRoute><PaymentConditionForm /></PrivateRoute>} />
-        <Route path="/listaPagamento" element={<PrivateRoute><PaymentConditionList/></PrivateRoute>} />
+        <Route path="/listaPagamento" element={<PrivateRoute><PaymentConditionList /></PrivateRoute>} />
         <Route path="/cadastroProduto" element={<PrivateRoute><ProductForm /></PrivateRoute>} />
         <Route path="/listaProduto" element={<PrivateRoute><ProductList /></PrivateRoute>} />
         <Route path="/editarProduto/:productId" element={<PrivateRoute><ProductUpdate /></PrivateRoute>} />

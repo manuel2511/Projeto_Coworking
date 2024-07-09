@@ -1,4 +1,4 @@
-const { Product, ReservationProducts  } = require('../models');
+const { Product, ReservationProducts } = require('../models');
 
 exports.create = async (req, res) => {
   try {
@@ -71,6 +71,6 @@ exports.delete = async (req, res) => {
       return res.status(404).json({ message: 'Produto não encontrado.' });
     }
   } catch (error) {
-    return res.status(500).json({ message: error.message+ "Falha catastrofica"});
+    return res.status(500).json({ message: error.message + "Falha catastrofica" });
   }
 };

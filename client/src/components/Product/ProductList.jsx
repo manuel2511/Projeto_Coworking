@@ -71,7 +71,7 @@ const ProductList = () => {
   };
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
@@ -128,20 +128,28 @@ const ProductList = () => {
                   <td className="col-rate">{product.hourlyRate}</td>
                   <td>
                     <button className="product-edit-button" onClick={() => handleEdit(product.id)}>
-                      <img src={editImage} alt="Editar"/>
+                      <img src={editImage} alt="Editar" />
                     </button>
                   </td>
                   <td>
                     <button className="product-delete-button" onClick={() => handleDelete(product.id)}>
-                      <img src={deleteImage} alt="Deletar"/>
+                      <img src={deleteImage} alt="Deletar" />
                     </button>
                   </td>
+<<<<<<< HEAD
                   <td>
                     <button 
                       className="product-infos-button" 
                       onClick={() => handleInfos(product)}
+=======
+                  <td className="tooltip-container">
+                    <button
+                      className="product-infos-button"
+                      onMouseEnter={() => handleInfos(product)}
+                      onMouseLeave={closeTooltip}
+>>>>>>> 441debec1d2c4446c8cd24ad500f4780cbc9657f
                     >
-                      <img src={infosImage} alt="Mais informações"/>
+                      <img src={infosImage} alt="Mais informações" />
                     </button>
                   </td>
                 </tr>

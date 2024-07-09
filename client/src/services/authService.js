@@ -19,7 +19,7 @@ export const logout = () => {
   localStorage.removeItem('token');
 };
 
-export const resetPassword = async(email, newPassword) => {
+export const resetPassword = async (email, newPassword) => {
   return axios.post(`${API_URL}/reset-password`, { email, newPassword });
 };
 
