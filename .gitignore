@@ -31,9 +31,11 @@ forms-layouts.html
 upload/*
 
 .env copy
+.
 
 .env
 
 package-lock.json
 
 /node_modules
+.vscode
