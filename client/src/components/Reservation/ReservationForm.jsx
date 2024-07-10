@@ -224,7 +224,7 @@ const ReservationForm = () => {
                 { text: reservation.duration, style: "item" },
                 { text: reservation.status, style: "item" },
                 { text: reservation.repeat, style: "item" },
-                { text: reservation.totalValue, style: "item" },
+                { text: `R$ ${(reservation.totalValue).toFixed(2)}`, style: "item" },
               ],
               [
                 {
