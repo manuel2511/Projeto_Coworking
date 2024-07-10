@@ -64,7 +64,7 @@ const ProductReport = () => {
                 { text: reservations.duration, style: 'item' },
                 { text: reservations.status, style: 'item' },
                 { text: reservations.repeat, style: 'item' },
-                { text: reservations.totalValue, style: 'item' },
+                { text: "R$ "+reservations.totalValue, style: 'item' },
               ])),
               [{ text: `Total: ${reservations.length}`, colSpan: 6, style: 'total' },
               {}]
