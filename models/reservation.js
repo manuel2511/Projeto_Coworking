@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     totalValue: {
       type: DataTypes.DECIMAL(10, 2),
-
+      defaultValue: 0,
     },
     userId: {
       type: DataTypes.INTEGER,

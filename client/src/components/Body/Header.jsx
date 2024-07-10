@@ -20,7 +20,7 @@ const Header = ({ onToggleSidebar }) => {
       <header id="header" className="header fixed-top d-flex align-items-center">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
-            <img src="assets/img/LogoCs.png" alt="Logo-Coworking-Space" />
+            <img src="../../assets/img/LogoCs.png" alt="Logo-Coworking-Space" />
             <span className="d-none d-lg-flex">Coworking Space</span>
           </a>
           <i className="bi bi-list toggle-sidebar-btn" onClick={onToggleSidebar} ></i>
@@ -67,7 +67,7 @@ const Header = ({ onToggleSidebar }) => {
                   <hr className="dropdown-divider" />
                 </li>
 
-                <li>
+                {/* <li>
                   <a
                     className="dropdown-item d-flex align-items-center"
                     href="/"
@@ -78,7 +78,7 @@ const Header = ({ onToggleSidebar }) => {
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
-                </li>
+                </li> */}
 
                 <li>
                   <Button variant="primary" onClick={handleShow}
