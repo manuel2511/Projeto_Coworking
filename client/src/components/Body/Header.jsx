@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { getUserInfo, logout } from '../User/auth';
 import ModalHelp from '../Modal/ModalHelp';
+import LogoCs from '../../assets/img/LogoCS.png'
 
 const Header = ({ onToggleSidebar }) => {
   const [showModal, setShowModal] = useState(false);
@@ -20,7 +21,7 @@ const Header = ({ onToggleSidebar }) => {
       <header id="header" className="header fixed-top d-flex align-items-center">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
-            <img src="../../assets/img/LogoCs.png" alt="Logo-Coworking-Space" />
+            <img src={LogoCs} alt="Logo-Coworking-Space" />
             <span className="d-none d-lg-flex">Coworking Space</span>
           </a>
           <i className="bi bi-list toggle-sidebar-btn" onClick={onToggleSidebar} ></i>
