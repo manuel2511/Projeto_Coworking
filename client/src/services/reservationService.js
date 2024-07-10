@@ -23,8 +23,17 @@ export const getReservationById = (id) => {
   return axios.get(`${API_URL}/${id}`);
 };
 
-export const updateReservation = (id, data) => {
-  return axios.put(`${API_URL}/${id}`, data);
+export const updateReservation = async (id, data) => {
+  try {
+    const response = await axios.put(`${API_URL}/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(`Erro ao atualizar reserva: ${error.response.data.error}`);
+  }
 };
 
 export const deleteReservation = (id) => {

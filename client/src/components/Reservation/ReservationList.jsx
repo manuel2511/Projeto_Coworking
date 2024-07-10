@@ -1,8 +1,9 @@
+// components/ReservationList.js
 import React, { useEffect, useState } from "react";
 import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
-import { getAllReservations, deleteReservation } from "../../services/reservationService";
+import { getAllReservations, updateReservation } from "../../services/reservationService";
 import { getAllPaymentConditions } from '../../services/paymentConditionService';
 import Swal from 'sweetalert2';
 import "./ReservationList.css";
@@ -10,7 +11,7 @@ import "./ReservationList.css";
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [paymentConditions, setPaymentConditions] = useState([]);
-  const [cancelledReservations, setCancelledReservations] = useState([]);
+  const [updatedReservations, setUpdatedReservations] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,9 @@ const ReservationList = () => {
 
         setReservations(reservationsResponse.data);
         setPaymentConditions(paymentConditionsResponse.data);
+
+        const storedUpdatedReservations = JSON.parse(localStorage.getItem('updatedReservations')) || [];
+        setUpdatedReservations(storedUpdatedReservations);
       } catch (error) {
         Swal.fire({
           icon: 'error',
@@ -53,15 +57,24 @@ const ReservationList = () => {
     if (!isConfirmed.isConfirmed) return;
 
     try {
-      await deleteReservation(reservationID);
-      const updatedReservations = reservations.map(reservation => {
+      const data = {
+        status: 'Cancelada',
+        cancelled: true
+      };
+
+      await updateReservation(reservationID, data);
+      const updatedReservationsList = reservations.map(reservation => {
         if (reservation.id === reservationID) {
-          return { ...reservation, status: 'Cancelada', cancelled: true };
+          return { ...reservation, ...data };
         }
         return reservation;
       });
-      setReservations(updatedReservations);
-      setCancelledReservations([...cancelledReservations, reservationID]);
+      setReservations(updatedReservationsList);
+
+      const newUpdatedReservations = [...updatedReservations, reservationID];
+      setUpdatedReservations(newUpdatedReservations);
+      localStorage.setItem('updatedReservations', JSON.stringify(newUpdatedReservations));
+
       Swal.fire({
         icon: 'success',
         title: 'Sucesso!',
@@ -72,6 +85,52 @@ const ReservationList = () => {
         icon: 'error',
         title: 'Erro!',
         text: 'Erro ao cancelar reserva.'
+      });
+    }
+  };
+
+  const handleFinish = async (reservationID) => {
+    const isConfirmed = await Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Você realmente deseja marcar esta reserva como finalizada?',
+      icon: 'warning',
+      showCancelButton: 'true',
+      cancelButtonText: 'Não',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim'
+    });
+
+    if (!isConfirmed.isConfirmed) return;
+
+    try {
+      const data = {
+        status: 'Finalizada'
+      };
+
+      await updateReservation(reservationID, data);
+      const updatedReservationsList = reservations.map(reservation => {
+        if (reservation.id === reservationID) {
+          return { ...reservation, ...data };
+        }
+        return reservation;
+      });
+      setReservations(updatedReservationsList);
+
+      const newUpdatedReservations = [...updatedReservations, reservationID];
+      setUpdatedReservations(newUpdatedReservations);
+      localStorage.setItem('updatedReservations', JSON.stringify(newUpdatedReservations));
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Reserva marcada como finalizada!'
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: 'Erro ao marcar reserva como finalizada.'
       });
     }
   };
@@ -132,11 +191,19 @@ const ReservationList = () => {
                 <hr />
                 <div className="reservation-footer">
                   <div className="reservation-buttons">
-                    {reservation.cancelled ? (
-                      <button className="reservation-cancel-button cancelled" disabled>Cancelado</button>
+                    {reservation.cancelled || updatedReservations.includes(reservation.id) ? (
+                      <>
+                        <button className="reservation-finish-button finished" disabled>Finalizada</button>
+                        <button className="reservation-cancel-button cancelled" disabled>Cancelado</button>
+                      </>
+
                     ) : (
-                      <button className="reservation-cancel-button" onClick={() => handleCancel(reservation.id)}>Cancelar</button>
+                      <>
+                        <button className="reservation-finish-button" onClick={() => handleFinish(reservation.id)}>Finalizar</button>
+                        <button className="reservation-cancel-button" onClick={() => handleCancel(reservation.id)}>Cancelar</button>
+                      </>
                     )}
+
                   </div>
                 </div>
               </div>

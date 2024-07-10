@@ -67,32 +67,37 @@ exports.findById = async (req, res) => {
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const { products, paymentMethod } = req.body;
-  let totalAmount = 0;
+  const { status, productIds } = req.body;
 
   try {
-    const reservation = await Reservation.findByPk(id);
+    const reservation = await Reservation.findByPk(id, { include: Product });
+
     if (!reservation) {
       return res.status(404).json({ error: 'Reserva não encontrada' });
     }
 
-    reservation.paymentMethod = paymentMethod;
-    await reservation.setProducts([]); // Remove produtos antigos
-
-    for (const product of products) {
-      const foundProduct = await Product.findByPk(product.id);
-      if (foundProduct) {
-        const amount = foundProduct.hourlyRate * product.hoursReserved;
-        totalAmount += amount;
-
-        await reservation.addProduct(foundProduct, {
-          through: { hoursReserved: product.hoursReserved },
-        });
-      }
-    }
-
-    reservation.totalAmount = totalAmount;
+    // Atualiza o status da reserva
+    reservation.status = status;
     await reservation.save();
+
+    // Atualiza os produtos relacionados na tabela ReservationProducts
+    if (status === 'Aberta' || status === 'Finalizada') {
+      if (productIds && productIds.length > 0) {
+        // Remove produtos antigos da relação
+        await ReservationProducts.destroy({ where: { reservationId: id } });
+
+        // Cria novas entradas na tabela ReservationProducts
+        const newProducts = productIds.map(productId => ({
+          reservationId: id,
+          productId: productId,
+        }));
+
+        await ReservationProducts.bulkCreate(newProducts);
+      }
+    } else if (status === 'Cancelada') {
+      // Remove todos os produtos associados à reserva se for cancelada
+      await ReservationProducts.destroy({ where: { reservationId: id } });
+    }
 
     res.status(200).json(reservation);
   } catch (error) {
