@@ -4,11 +4,11 @@ import Header from "../Body/Header";
 import NavBar from "../Body/NavBar";
 import Footer from "../Body/Footer";
 import "./ReservationForm.css";
-import { getUserInfo } from '../User/auth';
-import RemoveImageButton from '../../assets/img/remove.png';
-import Swal from 'sweetalert2'; // Importar o SweetAlert2
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { getUserInfo } from "../User/auth";
+import RemoveImageButton from "../../assets/img/remove.png";
+import Swal from "sweetalert2"; // Importar o SweetAlert2
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const ReservationForm = () => {
@@ -38,16 +38,16 @@ const ReservationForm = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-    document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
+    document.body.classList.toggle("toggle-sidebar", !isSidebarOpen);
   };
 
   const handleAddProduct = () => {
     // Verifica se o espaço está preenchido
     if (!selectedProduct) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, selecione pelo menos um espaço antes de continuar a reserva.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, selecione pelo menos um espaço antes de continuar a reserva.",
       });
       return;
     }
@@ -55,9 +55,9 @@ const ReservationForm = () => {
     // Verifique se a duração em horas está preenchida
     if (!duration) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, selecione a duração de tempo em horas antes de continuar a reserva.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, selecione a duração de tempo em horas antes de continuar a reserva.",
       });
       return;
     }
@@ -65,9 +65,9 @@ const ReservationForm = () => {
     // Verifica se a data está preenchida
     if (!date) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, selecione uma data antes de continuar a reserva.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, selecione uma data antes de continuar a reserva.",
       });
       return;
     }
@@ -75,15 +75,17 @@ const ReservationForm = () => {
     // Verifica se o usuário selecionou uma condição de pagamento
     if (!paymentConditionId) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, selecione uma condição de pagamento antes de continuar a reserva.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, selecione uma condição de pagamento antes de continuar a reserva.",
       });
       return;
     }
 
     const product = products.find((p) => p.id === parseInt(selectedProduct));
-    const paymentCondition = paymentConditions.find((pc) => pc.id === parseInt(paymentConditionId));
+    const paymentCondition = paymentConditions.find(
+      (pc) => pc.id === parseInt(paymentConditionId)
+    );
 
     if (product && paymentCondition) {
       const productTotal = product.hourlyRate * duration;
@@ -93,7 +95,7 @@ const ReservationForm = () => {
           ...product,
           quantity: duration,
           total: productTotal,
-          paymentConditionName: paymentCondition.name
+          paymentConditionName: paymentCondition.name,
         },
       ]);
       setTotalValue(totalValue + productTotal);
@@ -121,9 +123,9 @@ const ReservationForm = () => {
       });
 
       Swal.fire({
-        icon: 'success',
-        title: 'Sucesso',
-        text: 'Reserva criada com sucesso!'
+        icon: "success",
+        title: "Sucesso",
+        text: "Reserva criada com sucesso!",
       });
 
       // Limpar campos após submissão bem-sucedida
@@ -139,9 +141,9 @@ const ReservationForm = () => {
       gerarPDF(response.data);
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Erro ao criar reserva'
+        icon: "error",
+        title: "Erro",
+        text: "Erro ao criar reserva",
       });
     }
   };
@@ -152,9 +154,9 @@ const ReservationForm = () => {
       setDuration(parseInt(value));
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número positivo para a duração de tempo.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, digite um número positivo para a duração de tempo.",
       });
     }
   };
@@ -165,9 +167,9 @@ const ReservationForm = () => {
       setRepeatCount(parseInt(value));
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número maior ou igual a zero para a quantidade de repetições.'
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, digite um número maior ou igual a zero para a quantidade de repetições.",
       });
     }
   };
@@ -187,93 +189,104 @@ const ReservationForm = () => {
     function formatDate(dateString) {
       const date = new Date(dateString);
       date.setHours(date.getHours() + 3);
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
       const year = date.getFullYear();
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
       return `${day}/${month}/${year} - ${hours}:${minutes}`;
     }
 
     var docDefinition = {
       content: [
-        { text: 'Relatório de Reserva', style: 'header' },
-        { text: `Data de emissão: ${new Date().toLocaleDateString()}`, style: 'subheader' },
-        { text: '\n' },
+        { text: "Relatório de Reserva", style: "header" },
+        {
+          text: `Data de emissão: ${new Date().toLocaleDateString()}`,
+          style: "subheader",
+        },
+        { text: "\n" },
         {
           table: {
             headerRows: 1,
             widths: [40, 150, 50, 50, 50, 110],
             body: [
-              [{ text: 'ID', style: 'headerTable' },
-              { text: 'Data e hora', style: 'headerTable' },
-              { text: 'Duração', style: 'headerTable' },
-              { text: 'Status', style: 'headerTable' },
-              { text: 'Repetir', style: 'headerTable' },
-              { text: 'Valor Total', style: 'headerTable' }],
               [
-                { text: reservation.id, style: 'item' },
-                { text: formatDate(reservation.date), style: 'item' },
-                { text: reservation.duration, style: 'item' },
-                { text: reservation.status, style: 'item' },
-                { text: reservation.repeat, style: 'item' },
-                { text: reservation.totalValue, style: 'item' },
+                { text: "ID", style: "headerTable" },
+                { text: "Data e hora", style: "headerTable" },
+                { text: "Duração", style: "headerTable" },
+                { text: "Status", style: "headerTable" },
+                { text: "Repetir", style: "headerTable" },
+                { text: "Valor Total", style: "headerTable" },
               ],
-              [{ text: `Total de reservas: ${reservation.repeatCount+1}`, colSpan: 6, style: 'total' },
-              {}]
-            ]
+              [
+                { text: reservation.id, style: "item" },
+                { text: formatDate(reservation.date), style: "item" },
+                { text: reservation.duration, style: "item" },
+                { text: reservation.status, style: "item" },
+                { text: reservation.repeat, style: "item" },
+                { text: `R$ ${(reservation.totalValue).toFixed(2)}`, style: "item" },
+              ],
+              [
+                {
+                  text: `Total de reservas: ${reservation.repeatCount + 1}`,
+                  colSpan: 6,
+                  style: "total",
+                },
+                {},
+              ],
+            ],
           },
-          style: 'tableExample'
+          style: "tableExample",
         },
-        { text: '\n' },
+        { text: "\n" },
       ],
 
       styles: {
         header: {
           fontSize: 18,
           bold: true,
-          alignment: 'center',
-          margin: [0, 0, 0, 10]
+          alignment: "center",
+          margin: [0, 0, 0, 10],
         },
         subheader: {
           fontSize: 14,
           bold: true,
-          alignment: 'center',
-          margin: [0, 0, 0, 10]
+          alignment: "center",
+          margin: [0, 0, 0, 10],
         },
         tableExample: {
           margin: [0, 5, 0, 15],
-          alignment: 'center'
+          alignment: "center",
         },
         total: {
           fontSize: 14,
           bold: true,
-          alignment: 'right',
-          margin: [0, 2, 10, 2]
+          alignment: "right",
+          margin: [0, 2, 10, 2],
         },
         headerTable: {
           bold: true,
           fontSize: 13,
-          color: 'white',
-          fillColor: '#2a3f54',
-          alignment: 'center',
-          margin: [0, 4, 0, 4]
+          color: "white",
+          fillColor: "#2a3f54",
+          alignment: "center",
+          margin: [0, 4, 0, 4],
         },
         item: {
-          margin: [0, 2, 0, 2]
+          margin: [0, 2, 0, 2],
         },
         footer: {
           fontSize: 10,
-          margin: [0, 0, 0, 10]
-        }
+          margin: [0, 0, 0, 10],
+        },
       },
       footer: function (currentPage, pageCount) {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
-          alignment: 'center',
-          style: 'footer'
+          alignment: "center",
+          style: "footer",
         };
-      }
+      },
     };
 
     // Gerar o PDF
@@ -361,7 +374,9 @@ const ReservationForm = () => {
                 <label>Condição de Pagamento</label>
                 <select
                   value={paymentConditionId}
-                  onChange={(e) => setPaymentConditionId(parseInt(e.target.value))}
+                  onChange={(e) =>
+                    setPaymentConditionId(parseInt(e.target.value))
+                  }
                   required
                 >
                   <option value="">Selecione uma condição de pagamento</option>
@@ -385,7 +400,13 @@ const ReservationForm = () => {
                     </option>
                   ))}
                 </select>
-                <button type="button" className="reservation-product-button" onClick={handleAddProduct}>Adicionar Espaço</button>
+                <button
+                  type="button"
+                  className="reservation-product-button"
+                  onClick={handleAddProduct}
+                >
+                  Adicionar Espaço
+                </button>
               </div>
               <table className="reservation-product-table">
                 <thead>
@@ -405,14 +426,19 @@ const ReservationForm = () => {
                       <td className="col-product">{product.name}</td>
                       <td className="col-value">R$ {product.hourlyRate}</td>
                       <td className="col-hours">{product.quantity}</td>
-                      <td className="col-total">R$ {product.total.toFixed(2)}</td>
+                      <td className="col-total">
+                        R$ {product.total.toFixed(2)}
+                      </td>
                       <td className="col-remove">
                         <button
                           type="button"
                           onClick={() => handleRemoveProduct(index)}
                           className="reservation-remove-button"
                         >
-                          <img src={RemoveImageButton} />
+                          <img
+                            src={RemoveImageButton}
+                            alt="Botão de remoção "
+                          />
                         </button>
                       </td>
                     </tr>
@@ -425,7 +451,9 @@ const ReservationForm = () => {
             <div className="reservation-total-container">
               <h3>Valor Total da Reserva: </h3>
               <p>R${totalValue.toFixed(2)}</p>
-              <button type="submit" className="reservation-form-button">Criar Reserva</button>
+              <button type="submit" className="reservation-form-button">
+                Criar Reserva
+              </button>
             </div>
           </form>
         </div>

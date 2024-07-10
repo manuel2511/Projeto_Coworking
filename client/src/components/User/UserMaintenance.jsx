@@ -78,7 +78,11 @@ const UserMaintenance = () => {
 
   return (
     <div className="user-maintenance-container">
-      <h1>Manutenção do Usuário</h1>
+      <div className="user-maintenance-top">
+        <a href="/"><i class="bi bi-x-lg"></i></a>
+        <h1>Manutenção do Usuário</h1>
+      </div>
+
       <div className="user-photo-container">
         <img src={`../../assets/img/User.jpg`} alt="User" className="user-photo" />
       </div>

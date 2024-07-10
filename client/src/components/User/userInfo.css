@@ -10,8 +10,30 @@
     margin: 10px auto;
 }
 
-.user-maintenance-container h1 {
+.user-maintenance-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
     margin-bottom: 20px;
+
+}
+
+.user-maintenance-top a {
+    position: absolute;
+    left: 0;
+    color: var(--darkBlue-color);
+    font-weight: 800;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.user-maintenance-top h1 {
+    flex-grow: 1;
+    text-align: center;
     color: #333;
     font-size: 24px;
 }

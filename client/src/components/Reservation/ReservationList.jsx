@@ -5,15 +5,13 @@ import Footer from "../Body/Footer";
 import { getAllReservations, deleteReservation } from "../../services/reservationService";
 import { getAllPaymentConditions } from '../../services/paymentConditionService';
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
 import "./ReservationList.css";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
-  const [selectedReservationId, setSelectedreservationId] = useState(null);
   const [paymentConditions, setPaymentConditions] = useState([]);
   const [cancelledReservations, setCancelledReservations] = useState([]);
-  const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,16 +33,9 @@ const ReservationList = () => {
     fetchData();
   }, []);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     document.body.classList.toggle('toggle-sidebar', !isSidebarOpen);
-  };
-
-  const handleReopen = (reservationId) => {
-    setSelectedreservationId(reservationId);
-    navigate(`/cadastroReserva/${reservationId}`);
   };
 
   const handleCancel = async (reservationID) => {
@@ -65,7 +56,7 @@ const ReservationList = () => {
       await deleteReservation(reservationID);
       const updatedReservations = reservations.map(reservation => {
         if (reservation.id === reservationID) {
-          return { ...reservation, cancelled: true };
+          return { ...reservation, status: 'Cancelada', cancelled: true };
         }
         return reservation;
       });
@@ -122,6 +113,9 @@ const ReservationList = () => {
               <div className={`reservation-card ${reservation.cancelled ? 'cancelled' : ''}`} key={reservation.id}>
                 <p className="id">ID: {reservation.id} </p>
                 <p>{formatDate(reservation.date)}</p>
+                <p className={`status-view ${reservation.status === 'Cancelada' ? 'cancelled-status' : ''}`}>
+                  Status: {reservation.status}
+                </p>
                 <p className="payment-method">
                   Método de Pagamento: {getPaymentConditionName(reservation.paymentConditionId)}
                 </p>
@@ -138,7 +132,6 @@ const ReservationList = () => {
                 <hr />
                 <div className="reservation-footer">
                   <div className="reservation-buttons">
-                    {/*<button className="reservation-reopen-button" onClick={() => handleReopen(reservation.id)}>Reagendar</button>*/}
                     {reservation.cancelled ? (
                       <button className="reservation-cancel-button cancelled" disabled>Cancelado</button>
                     ) : (

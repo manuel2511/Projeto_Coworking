@@ -128,12 +128,12 @@ const ProductList = () => {
                   <td className="col-rate">{product.hourlyRate}</td>
                   <td>
                     <button className="product-edit-button" onClick={() => handleEdit(product.id)}>
-                      <img src={editImage} alt="Editar produto" />
+                      <img src={editImage} alt="Editar" />
                     </button>
                   </td>
                   <td>
                     <button className="product-delete-button" onClick={() => handleDelete(product.id)}>
-                      <img src={deleteImage} alt="Deletar produto" />
+                      <img src={deleteImage} alt="Deletar" />
                     </button>
                   </td>
                   <td>

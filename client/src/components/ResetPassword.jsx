@@ -12,7 +12,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await resetPassword(email, newPassword);
+      await resetPassword(email, newPassword);
       Swal.fire('Sucesso', 'Senha alterada com sucesso!', 'success');
       navigate('/login');
     } catch (error) {

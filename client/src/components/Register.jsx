@@ -9,7 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const navigate = useNavigate(); // Hook para navigação
 
   const handleSubmit = async (e) => {
