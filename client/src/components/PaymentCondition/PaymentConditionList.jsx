@@ -46,9 +46,9 @@ const PaymentConditionList = () => {
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: 'Erro ao deletar condição de pagamento, verifique se ela não está conectada a alguma reserva ativa.'
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Não é possível deletar a condição de pagamento pois ela está conectado a uma reserva ativa.'
       });
     }
   };

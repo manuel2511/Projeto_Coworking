@@ -60,16 +60,17 @@ const ProductForm = () => {
     if (value === '' || (!isNaN(parseInt(value)) && parseInt(value) > 0)) {
       setCapacity(value);
     } else {
-      Swal.fire('Erro', 'Por favor, digite um número maior que zero para a capacidade.', 'error');
+      Swal.fire('Atenção!', 'Digite um número maior que zero para a capacidade.', 'warning');
     }
   };
+
 
   const handleHourlyRateChange = (e) => {
     const value = e.target.value;
     if (value === '' || (!isNaN(parseFloat(value)) && parseFloat(value) > 0)) {
       setHourlyRate(value);
     } else {
-      Swal.fire('Erro', 'Por favor, digite um número maior que zero para o valor por hora.', 'error');
+      Swal.fire('Atenção!', 'Digite um número maior que zero para o valor por hora.', 'warning');
     }
   };
 

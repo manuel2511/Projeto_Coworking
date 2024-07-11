@@ -58,9 +58,9 @@ const ProductList = () => {
       });
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: 'Erro ao deletar espaço. Verifique se ele não está conectado a alguma reserva ativa.'
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Não é possível deletar o espaço pois ele está conectado a uma reserva ativa.'
       });
     }
   };

@@ -42,18 +42,18 @@ const ProductUpdate = () => {
     // Verificações para garantir que os valores sejam positivos
     if (parseInt(product.capacity) <= 0) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número maior que zero para a capacidade.',
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Digite um número maior que zero para a capacidade.',
       });
       return;
     }
 
     if (parseFloat(product.hourlyRate) <= 0) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número maior que zero para o valor por hora.',
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Digite um número maior que zero para o valor por hora.',
       });
       return;
     }
@@ -91,9 +91,9 @@ const ProductUpdate = () => {
       setProduct({ ...product, capacity: value });
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número maior que zero para a capacidade.',
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Digite um número maior que zero para a capacidade.',
       });
     }
   };
@@ -104,9 +104,9 @@ const ProductUpdate = () => {
       setProduct({ ...product, hourlyRate: value });
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Por favor, digite um número maior que zero para o valor por hora.',
+        icon: 'warning',
+        title: 'Atenção!',
+        text: 'Digite um número maior que zero para o valor por hora.',
       });
     }
   };
