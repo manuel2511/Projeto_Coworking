@@ -45,9 +45,9 @@ const ReservationForm = () => {
     // Verifica se o espaço está preenchido
     if (!selectedProduct) {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, selecione pelo menos um espaço antes de continuar a reserva.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Selecione pelo menos um espaço antes de continuar a reserva.",
       });
       return;
     }
@@ -55,9 +55,9 @@ const ReservationForm = () => {
     // Verifique se a duração em horas está preenchida
     if (!duration) {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, selecione a duração de tempo em horas antes de continuar a reserva.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Selecione a duração de tempo em horas antes de continuar a reserva.",
       });
       return;
     }
@@ -65,9 +65,9 @@ const ReservationForm = () => {
     // Verifica se a data está preenchida
     if (!date) {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, selecione uma data antes de continuar a reserva.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Selecione uma data antes de continuar a reserva.",
       });
       return;
     }
@@ -75,9 +75,9 @@ const ReservationForm = () => {
     // Verifica se o usuário selecionou uma condição de pagamento
     if (!paymentConditionId) {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, selecione uma condição de pagamento antes de continuar a reserva.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Selecione uma condição de pagamento antes de continuar a reserva.",
       });
       return;
     }
@@ -154,9 +154,9 @@ const ReservationForm = () => {
       setDuration(parseInt(value));
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, digite um número positivo para a duração de tempo.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Digite um número positivo para a duração de tempo.",
       });
     }
   };
@@ -167,9 +167,9 @@ const ReservationForm = () => {
       setRepeatCount(parseInt(value));
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Erro",
-        text: "Por favor, digite um número maior ou igual a zero para a quantidade de repetições.",
+        icon: 'warning',
+        title: 'Atenção!',
+        text: "Digite um número maior ou igual a zero para a quantidade de repetições.",
       });
     }
   };

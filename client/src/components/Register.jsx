@@ -25,9 +25,9 @@ const Register = () => {
       navigate('/login');
     } catch (error) {
       if (error.message.includes('email')) {
-        Swal.fire('Erro', 'Email já cadastrado no sistema', 'error');
+        Swal.fire('Atenção!', 'Email já cadastrado no sistema', 'warning');
       } else if (error.message.includes('username')) {
-        Swal.fire('Erro', 'Nome de usuário já está em uso', 'error');
+        Swal.fire('Atenção!', 'Nome de usuário já está em uso', 'warning');
       } else {
         Swal.fire('Erro', 'Erro ao registrar. Tente novamente mais tarde.', 'error');
       }

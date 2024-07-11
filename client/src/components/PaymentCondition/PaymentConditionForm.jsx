@@ -29,8 +29,8 @@ const PaymentConditionForm = () => {
       setDescription("");
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
+        icon: 'warning',
+        title: 'Atenção!',
         text: 'Já existe esta condição de pagamento'
       });
     }

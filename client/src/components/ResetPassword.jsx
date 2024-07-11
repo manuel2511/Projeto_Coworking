@@ -17,7 +17,7 @@ const ResetPassword = () => {
       navigate('/login');
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        Swal.fire('Erro', 'Email não encontrado. Verifique o email digitado.', 'error');
+        Swal.fire('Atenção!', 'Email não encontrado. Verifique o email digitado.', 'warning');
       } else {
         Swal.fire('Erro', 'Erro ao redefinir a senha. Tente novamente mais tarde.', 'error');
       }
