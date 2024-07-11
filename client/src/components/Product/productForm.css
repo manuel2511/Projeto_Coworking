@@ -168,7 +168,7 @@ input[type="number"] {
 
 }
 
-@media (max-width: 409px) {
+@media (max-width: 427px) {
     .product-form-container {
         padding: 2.5em;
     }
@@ -201,5 +201,250 @@ input[type="number"] {
         width: 90%;
     }
 }
+
+@media (max-width: 435px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 90%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 90%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 90%;
+    }
+} 
+
+
+@media (max-width: 413px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 80%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 80%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 80%;
+    }
+} 
+
+
+@media (max-width: 409px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 80%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 80%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 80%;
+    }
+} 
+
+
+@media (max-width: 375px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 70%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 70%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 70%;
+    }
+} 
+
+
+@media (max-width: 345px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 70%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 70%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 70%;
+    }
+} 
+
+
+
+@media (max-width: 345px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 65%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 65%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 65%;
+    }
+} 
+
+@media (max-width: 325px) {
+    .product-form-container {
+        padding: 2.5em;
+    }
+
+    .product-form-group input,
+    .product-form-group textarea {
+        font-size: 14px;
+        padding: 8px;
+        width: 60%;
+    }
+
+    .product-form-group label {
+        font-size: 14px;
+        
+    }
+
+    .product-preview-container {
+        height: 300px;
+        width: 60%;
+    }
+
+    .product-preview-placeholder .icon {
+        font-size: 2rem;
+       
+    }
+
+    .product-form-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: 60%;
+    }
+} 
+
 
 
