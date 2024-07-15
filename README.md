@@ -25,6 +25,9 @@ O Coworking Space pode trazer inúmeros benefícios para empresas que gerenciam 
 - Cancelamento de Reservas
 - Sistema de Autenticação de Usuários
 
+## Deploy da Aplicação
+https://projetocoworking-production.up.railway.app/
+
 ## Tecnologias Utilizadas
 
 ### Frontend
