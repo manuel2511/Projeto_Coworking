@@ -135,4 +135,3 @@ O Coworking Space pode trazer inúmeros benefícios para empresas que gerenciam 
 3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`).
 4. Dê push na sua branch (`git push origin feature/nova-feature`).
 5. Abra um Pull Request.
-6.
