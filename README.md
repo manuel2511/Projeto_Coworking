@@ -57,8 +57,8 @@ O Coworking Space pode trazer inúmeros benefícios para empresas que gerenciam 
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/coworking-space-management.git
-   cd coworking-space-management
+   git clone (url ou http do repositório)
+   cd ProjetoCoworking
    ```
 
 2. Instale as dependências:
